@@ -1,11 +1,14 @@
-BHAG
+FooSummer Story Board - "I'm a Space Pirate"
 =================================================================
-You are a space pirate that is hiding from the Galaxy Federation Space Police Force (GFSPF) in an asteroid belt. Your goal is to escape the GFSPF while gathering rare materials present in the asteroids.
+
+BHAG
+-----------------------------------------------------------------
+You are a space pirate that is attacking a trade convoy guarded by the Galaxy Federation Space Police Force (GFSPF). Your goal is to neutralize the GFSPF while stealing cargos from the convoy.
 
 
 User Stories
-=================================================================
-As a space pirate I want to use a spacecraft and laser to navigate outer space while escaping the space police force and destroying asteroids.
+-----------------------------------------------------------------
+As a space pirate I want to pilot a spacecraft and laser to navigate outer space while escaping the space police force and stealing cargos.
 
 As a space pirate I have a spaceship and I can rotate 360 degrees.
 
