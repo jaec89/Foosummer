@@ -1,0 +1,135 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/davy/.gradle/caches/transforms-2/files-2.1/3265f1af1c6711e47d5b158863e7b966/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/07d51e6f23c18e44fb9a1509772dec4d/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/2291472ad06b2b03fd649a0820030344/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/676386f8d6da8168b3f56f39dd2aea0d/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/5f1276b53f11529c34e29a9f935f54b3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/a362131a74571bc3c993f3d448ce9475/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/4aed3eed3a1d96c9e2a02e6e6a853a04/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/e5515cce25b23d96e6c1ff44314f0cce/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/539912b9df11d2667518b9992372cdab/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/78ff1f8e6d5ec62469eb4a3914be6118/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/d4fc8aa4abfc40b7e5188b47b5add96d/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/b406ee6cf8ca17f0fd0591de15198708/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/7e924a32cecc3d9dcbf02ebf40fcc906/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/6dfe3adfc5ef484b73c0171462a3e58e/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/9fcbdce84b08294327944be1ef0f689e/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/b6469e7f4639e55cf89417ea251d0271/AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/35bc7f5e035aef1a5422d3e11cdc38b9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/9dae7e6836c22f093ff5efe447c1d03c/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/fe7ad0255e9cdc166b97b5ba7136a335/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/d465f0018dc31647a8e0d33ea36a689b/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/9f108205fd34cafd06ec8348d2cf7c01/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/cd18772edc9f177f7d9e85ea6db07404/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/7e8c7d5240b150e06247852681a8c5f5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/0dc2fa5ffe3b7fa207eba3429b983ddb/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/a16749057e0ca91115f0ae4ac79fbada/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/cde42f05660cca8730584ba21b4505fc/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+	package
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:2:9-49
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:1-10:12
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:4:5-9:42
+MERGED from [androidx.core:core:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/9fcbdce84b08294327944be1ef0f689e/AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/9fcbdce84b08294327944be1ef0f689e/AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/b6469e7f4639e55cf89417ea251d0271/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/b6469e7f4639e55cf89417ea251d0271/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/9fcbdce84b08294327944be1ef0f689e/AndroidManifest.xml:22:18-86
+	android:supportsRtl
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:8:9-35
+	android:label
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:5:9-41
+	android:roundIcon
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:7:9-54
+	android:icon
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:6:9-43
+	android:allowBackup
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:4:18-44
+	android:theme
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml:9:9-40
+uses-sdk
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/davy/.gradle/caches/transforms-2/files-2.1/3265f1af1c6711e47d5b158863e7b966/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/davy/.gradle/caches/transforms-2/files-2.1/3265f1af1c6711e47d5b158863e7b966/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/07d51e6f23c18e44fb9a1509772dec4d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/07d51e6f23c18e44fb9a1509772dec4d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/2291472ad06b2b03fd649a0820030344/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/2291472ad06b2b03fd649a0820030344/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/676386f8d6da8168b3f56f39dd2aea0d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/676386f8d6da8168b3f56f39dd2aea0d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/5f1276b53f11529c34e29a9f935f54b3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/5f1276b53f11529c34e29a9f935f54b3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/a362131a74571bc3c993f3d448ce9475/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/a362131a74571bc3c993f3d448ce9475/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/4aed3eed3a1d96c9e2a02e6e6a853a04/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/4aed3eed3a1d96c9e2a02e6e6a853a04/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/e5515cce25b23d96e6c1ff44314f0cce/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/e5515cce25b23d96e6c1ff44314f0cce/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/539912b9df11d2667518b9992372cdab/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/539912b9df11d2667518b9992372cdab/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/78ff1f8e6d5ec62469eb4a3914be6118/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/78ff1f8e6d5ec62469eb4a3914be6118/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/d4fc8aa4abfc40b7e5188b47b5add96d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/d4fc8aa4abfc40b7e5188b47b5add96d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/b406ee6cf8ca17f0fd0591de15198708/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/b406ee6cf8ca17f0fd0591de15198708/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/7e924a32cecc3d9dcbf02ebf40fcc906/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/7e924a32cecc3d9dcbf02ebf40fcc906/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/6dfe3adfc5ef484b73c0171462a3e58e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/6dfe3adfc5ef484b73c0171462a3e58e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/9fcbdce84b08294327944be1ef0f689e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] /Users/davy/.gradle/caches/transforms-2/files-2.1/9fcbdce84b08294327944be1ef0f689e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/b6469e7f4639e55cf89417ea251d0271/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/b6469e7f4639e55cf89417ea251d0271/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/35bc7f5e035aef1a5422d3e11cdc38b9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/35bc7f5e035aef1a5422d3e11cdc38b9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/9dae7e6836c22f093ff5efe447c1d03c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/9dae7e6836c22f093ff5efe447c1d03c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/fe7ad0255e9cdc166b97b5ba7136a335/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/fe7ad0255e9cdc166b97b5ba7136a335/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/d465f0018dc31647a8e0d33ea36a689b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/d465f0018dc31647a8e0d33ea36a689b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/9f108205fd34cafd06ec8348d2cf7c01/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/9f108205fd34cafd06ec8348d2cf7c01/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/cd18772edc9f177f7d9e85ea6db07404/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/cd18772edc9f177f7d9e85ea6db07404/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/7e8c7d5240b150e06247852681a8c5f5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/7e8c7d5240b150e06247852681a8c5f5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/0dc2fa5ffe3b7fa207eba3429b983ddb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/0dc2fa5ffe3b7fa207eba3429b983ddb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/a16749057e0ca91115f0ae4ac79fbada/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/a16749057e0ca91115f0ae4ac79fbada/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/cde42f05660cca8730584ba21b4505fc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/davy/.gradle/caches/transforms-2/files-2.1/cde42f05660cca8730584ba21b4505fc/AndroidManifest.xml:20:5-44
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+		ADDED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/davy/Desktop/AndroidStudioProjects/AsteroidsFS/app/src/main/AndroidManifest.xml
