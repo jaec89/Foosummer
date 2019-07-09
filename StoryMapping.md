@@ -11,33 +11,33 @@ As a space pirate, I want to pilot my spaceship to avoid the GFSPF and collect r
 <table width="75%" border="1">
   <tr>
     <td> User Story</td>
-    <td> As a space pirate, I want to use a spacecraft and laser to navigate outer space. </td>
-    <td> While escaping the space police force.  </td>
-    <td> And destroying asteroids. </td>
-    <td> As a game developer, I want to have multiple game levels and features, and have a sense-pleasing game. </td>
+    <td> As a space pirate, I want to navigate my spacecraft </td>
+    <td> Through outer space  </td>
+    <td> while stealing cargo </td>
+    <td> and being chased by space police. </td>
   </tr>
 
   <tr>
     <td> Sprint 1 </td>
-    <td> I have a spaceship and I can rotate 360 degrees. </td>
-    <td> Space police  are approaching to fight. </td>
-    <td> Asteroids are moving through space with different sizes, directions, and speeds. </td>
-    <td> Game screen is displayed with score board and number of lives. </td>
+    <td> I have a spaceship and I can rotate 360 degrees </td>
+    <td> Black screen with score and other statistics displayed, and power ups (minerals) are available </td>
+    <td> Cargo spaceships (asteroids) navigate through space with different sizes, directions, and speeds </td>
+    <td> Space police show up and approach </td>
   </tr>
 
   <tr>
     <td> Sprint 2 </td>
-    <td> My spaceship has a laser to shoot and mobile functionality to navigate. </td>
-    <td> Space police are able to target us and attack with some precision. </td>
-    <td> Bigger asteroids break into smaller asteroids until completely wiped out and do not collide with each other. </td>
-    <td> Power ups (minerals)  are available to shoot and I have three lives. </td>
+    <td> My spaceship has a laser and mobile functionality </td>
+    <td> There are multiple levels and space town/port varies with each level </td>
+    <td> Bigger cargo spaceships break into smaller space boats until completely wiped out </td>
+    <td> Space police are able to target us and attack with some precision </td>
   </tr>
 
   <tr> 
     <td> Sprint 3 </td>
-    <td> My spaceship is the Apollo 11. </td>
-    <td> Space police lasers increase their precision. </td>
-    <td> Smaller asteroids have higher speed and are worth more points. </td>
-    <td> Visual and sound features are implemented. </td>
+    <td> My spaceship is the black pearl </td>
+    <td> Visual and sound features are implemented </td>
+    <td> Space boats have higher speed and are worth more points </td>
+    <td> Space police's lasers shoot with high precision and their uniforms (color?) vary with space town </td>
   </tr>
 </table>
