@@ -12,11 +12,9 @@ As a space pirate I want to pilot a spacecraft and laser to navigate outer space
 
 As a space pirate I have a spaceship and I can rotate 360 degrees.
 
-As a game developer,  I want to have multiple game levels and features, and have a sense-pleasing game.
+As a game developer, I want to have multiple game levels and features, and have a sense-pleasing game.
 
 As a space police I want to stop and destroy the space pirates using my spaceship lasers.
-
-As an asteroid belt I want my asteroids to have different sizes and move in different directions, and at different speeds.
 
 As s spaceship I want a laser to shoot and mobile functionality to navigate.
 
