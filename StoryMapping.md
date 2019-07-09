@@ -3,6 +3,23 @@ BHAG
 You are a space pirate that is hiding from the Galaxy Federation Space Police Force (GFSPF) in an asteroid belt. Your goal is to escape the GFSPF while gathering rare materials present in the asteroids.
 
 
+User Stories
+=================================================================
+As a space pirate I want to use a spacecraft and laser to navigate outer space while escaping the space police force and destroying asteroids.
+
+As a space pirate I have a spaceship and I can rotate 360 degrees.
+
+As a game developer,  I want to have multiple game levels and features, and have a sense-pleasing game.
+
+As a space police I want to stop and destroy the space pirates using my spaceship lasers.
+
+As an asteroid belt I want my asteroids to have different sizes and move in different directions, and at different speeds.
+
+As s spaceship I want a laser to shoot and mobile functionality to navigate.
+
+As a space pirate I want to use power ups (minerals) available to help me shoot and I have three lives.
+
+
 Table
 =================================================================
 As a space pirate, I want to pilot my spaceship to avoid the GFSPF and collect rare materials by destroying the asteroids.
