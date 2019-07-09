@@ -1,5 +1,12 @@
 # FooSummer
-Team FooSummer will receate and redesign the classic Atari 2600 game `Asteroids`.
+Team FooSummer will recreate and redesign the classic Atari 2600 game `Asteroids`.
+
+## Meet the Team
+- Brenda Rosas: Computer Science and Engineering, Senior.
+- Cheantheary 'Terri' Soth: Computer Science, Senior.
+- Davy Chuon Computer Science and Engineering, Senior.
+- Andre Tom Computer Science, Senior.
+- Jae Choi Chemisty, Senior.
 
 ## Game Objective
 You're a space pilot and your home planet is passing near an asteroid belt. The mission is to shoot and destroy the asteroids while protecting your planet and your spaceship from collisions with the limited resources that you have. 
