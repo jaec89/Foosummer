@@ -8,7 +8,6 @@ You are a space pirate that is attacking a trade convoy guarded by the Galaxy Fe
 
 User Stories
 -----------------------------------------------------------------
-You are a space pirate attacking spaceships in outer space while being chased by space police.
 
 As a space pirate I want to pilot a spacecraft and laser to navigate outer space while escaping the space police force and stealing cargos.
 
