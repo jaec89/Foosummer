@@ -2,7 +2,7 @@
 Team FooSummer will recreate and redesign the classic Atari 2600 game `Asteroids`.
 
 ## Game Objective
-You are a space pirate that is hiding from the Galaxy Federation Space Police Force (GFSPF) in an asteroid belt. Your goal is to escape the GFSPF while gathering rare materials present in the asteroids.
+You are a space pirate that is attacking a trade convoy guarded by the Galaxy Federation Space Police Force (GFSPF). Your goal is to neutralize the GFSPF while stealing cargos from the convoy.
 
 ## Meet the Team
 - Brenda Rosas: Computer Science and Engineering, Senior.
