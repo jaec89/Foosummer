@@ -27,12 +27,14 @@ Table
 =================================================================
 As a space pirate, I want to pilot my spaceship to avoid the GFSPF and collect rare materials by destroying the asteroids.
 
+As a space pirate, I want to navigate my spacecraft through outer space, while stealing cargo and being chased by space police.
+
 <hr></hr>
 <table width="75%" border="1">
   <tr>
     <td> User Story</td>
     <td> As a space pirate, I want to navigate my spacecraft </td>
-    <td> Through outer space  </td>
+    <td> through outer space  </td>
     <td> while stealing cargo </td>
     <td> and being chased by space police. </td>
   </tr>
