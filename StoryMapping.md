@@ -30,7 +30,7 @@ As a space pirate, I want to pilot my spaceship to avoid the GFSPF and collect r
 
 
 <hr></hr>
-##Storyboard
+Storyboard
 <table width="75%" border="1">
   <tr>
     <td> User Story</td>
@@ -68,7 +68,7 @@ As a space pirate, I want to pilot my spaceship to avoid the GFSPF and collect r
 
 
 <hr></hr>
-##Acceptance Tests
+Acceptance Tests
 <table width="75%" border="1">
   <tr>
     <td> User Story</td>
