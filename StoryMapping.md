@@ -52,7 +52,7 @@ Storyboard
     <td> Sprint 2 </td>
     <td> My spaceship has a laser and mobile functionality </td>
     <td> There are multiple levels and space town/port varies with each level </td>
-    <td> Bigger asteroids break into smaller size until. </td>
+    <td> Asteroids do not collide with each other or police ships or police lasers</td>
     <td> Space police always shoots at the pirate on sight. </td>
   </tr>
 
@@ -60,7 +60,7 @@ Storyboard
     <td> Sprint 3 </td>
     <td> My spaceship is the Black Pearl </td>
     <td> Visual and sound features are implemented </td>
-    <td> Space boats have higher speed and are worth more points </td>
+    <td> Bigger asteroids break into smaller size until </td>
     <td> Space police shoots faster on higher difficulty </td>
   </tr>
 </table>
