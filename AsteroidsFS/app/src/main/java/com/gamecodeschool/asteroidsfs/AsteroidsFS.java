@@ -20,5 +20,21 @@ public class AsteroidsFS extends Activity{
         myAsteroidsGame = new AsteroidsGame(this, size.x, size.y);
         setContentView(myAsteroidsGame);
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        myAsteroidsGame.resume();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        myAsteroidsGame.pause();
+    }
+
+
 }
 
