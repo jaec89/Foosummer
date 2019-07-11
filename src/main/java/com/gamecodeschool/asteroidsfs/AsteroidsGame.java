@@ -57,12 +57,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     //private Drawable mCustomImage;
 
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/master
     public AsteroidsGame(Context context, int x, int y){
         // calls parent class constructor of SurfaceView
         super(context);
@@ -172,7 +166,3 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
