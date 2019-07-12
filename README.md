@@ -10,9 +10,9 @@ You are a space pirate that is hiding from the Galaxy Federation Space Police Fo
 - Davy Chuon: Computer Science and Engineering, Senior.
 - Andre Tom: Computer Science, Senior.
 - Jae Choi: Chemistry, Senior.
+ 
+[Project Repository](https://github.com/ecs160ss12019/Foosummer)
 
-## Link to project repository
-https://github.com/ecs160ss12019/Foosummer.git
+[Story Mapping](https://github.com/ecs160ss12019/Foosummer/blob/master/StoryMapping.md)
 
-## Link to story map
-https://github.com/ecs160ss12019/Foosummer/blob/master/StoryMapping.md
+[CRC Sprint 1](https://github.com/ecs160ss12019/Foosummer/blob/master/CRC_Cards_Sprint_1.md)
