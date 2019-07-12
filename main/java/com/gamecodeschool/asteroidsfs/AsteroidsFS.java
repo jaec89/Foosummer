@@ -35,10 +35,6 @@ public class AsteroidsFS extends Activity{
         myAsteroidsGame.pause();
     }
 
-<<<<<<< HEAD
-}
-=======
 
 }
 
->>>>>>> origin/master
