@@ -1,3 +1,4 @@
+package com.gamecodeschool.asteroidsfs;
 /*
 	Spacecraft
 */

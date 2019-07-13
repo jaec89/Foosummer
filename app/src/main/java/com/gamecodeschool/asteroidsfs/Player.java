@@ -1,3 +1,4 @@
+package com.gamecodeschool.asteroidsfs;
 /*
 	Player is a spacecraft that is able to shoot.
 */
