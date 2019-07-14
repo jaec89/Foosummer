@@ -3,7 +3,7 @@ package com.gamecodeschool.asteroidsfs;
 	Player is a spacecraft that is able to shoot.
 */
 
-public class Player extends SpaceObjet {
+public class Player extends SpaceObject {
 	
 	private boolean hit;
 		
