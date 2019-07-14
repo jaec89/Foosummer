@@ -72,4 +72,10 @@ public class Asteroids {
         mYVelocity = mYVelocity * 1.1f;
     }
 
+    // Large asteroid breaks into medium pieces
+    // medium piece breaks into small pieces
+    void disintegrate(){
+
+    }
+
 }
