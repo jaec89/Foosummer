@@ -39,7 +39,7 @@ public class SpaceObject {
 		this.velocity_x = velocity_x;
 	}
 	public void setVelocity_y(int direction) {
-		this.direction = direction;
+		//this.direction = direction;
 	}
 // 	public void setHit(boolean hit) {
 // 		this.hit = hit;
@@ -54,10 +54,12 @@ public class SpaceObject {
 		return pos_y;
 	}
 	public double getVelocity_x() {
-		return speed;
+		//return speed;
+		return 0;
 	}
 	public int getVelocity_y() {
-		return direction;
+		//return direction;
+		return 0;
 	}
 // 	public boolean getHit() {
 // 		return hit;

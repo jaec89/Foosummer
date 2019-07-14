@@ -47,7 +47,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     // game objects
 //    private Space mySpace;
-//    private UserShip myShip;
+    private Player myShip;
 //    private OpponentShip npcShip; // make a vector of npc ships
 //    private Asteroids myAsteroids; // make a vector of asteroids
 //    private Laser myLaser;
@@ -74,7 +74,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         myPaint = new Paint();
 
         // Initialize the objects
-        // myShip = new UserShip(...)
+         myShip = new Player(screenX, screenY);
         // Asteroids = new Asteroids()
         // enemyShip = new ...()
         // myLaser = new ..()
@@ -96,23 +96,12 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             myCanvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
                     R.drawable.outerspacebackground1), 0, 0, null);
 
-//            // Change the paint color to white
-//            myPaint.setColor(Color.argb(255, 255, 255, 255));
-
-
-
-            // Fill the screen with a solid color
-//            myCanvas.drawColor(Color.argb
-//                    (255, 42, 10, 200));
-
             // Choose a color to paint with
-//            myPaint.setColor(Color.argb
-//                    (255, 255, 255, 255));
+            myPaint.setColor(Color.argb
+                    (255, 26, 190, 26));
 
-            // Draw the bat and ball
-//            myCanvas.drawRect(mBall.getRect(), myPaint);
-//            myCanvas.drawRect(mBat.getRect(), myPaint);
-
+            // Draw the objects
+            myCanvas.drawRect(myShip.getRect(), myPaint);
 
 
             // Choose the font size
@@ -135,10 +124,11 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 
+
     @Override
     public void run(){
         // change condition for this later...
-        while(true){
+        while(nowPlaying){
             draw();
         }
 
