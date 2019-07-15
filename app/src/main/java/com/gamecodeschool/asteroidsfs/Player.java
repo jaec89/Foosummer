@@ -21,6 +21,7 @@ public class Player extends SpaceObject {
 	private float mShipHeight;
 	private int lives = 3;
 	private int score = 0;
+	private float mShipSpeed;
 
 	private boolean hit;
 
@@ -43,13 +44,22 @@ public class Player extends SpaceObject {
 				mXCoord + mLength,
 				mYCoord + mHeight);
 
-
-//		mShipSpeed = ...
-
+		// Configure the speed of the ship
+		// This code means the ship can cover the
+		// width of the screen in 2 seconds
+		mShipSpeed = screenX / 2;
 	}
+
+
 
 	RectF getRect(){
 		return mRect;
+	}
+
+
+	// Update the bat- Called each frame/loop
+	void update(long fps){
+
 	}
 
 //	public Player() {
