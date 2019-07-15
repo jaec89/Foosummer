@@ -21,7 +21,7 @@ public class Player extends SpaceObject {
 	private float mShipHeight;
 	private int lives = 3;
 	private int score = 0;
-	private float mShipSpeed;
+	private float mPlayerSpeed;
 
 	private boolean hit;
 
@@ -47,7 +47,7 @@ public class Player extends SpaceObject {
 		// Configure the speed of the ship
 		// This code means the ship can cover the
 		// width of the screen in 2 seconds
-		mShipSpeed = screenX / 2;
+		mPlayerSpeed = screenX / 2;
 	}
 
 
@@ -62,6 +62,13 @@ public class Player extends SpaceObject {
 
 	}
 
+	public float getPlayerLength(){
+		return this.mLength;
+	}
+
+	public float getPlayerHeight(){
+		return this.mHeight;
+	}
 //	public Player() {
 //		this(1,1,1,1,false);
 //	}
