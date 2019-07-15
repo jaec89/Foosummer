@@ -86,6 +86,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 
+
     // Draw the game objects and the HUD
     void draw() {
         if (myHolder.getSurface().isValid()) {
@@ -123,6 +124,72 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     }
 
 
+
+
+    // Handle all the screen touches
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+
+        // This switch block replaces the
+        // if statement from the Sub Hunter game
+        switch (motionEvent.getAction() &
+                MotionEvent.ACTION_MASK) {
+
+            // The player has put their finger on the screen
+            case MotionEvent.ACTION_DOWN:
+
+                // If the game was paused unpause
+                nowPaused = false;
+
+            // If finger pressed on right side of screen
+            // then the ship will accelerate
+            if(motionEvent.getX() > screenX / 2){
+                // call method that will accelerate ship
+            }
+
+            // If finger pressed on left side of screen...
+            if(motionEvent.getX() < screenX / 2){
+                // If finger pressed on upper left of screen
+                // then the ship will rotate counter-clockwise
+                if(motionEvent.getY() < screenY / 2){
+                    // rotate ship counter-clockwise
+                }
+
+                if(motionEvent.getY() > screenY / 2){
+                    // rotate ship clockwise
+                }
+            }
+
+                break;
+
+            // The player lifted their finger
+            // from anywhere on screen.
+            // It is possible to create bugs by using
+            // multiple fingers. We will use more
+            // complicated and robust touch handling
+            // in later projects
+            case MotionEvent.ACTION_UP:
+                if(motionEvent.getX() > screenX / 2){
+                    // stop position
+                }
+
+                if(motionEvent.getX() < screenX / 2){
+                    // stop rotation / fix orientation
+                }
+
+
+
+                break;
+        }
+        return true;
+    }
+
+
+
+    private void update() {
+        // Update the bat and the ball
+        myShip.update(myFPS);
+    }
 
 
     @Override
