@@ -11,6 +11,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+// these imports deal with vector class in java
+import java.util.*;
+import java.util.Vector;
 
 import java.util.Random;
 
@@ -50,12 +53,12 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private boolean nowPaused = true;
 
     // GAME OBJECTS
-    private int levels[] = {0, 1, 2};
+    private int levels = 1; // we increment each time the player clears a level.
 //    private Space mySpace;
     private Player myShip;
 //    private OpponentShip npcShip; // make a vector of npc ships
     private Asteroid asteroids[]; // make a vector of asteroids
-    private Laser myLaser;
+    private Vector<Laser> myLaser;
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
 //    private Power.Ups mineralPowerUps; // vector of mineral powerups
 
