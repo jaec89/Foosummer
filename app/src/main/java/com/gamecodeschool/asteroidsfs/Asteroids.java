@@ -10,6 +10,9 @@ public class Asteroids {
     private float mHeight;
     private boolean hit;
 
+    private int screenX;
+    private int screenY;
+
 
     /*Define different size asteroids*/
 
@@ -19,6 +22,11 @@ public class Asteroids {
     // in the AsteroidsGame class
 
     Asteroids(int screenX, int screenY) {
+
+        this.screenX = screenX;
+        this.screenY = screenY;
+
+
         // Make the asteroid square 1% of screen width
         mWidth = screenX / 100;
         mHeight = screenX / 100;
@@ -26,7 +34,7 @@ public class Asteroids {
         // Initialize the RectF
         // We do it here because we only want to do it once.
         // We will initialize the detail at the start of each game
-        // default constructor sets variables (left, top, right and bottom) to zero
+        // Default constructor sets variables (left, top, right and bottom)
         mRect = new RectF();
         mRect.left = screenX / 2;
         mRect.top = screenY / 2;
@@ -41,22 +49,40 @@ public class Asteroids {
         mXVelocity = (screenY / 5);
     }
 
+
+
     // Return a reference to mRect to AsteroidsGame
-    RectF getRect() {
+    public RectF getRect() {
         return mRect;
     }
 
+
+
     // Update the asteroid position.
     // Called each frame/loop
-    void update(long fps){
+    public void update(long fps){
         // Move the asteroid based upon the
         // horizontal (mXVelocity) and
         // vertical(mYVelocity) speed
         // and the current frame rate(mFPS)
 
         // Move the top left corner
-        mRect.left = mRect.left + (mXVelocity / fps);
-        mRect.top = mRect.top + (mYVelocity / fps);
+        mRect.left = mRect.left + (mXVelocity / fps) ;
+        mRect.top = mRect.top + (mYVelocity / fps) ;
+
+        if(mRect.left < 0) {
+            mRect.left = screenX;
+        }
+        if(mRect.left > screenX) {
+            mRect.left = 0;
+        }
+
+        if(mRect.top < 0) {
+            mRect.top = screenY;
+        }
+        if(mRect.top > screenY) {
+            mRect.top = 0;
+        }
 
         // Match up the bottom right corner
         // based on the size of the ball
