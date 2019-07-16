@@ -111,7 +111,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // Draw the objects
             myCanvas.drawRect(myShip.getRect(), myPaint);
-            // Draw player ship on hit box
 
 
             // A bitmap for each direction the ship can face
@@ -120,6 +119,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             Bitmap mBitmapHeadDown;
             Bitmap mBitmapHeadRight;
             Bitmap mBitmapHeadCurrent;
+
 
 
 
@@ -178,13 +178,13 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                             0, 0, blockSize*4, blockSize*4, matrix, true);
 */
 
-            matrix.preRotate(45);
+            /*matrix.preRotate(45);
             mBitmapHeadCurrent = Bitmap
                     .createBitmap(mBitmapHeadUp,
                             0, 0, blockSize*4, blockSize*4, matrix, true);
 
           //https://stackoverflow.com/questions/32816570/how-can-i-remove-black-background-of-after-rotate-bitmap-image-in-android-5-0
-            mBitmapHeadCurrent.setHasAlpha(true);
+            mBitmapHeadCurrent.setHasAlpha(true);*/
 
             /*myCanvas.drawBitmap(mBitmapHeadRight,
                     screenX / 2,
@@ -199,22 +199,26 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     .createBitmap(mBitmapHeadUp,
                             0, 0, blockSize*4, blockSize*4, matrix, true);*/
 
-            myCanvas.drawBitmap(mBitmapHeadCurrent,
+            /*myCanvas.drawBitmap(mBitmapHeadCurrent,
                     screenX / 4,
-                    screenY / 2, myPaint);
+                    screenY / 2, myPaint);*/
 
+            matrix.preRotate(45);
             myCanvas.drawBitmap(mBitmapHeadUp,
                     screenX / 2,
                     screenY / 2, myPaint);
+            mBitmapHeadCurrent.setHasAlpha(true);
+//            matrix.mapRect(myShip.getRect());
 
-            matrix.postRotate(20);
+           /* matrix.postRotate(20);
             mBitmapHeadCurrent = Bitmap
                     .createBitmap(mBitmapHeadUp,
                             0, 0, blockSize*4, blockSize*4, matrix, true);
 
+
             myCanvas.drawBitmap(mBitmapHeadCurrent,
                     screenX / 2,
-                    screenY / 4, myPaint);
+                    screenY / 4, myPaint);*/
 
             // Choose the font size
             myPaint.setTextSize(fontSize);
