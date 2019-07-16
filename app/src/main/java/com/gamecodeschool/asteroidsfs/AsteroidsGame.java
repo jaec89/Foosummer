@@ -91,6 +91,34 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             int asteroidHeight = screenY/ 100;
             int asteroidXVelocity = -(screenY / 5);
             int asteroidYVelocity = (screenY / 5);
+
+
+            // Pick a random direction
+            // 0 -> left, down
+            // 1 -> left, up
+            // 2 -> right, down
+            // 3 -> right, up
+            int direction = rand.nextInt(4);
+            switch (direction) {
+                case 0:
+                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
+                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
+                    break;
+                case 1:
+                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
+                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
+                    break;
+                case 2:
+                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
+                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
+                    break;
+                case 3:
+                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
+                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
+                    break;
+            }
+
+
             asteroids[i] = new Asteroid(asteroidXPosition,
                                             asteroidYPosition,
                                             asteroidWidth,

@@ -1,6 +1,7 @@
 package com.gamecodeschool.asteroidsfs;
 
 import android.graphics.RectF;
+import java.util.Random;
 
 public class Asteroid {
     private RectF mRect; // Give access to precise position and size of asteroid
@@ -21,6 +22,33 @@ public class Asteroid {
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
         //super(xPosition, yPosition, width, height, xVelocity, yVelocity);
+
+
+//        // Pick a random direction
+//        // 0 -> left, down
+//        // 1 -> left, up
+//        // 2 -> right, down
+//        // 3 -> right, up
+//        Random rand = new Random();
+//        int direction = rand.nextInt(4);
+//        switch (direction) {
+//            case 0:
+//                xVelocity = -Math.abs(xVelocity);   // left
+//                yVelocity = Math.abs(yVelocity);    // down
+//                break;
+//            case 1:
+//                xVelocity = -Math.abs(xVelocity);   // left
+//                yVelocity = -Math.abs(yVelocity);   // up
+//                break;
+//            case 2:
+//                xVelocity = Math.abs(xVelocity);    // right
+//                yVelocity = Math.abs(yVelocity);    // down
+//                break;
+//            case 3:
+//                xVelocity = Math.abs(xVelocity);    // right
+//                yVelocity = -Math.abs(yVelocity);   // up
+//                break;
+//        }
     }
 
 
