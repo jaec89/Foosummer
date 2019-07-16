@@ -140,7 +140,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     @Override
     public void run() {
-
         while(nowPlaying) {
             //What time is it now at the start of the loop?
             long frameStartTime = System.currentTimeMillis();
@@ -172,7 +171,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //        while(nowPlaying){
 //            draw();
 //        }
-
     }
 
 
@@ -203,12 +201,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // Draw the objects
             myCanvas.drawRect(myShip.getRect(), myPaint);
             myCanvas.drawRect(myLaser.getRect(), myPaint);
-
-            // draw asteroids
-            myPaint.setColor(Color.argb
-                    (255, 205, 160, 245));
             for(int i = 0 ; i < asteroids.length ; i++) {
-                myCanvas.drawRect(asteroids[i].getRect(), myPaint);
+                asteroids[i].draw(myCanvas);
             }
 
             // Choose the font size

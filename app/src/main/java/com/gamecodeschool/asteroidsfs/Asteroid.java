@@ -1,5 +1,8 @@
 package com.gamecodeschool.asteroidsfs;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.RectF;
 import java.util.Random;
 
@@ -53,8 +56,16 @@ public class Asteroid {
 
 
     // Return a reference to mRect to AsteroidsGame
-    public RectF getRect(){
+    public RectF getRect() {
         return mRect;
+    }
+
+
+    // Draw asteroid
+    public void draw(Canvas myCanvas) {
+        Paint myPaint = new Paint();
+        myPaint.setColor(Color.argb(255, 205, 160, 245));
+        myCanvas.drawRect(mRect, myPaint);
     }
 
 
