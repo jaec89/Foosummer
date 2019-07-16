@@ -9,6 +9,8 @@ public class Asteroids {
     private float mWidth;
     private float mHeight;
     private boolean hit;
+    private float mAsteroidWidth;
+    private float mAsteroidHeight;
 
 
     /*Define different size asteroids*/
@@ -17,7 +19,8 @@ public class Asteroids {
     // It is called by the code:
     // mAsteroid = new Asteroid(mScreenX);
     // in the AsteroidsGame class
-    Asteroids(int screenX, int mScreenY){
+
+    Asteroids(int screenX, int mScreenY) {
         // Make the ball square and 1% of screen width
         // of the screen width
         mWidth = screenX / 100;
@@ -64,7 +67,20 @@ public class Asteroids {
         mRect.bottom = mRect.top + mHeight;
     }
 
-
+    void reset(int x, int y){
+        // Initialise the four points of
+        // the rectangle which defines the asteroid
+        mRect.left = x / 2;
+        mRect.top = 0;
+        mRect.right = x / 2 + mAsteroidWidth;
+        mRect.bottom = mAsteroidHeight;
+        // How fast will the asteroid travel
+        // You could vary this to suit
+        // You could even increase it as the game progresses
+        // to make it harder
+        mYVelocity = -(y / 3);
+        mXVelocity = (y / 3);
+    }
 
     void increaseVelocity(){
         // increase the speed by 10%
@@ -72,12 +88,17 @@ public class Asteroids {
         mYVelocity = mYVelocity * 1.1f;
     }
 
-
-
     // Detect collision with a laser object
     // Has the laser hit the asteroid?
     private void detectCollisions(RectF laserPosition){
         hit = RectF.intersects(laserPosition, mRect);
     }
 
+    // Large asteroid breaks into medium pieces
+    // medium piece breaks into small pieces
+    void disintegrate(){
+
+    }
+
 }
+

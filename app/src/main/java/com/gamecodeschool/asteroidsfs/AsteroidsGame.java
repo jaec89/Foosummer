@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 
 
 class AsteroidsGame extends SurfaceView implements Runnable{
@@ -47,7 +48,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     // game objects
 //    private Space mySpace;
-//    private UserShip myShip;
+    private Player myShip;
 //    private OpponentShip npcShip; // make a vector of npc ships
 //    private Asteroids myAsteroids; // make a vector of asteroids
 //    private Laser myLaser;
@@ -74,7 +75,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         myPaint = new Paint();
 
         // Initialize the objects
-        // myShip = new UserShip(...)
+         myShip = new Player(screenX, screenY);
         // Asteroids = new Asteroids()
         // enemyShip = new ...()
         // myLaser = new ..()
@@ -83,7 +84,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         //startNewGame();
 
     }
-
 
 
     // Draw the game objects and the HUD
@@ -96,23 +96,12 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             myCanvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
                     R.drawable.outerspacebackground1), 0, 0, null);
 
-//            // Change the paint color to white
-//            myPaint.setColor(Color.argb(255, 255, 255, 255));
-
-
-
-            // Fill the screen with a solid color
-//            myCanvas.drawColor(Color.argb
-//                    (255, 42, 10, 200));
-
             // Choose a color to paint with
-//            myPaint.setColor(Color.argb
-//                    (255, 255, 255, 255));
+            myPaint.setColor(Color.argb
+                    (255, 26, 190, 26));
 
-            // Draw the bat and ball
-//            myCanvas.drawRect(mBall.getRect(), myPaint);
-//            myCanvas.drawRect(mBat.getRect(), myPaint);
-
+            // Draw the objects
+            myCanvas.drawRect(myShip.getRect(), myPaint);
 
 
             // Choose the font size
@@ -135,13 +124,105 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 
+
+    // Handle all the screen touches
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+
+        // This switch block replaces the
+        // if statement from the Sub Hunter game
+        switch (motionEvent.getAction() &
+                MotionEvent.ACTION_MASK) {
+
+            // The player has put their finger on the screen
+            case MotionEvent.ACTION_DOWN:
+
+                // If the game was paused unpause
+                nowPaused = false;
+
+                // If finger pressed on right side of screen
+                // then the ship will accelerate
+                if(motionEvent.getX() > screenX / 2){
+                // call method that will accelerate ship
+                }
+
+                // If finger pressed on left side of screen...
+                if(motionEvent.getX() < screenX / 2){
+                    // If finger pressed on upper left of screen
+                    // then the ship will rotate counter-clockwise
+                    if(motionEvent.getY() < screenY / 2){
+                        // rotate ship counter-clockwise
+                    }
+
+                    if(motionEvent.getY() > screenY / 2){
+                        // rotate ship clockwise
+                    }
+                }
+
+                break;
+
+            // The player lifted their finger
+            // from anywhere on screen.
+            // It is possible to create bugs by using
+            // multiple fingers. We will use more
+            // complicated and robust touch handling
+            // in later projects
+            case MotionEvent.ACTION_UP:
+                if(motionEvent.getX() > screenX / 2){
+                    // stop position
+                }
+
+                if(motionEvent.getX() < screenX / 2){
+                    // stop rotation / fix orientation
+                }
+
+                break;
+        }
+        return true;
+    }
+
+
+
     @Override
     public void run(){
-        // change condition for this later...
-        while(true){
+
+        while(nowPlaying){
+            //What time is it now at the start of the loop?
+            long frameStartTime = System.currentTimeMillis();
+
+            if(!nowPaused){
+                update();
+
+//            detectCollisions();
+            }
+
+            // The movement has been handled and collisions
+            // detected now we can draw the scene.
             draw();
+
+            // How long did this frame/loop take?
+            // Store the answer in timeThisFrame
+            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
+
+            // Make sure timeThisFrame is at least 1 millisecond
+            // because accidentally dividing by zero crashes the game
+            if(timeThisFrame > 0){
+                // Store the current frame rate in myFPS
+                // ready to pass to the update methods of
+                // myShip..... next frame/loop
+                myFPS = MILLIS_IN_SECOND / timeThisFrame;
+            }
         }
 
+        // change condition for this later...
+//        while(nowPlaying){
+//            draw();
+//        }
+
+    }
+
+    private void update(){
+        myShip.update(myFPS);
     }
 
     public void resume(){
