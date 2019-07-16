@@ -80,18 +80,17 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize the objects
         myShip = new Player(screenX, screenY);
-        myLaser = new Laser(screenX/2, screenY/2, screenX/100, screenY/100, -(screenY/5), (screenY/5));
+        myLaser = new Laser(screenX/2, screenY/2, screenY/100, screenY/100, -(screenY/5), (screenY/5));
         // Initialize asteroids
         asteroids = new Asteroid[3];
         for(int i = 0 ; i < asteroids.length ; i++) {
             Random rand = new Random();
             int asteroidXPosition = rand.nextInt(screenX);
             int asteroidYPosition = rand.nextInt(screenY);
-            int asteroidWidth = screenX/ 100;
-            int asteroidHeight = screenY/ 100;
+            int asteroidWidth = screenY/ 50;
+            int asteroidHeight = screenY/ 50;
             int asteroidXVelocity = -(screenY / 5);
             int asteroidYVelocity = (screenY / 5);
-
 
             // Pick a random direction
             // 0 -> left, down
@@ -199,19 +198,15 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // Choose a color to paint with
             myPaint.setColor(Color.argb
-                    (255, 26, 190, 26));
+                    (255, 75, 180, 250));
 
             // Draw the objects
-            //myCanvas.drawRect(myShip.getRect(), myPaint);
-
-            // draw laser
-            myPaint.setColor(Color.argb
-                    (255, 26, 190, 26));
+            myCanvas.drawRect(myShip.getRect(), myPaint);
             myCanvas.drawRect(myLaser.getRect(), myPaint);
 
             // draw asteroids
             myPaint.setColor(Color.argb
-                    (255, 26, 190, 26));
+                    (255, 205, 160, 245));
             for(int i = 0 ; i < asteroids.length ; i++) {
                 myCanvas.drawRect(asteroids[i].getRect(), myPaint);
             }
