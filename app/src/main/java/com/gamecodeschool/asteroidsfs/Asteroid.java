@@ -1,7 +1,6 @@
 package com.gamecodeschool.asteroidsfs;
 
 import android.graphics.RectF;
-import java.util.Random;
 
 public class Asteroid {
     private RectF mRect; // Give access to precise position and size of asteroid
@@ -21,19 +20,19 @@ public class Asteroid {
         this.height = height;
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
+        //super(xPosition, yPosition, width, height, xVelocity, yVelocity);
     }
 
 
-
     // Return a reference to mRect to AsteroidsGame
-    public RectF getRect() {
+    public RectF getRect(){
         return mRect;
     }
 
 
-
     // Update the asteroid position (called each frame/loop)
     // Move the asteroid based on the velocity and current frame rate (mFPS)
+    //OVERRIDE update() in SpaceObject
     public void update(long fps, int x, int y){
         // Move the top left corner
         mRect.left = mRect.left + (xVelocity / fps) ;
