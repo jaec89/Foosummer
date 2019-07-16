@@ -10,7 +10,7 @@ public class SpaceObject {
     private float mWidth;
     private float mHeight;
 
-    SpaceObject(int screenX, int screenY){
+    SpaceObject(int screenX, int screenY) {
         // Make the ball square and 1% of screen width
         // of the screen width
         mWidth = screenX / 100;
