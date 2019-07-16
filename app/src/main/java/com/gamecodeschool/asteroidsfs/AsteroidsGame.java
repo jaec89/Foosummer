@@ -61,7 +61,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 
-    public AsteroidsGame(Context context, int x, int y){
+    public AsteroidsGame(Context context, int x, int y) {
         // calls parent class constructor of SurfaceView
         super(context);
 
@@ -86,6 +86,53 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     }
 
 
+
+
+    @Override
+    public void run() {
+
+        while(nowPlaying) {
+            //What time is it now at the start of the loop?
+            long frameStartTime = System.currentTimeMillis();
+
+            if(!nowPaused){
+                update();
+//            detectCollisions();
+            }
+
+            // The movement has been handled and collisions
+            // detected now we can draw the scene.
+            draw();
+
+            // How long did this frame/loop take?
+            // Store the answer in timeThisFrame
+            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
+
+            // Make sure timeThisFrame is at least 1 millisecond
+            // because accidentally dividing by zero crashes the game
+            if(timeThisFrame > 0) {
+                // Store the current frame rate in myFPS
+                // ready to pass to the update methods of
+                // myShip..... next frame/loop
+                myFPS = MILLIS_IN_SECOND / timeThisFrame;
+            }
+        }
+
+        // change condition for this later...
+//        while(nowPlaying){
+//            draw();
+//        }
+
+    }
+
+
+    private void update() {
+        // Update the asteroid
+        //myShip.update(myFPS);
+        myAsteroid.update(myFPS);
+    }
+
+
     // Draw the game objects and the HUD
     void draw() {
         if (myHolder.getSurface().isValid()) {
@@ -101,7 +148,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     (255, 26, 190, 26));
 
             // Draw the objects
-            myCanvas.drawRect(myShip.getRect(), myPaint);
+            //myCanvas.drawRect(myShip.getRect(), myPaint);
             myCanvas.drawRect(myAsteroid.getRect(), myPaint);
 
             // Choose the font size
@@ -143,7 +190,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 // If finger pressed on right side of screen
                 // then the ship will accelerate
                 if(motionEvent.getX() > screenX / 2){
-                // call method that will accelerate ship
+                    // call method that will accelerate ship
                 }
 
                 // If finger pressed on left side of screen...
@@ -183,47 +230,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 
-    @Override
-    public void run(){
 
-        while(nowPlaying){
-            //What time is it now at the start of the loop?
-            long frameStartTime = System.currentTimeMillis();
 
-            if(!nowPaused){
-                update();
 
-//            detectCollisions();
-            }
-
-            // The movement has been handled and collisions
-            // detected now we can draw the scene.
-            draw();
-
-            // How long did this frame/loop take?
-            // Store the answer in timeThisFrame
-            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
-
-            // Make sure timeThisFrame is at least 1 millisecond
-            // because accidentally dividing by zero crashes the game
-            if(timeThisFrame > 0){
-                // Store the current frame rate in myFPS
-                // ready to pass to the update methods of
-                // myShip..... next frame/loop
-                myFPS = MILLIS_IN_SECOND / timeThisFrame;
-            }
-        }
-
-        // change condition for this later...
-//        while(nowPlaying){
-//            draw();
-//        }
-
-    }
-
-    private void update(){
-        myShip.update(myFPS);
-    }
 
     public void resume(){
         nowPlaying = true;
@@ -233,8 +242,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Start the thread
         myGameThread.start();
-
     }
+
 
     public void pause(){
         // Set nowPlaying to false

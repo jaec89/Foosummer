@@ -9,20 +9,17 @@ public class Asteroids {
     private float mWidth;
     private float mHeight;
     private boolean hit;
-    private float mAsteroidWidth;
-    private float mAsteroidHeight;
 
 
     /*Define different size asteroids*/
 
     // This is the constructor method.
     // It is called by the code:
-    // mAsteroid = new Asteroid(mScreenX);
+    // myAsteroid = new Asteroid(screenX, screenY);
     // in the AsteroidsGame class
 
-    Asteroids(int screenX, int mScreenY) {
-        // Make the ball square and 1% of screen width
-        // of the screen width
+    Asteroids(int screenX, int screenY) {
+        // Make the asteroid square 1% of screen width
         mWidth = screenX / 100;
         mHeight = screenX / 100;
 
@@ -32,20 +29,20 @@ public class Asteroids {
         // default constructor sets variables (left, top, right and bottom) to zero
         mRect = new RectF();
         mRect.left = screenX / 2;
-        mRect.top = 0;
+        mRect.top = screenY / 2;
         mRect.right = screenX / 2 + mWidth;
-        mRect.bottom = mHeight;
+        mRect.bottom = screenY / 2 + mHeight;
 
         // How fast will the ball travel
         // You could vary this to suit
         // You could even increase it as the game progresses
         // to make it harder
-        mYVelocity = -(mScreenY / 3);
-        mXVelocity = (mScreenY / 3);
+        mYVelocity = -(screenY / 5);
+        mXVelocity = (screenY / 5);
     }
 
     // Return a reference to mRect to AsteroidsGame
-    RectF getRect(){
+    RectF getRect() {
         return mRect;
     }
 
@@ -55,30 +52,19 @@ public class Asteroids {
         // Move the asteroid based upon the
         // horizontal (mXVelocity) and
         // vertical(mYVelocity) speed
-        // and the current frame rate(fps)
+        // and the current frame rate(mFPS)
+
         // Move the top left corner
         mRect.left = mRect.left + (mXVelocity / fps);
         mRect.top = mRect.top + (mYVelocity / fps);
+
         // Match up the bottom right corner
-        // based on the size of the asteroid
+        // based on the size of the ball
         mRect.right = mRect.left + mWidth;
         mRect.bottom = mRect.top + mHeight;
     }
 
-    void reset(int x, int y){
-        // Initialise the four points of
-        // the rectangle which defines the asteroid
-        mRect.left = x / 2;
-        mRect.top = 0;
-        mRect.right = x / 2 + mAsteroidWidth;
-        mRect.bottom = mAsteroidHeight;
-        // How fast will the asteroid travel
-        // You could vary this to suit
-        // You could even increase it as the game progresses
-        // to make it harder
-        mYVelocity = -(y / 3);
-        mXVelocity = (y / 3);
-    }
+
 
     void increaseVelocity(){
         // increase the speed by 10%
