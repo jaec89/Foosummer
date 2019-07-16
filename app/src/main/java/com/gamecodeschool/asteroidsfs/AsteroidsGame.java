@@ -82,15 +82,15 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         myShip = new Player(screenX, screenY);
         myLaser = new Laser(screenX/2, screenY/2, screenY/100, screenY/100, -(screenY/5), (screenY/5));
         // Initialize asteroids
-        asteroids = new Asteroid[3];
+        asteroids = new Asteroid[5];
         for(int i = 0 ; i < asteroids.length ; i++) {
             Random rand = new Random();
             int asteroidXPosition = rand.nextInt(screenX);
             int asteroidYPosition = rand.nextInt(screenY);
             int asteroidWidth = screenY/ 50;
             int asteroidHeight = screenY/ 50;
-            int asteroidXVelocity = -(screenY / 5);
-            int asteroidYVelocity = (screenY / 5);
+            int asteroidXVelocity = -(screenY / 10);
+            int asteroidYVelocity = (screenY / 10);
 
             // Pick a random direction
             // 0 -> left, down
