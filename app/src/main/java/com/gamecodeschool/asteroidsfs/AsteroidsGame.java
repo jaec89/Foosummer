@@ -11,6 +11,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+// these imports deal with ArrayList class in java
+import java.util.*;
+import java.util.ArrayList;
 
 import java.util.Random;
 
@@ -50,12 +53,12 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private boolean nowPaused = true;
 
     // GAME OBJECTS
-    private int levels[] = {0, 1, 2};
+    private int levels = 1; // we increment each time the player clears a level.
 //    private Space mySpace;
     private Player myShip;
-//    private OpponentShip npcShip; // make a vector of npc ships
-    private Asteroid asteroids[]; // make a vector of asteroids
-    private Laser myLaser;
+//    private OpponentShip npcShip; 
+    private ArrayList<Asteroid> asteroids;
+    private ArrayList<Laser> myLasers;
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
 //    private Power.Ups mineralPowerUps; // vector of mineral powerups
 
@@ -80,58 +83,17 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize the objects
         myShip = new Player(screenX, screenY);
-        myLaser = new Laser(screenX/2, screenY/2, screenY/100, screenY/100, -(screenY/5), (screenY/5));
+        myLasers = new ArrayList<Laser>();
         // Initialize asteroids
-        asteroids = new Asteroid[3];
-        for(int i = 0 ; i < asteroids.length ; i++) {
-            Random rand = new Random();
-            int asteroidXPosition = rand.nextInt(screenX);
-            int asteroidYPosition = rand.nextInt(screenY);
-            int asteroidWidth = screenY/ 50;
-            int asteroidHeight = screenY/ 50;
-            int asteroidXVelocity = -(screenY / 5);
-            int asteroidYVelocity = (screenY / 5);
+        asteroids = new ArrayList<Asteroid>();
 
-            // Pick a random direction
-            // 0 -> left, down
-            // 1 -> left, up
-            // 2 -> right, down
-            // 3 -> right, up
-            int direction = rand.nextInt(4);
-            switch (direction) {
-                case 0:
-                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
-                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
-                    break;
-                case 1:
-                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
-                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
-                    break;
-                case 2:
-                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
-                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
-                    break;
-                case 3:
-                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
-                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
-                    break;
-            }
-
-
-            asteroids[i] = new Asteroid(asteroidXPosition,
-                                            asteroidYPosition,
-                                            asteroidWidth,
-                                            asteroidHeight,
-                                            asteroidXVelocity,
-                                            asteroidYVelocity);
-        }
 
 
         // enemyShip = new ...()
         // myLaser = new ..()
         // enemyLaser = new ..()
 
-        //startNewGame();
+        startNewGame();
 
     }
 
@@ -146,7 +108,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             if(!nowPaused){
                 update();
-//            detectCollisions();
+                detectCollisions();
             }
 
             // The movement has been handled and collisions
@@ -177,9 +139,11 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private void update() {
         // Update the asteroid
         //myShip.update(myFPS);
-        myLaser.update(myFPS, screenX, screenY);
-        for(int i = 0 ; i < asteroids.length ; i++) {
-            asteroids[i].update(myFPS, screenX, screenY);
+        for(int i = 0; i < myLasers.size(); i++) {
+            myLasers.get(i).update(myFPS, screenX, screenY);
+        }
+        for(int i = 0 ; i < asteroids.size() ; i++) {
+            asteroids.get(i).update(myFPS, screenX, screenY);
         }
     }
 
@@ -200,9 +164,13 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // Draw the objects
             myCanvas.drawRect(myShip.getRect(), myPaint);
-            myLaser.draw(myCanvas);
-            for(int i = 0 ; i < asteroids.length ; i++) {
-                asteroids[i].draw(myCanvas);
+
+            // loop through all lasers and then draw.
+            for(int i = 0; i < myLasers.size(); i++) {
+                myLasers.get(i).draw(myCanvas);
+            }
+            for(int i = 0 ; i < asteroids.size(); i++) {
+                asteroids.get(i).draw(myCanvas);
             }
 
             // Choose the font size
@@ -308,6 +276,71 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             myGameThread.join();
         } catch (InterruptedException e){
             Log.e("Error:", "joining thread");
+        }
+    }
+
+    /* 
+        We go through run through all object pairs that can be collided.
+        meteor - player's laser.
+        meteor - player
+        enemy - player
+        enemy laser - player
+        enemy - player's laser
+
+        These should cover the basic cases of collision within the game.
+    */
+    private void detectCollisions() {
+        
+    }
+
+    /* 
+        When we start the game we reset the game state such as level
+        initial meteor count.
+        and clear all lasers and enemy space ships.
+     */
+    private void startNewGame() {
+        // FIXME: Change 3 to asteroid count variable that can be changed.
+        for(int i = 0 ; i < 3 ; i++) {
+            Random rand = new Random();
+            int asteroidXPosition = rand.nextInt(screenX);
+            int asteroidYPosition = rand.nextInt(screenY);
+            int asteroidWidth = screenY/ 50;
+            int asteroidHeight = screenY/ 50;
+            int asteroidXVelocity = -(screenY / 5);
+            int asteroidYVelocity = (screenY / 5);
+
+            // Pick a random direction
+            // 0 -> left, down
+            // 1 -> left, up
+            // 2 -> right, down
+            // 3 -> right, up
+            int direction = rand.nextInt(4);
+            switch (direction) {
+                case 0:
+                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
+                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
+                    break;
+                case 1:
+                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
+                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
+                    break;
+                case 2:
+                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
+                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
+                    break;
+                case 3:
+                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
+                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
+                    break;
+            }
+
+
+            asteroids.add(new Asteroid(asteroidXPosition,
+                                            asteroidYPosition,
+                                            asteroidWidth,
+                                            asteroidHeight,
+                                            asteroidXVelocity,
+                                            asteroidYVelocity));
         }
     }
 
