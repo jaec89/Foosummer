@@ -4,12 +4,15 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+
+import java.util.Random;
 
 
 class AsteroidsGame extends SurfaceView implements Runnable{
@@ -50,7 +53,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //    private Space mySpace;
     private Player myShip;
 //    private OpponentShip npcShip; // make a vector of npc ships
-    private Asteroids asteroids[]; // make a vector of asteroids
+    private Asteroid asteroids[]; // make a vector of asteroids
 //    private Laser myLaser;
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
 //    private Power.Ups mineralPowerUps; // vector of mineral powerups
@@ -76,9 +79,23 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize the objects
         myShip = new Player(screenX, screenY);
-        asteroids = new Asteroids[3];
+
+        // Initialize asteroids
+        asteroids = new Asteroid[3];
         for(int i = 0 ; i < asteroids.length ; i++) {
-            asteroids[i] = new Asteroids(screenX, screenY);
+            Random rand = new Random();
+            int asteroidXPosition = rand.nextInt(screenX);
+            int asteroidYPosition = rand.nextInt(screenY);
+            int asteroidWidth = screenX/ 100;
+            int asteroidHeight = screenY/ 100;
+            int asteroidXVelocity = -(screenY / 5);
+            int asteroidYVelocity = (screenY / 5);
+            asteroids[i] = new Asteroid(asteroidXPosition,
+                                            asteroidYPosition,
+                                            asteroidWidth,
+                                            asteroidHeight,
+                                            asteroidXVelocity,
+                                            asteroidYVelocity);
         }
 
 
@@ -135,7 +152,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         // Update the asteroid
         //myShip.update(myFPS);
         for(int i = 0 ; i < asteroids.length ; i++) {
-            asteroids[i].update(myFPS);
+            asteroids[i].update(myFPS, screenX, screenY);
         }
     }
 
