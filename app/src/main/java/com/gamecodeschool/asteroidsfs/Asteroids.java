@@ -26,11 +26,9 @@ public class Asteroids {
         mWidth = screenX / 100;
         mHeight = screenX / 100;
 
-        // Initialize the RectF with 0, 0, 0, 0
-        // We do it here because we only want to
-        // do it once.
-        // We will initialize the detail
-        // at the start of each game
+        // Initialize the RectF
+        // We do it here because we only want to do it once.
+        // We will initialize the detail at the start of each game
         // default constructor sets variables (left, top, right and bottom) to zero
         mRect = new RectF();
         mRect.left = screenX / 2;

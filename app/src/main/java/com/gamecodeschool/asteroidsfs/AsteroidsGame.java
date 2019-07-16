@@ -50,7 +50,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //    private Space mySpace;
     private Player myShip;
 //    private OpponentShip npcShip; // make a vector of npc ships
-//    private Asteroids myAsteroids; // make a vector of asteroids
+    private Asteroids myAsteroid; // make a vector of asteroids
 //    private Laser myLaser;
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
 //    private Power.Ups mineralPowerUps; // vector of mineral powerups
@@ -75,8 +75,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         myPaint = new Paint();
 
         // Initialize the objects
-         myShip = new Player(screenX, screenY);
-        // Asteroids = new Asteroids()
+        myShip = new Player(screenX, screenY);
+        myAsteroid = new Asteroids(screenX, screenY);
         // enemyShip = new ...()
         // myLaser = new ..()
         // enemyLaser = new ..()
@@ -102,7 +102,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // Draw the objects
             myCanvas.drawRect(myShip.getRect(), myPaint);
-
+            myCanvas.drawRect(myAsteroid.getRect(), myPaint);
 
             // Choose the font size
             myPaint.setTextSize(fontSize);
