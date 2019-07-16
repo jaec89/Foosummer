@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 
+
 import android.graphics.Bitmap;
 
 class AsteroidsGame extends SurfaceView implements Runnable{
@@ -43,12 +44,15 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private int myScore = 0;
     private int myLives = 3; // abstract this to UserShip class?
 
+    private int degree;
+
     // Here is the Thread and two control variables
     private Thread myGameThread = null;
     // This volatile variable can be accessed
     // from inside and outside the thread
     private volatile boolean nowPlaying;
     private boolean nowPaused = true;
+
 
     // game objects
 //    private Space mySpace;
@@ -58,7 +62,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //    private Laser myLaser;
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
 //    private Power.Ups mineralPowerUps; // vector of mineral powerups
-
 
     // temp Context
     Context ourContext;
@@ -84,7 +87,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         myPaint = new Paint();
 
         // Initialize the objects
-         myShip = new Player(screenX, screenY);
+        myShip = new Player(screenX, screenY);
         // Asteroids = new Asteroids()
         // enemyShip = new ...()
         // myLaser = new ..()
@@ -126,16 +129,16 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // Create and scale the bitmaps
             mBitmapHeadUp = BitmapFactory
                     .decodeResource(ourContext.getResources(),
-                            R.drawable.grayship);
+                            R.drawable.sqspaceship);
             mBitmapHeadLeft = BitmapFactory
                     .decodeResource(ourContext.getResources(),
-                            R.drawable.grayship);
+                            R.drawable.sqspaceship);
             mBitmapHeadDown = BitmapFactory
                     .decodeResource(ourContext.getResources(),
-                            R.drawable.grayship);
+                            R.drawable.sqspaceship);
             mBitmapHeadRight = BitmapFactory
                     .decodeResource(ourContext.getResources(),
-                            R.drawable.grayship);
+                            R.drawable.sqspaceship);
 
             mBitmapHeadCurrent = BitmapFactory
                     .decodeResource(ourContext.getResources(),
@@ -145,77 +148,37 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // in the correct direction
             mBitmapHeadUp = Bitmap
                     .createScaledBitmap(mBitmapHeadUp,
-                            blockSize*4, blockSize*4, false);
+                            blockSize*3, blockSize*3, false);
 
             // A matrix for scaling
             Matrix matrix = new Matrix();
 
-            // leave all the horizontal values the same while making
-            // all the vertical values their inverse.
-            /*matrix.preScale(1, -1);
+            // set parameters depending on degree orientation vs location of box
 
-            mBitmapHeadDown = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);*/
-/*
-            // A matrix for rotating
-            matrix.preRotate(-90);
 
-            mBitmapHeadLeft = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);
-
-            // Matrix operations are cumulative
-            // so rotate by 180 to face right
-            matrix.preRotate(180);
-            mBitmapHeadRight = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);
-
-            matrix.preRotate(45);
+            matrix.preRotate(degree);
+            degree++;
+            if(degree > 360){
+                degree = 0;
+            }
+            Log.d("ADebugTag", "Degree: " + Float.toString(degree));
             mBitmapHeadCurrent = Bitmap
                     .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);
-*/
-
-            /*matrix.preRotate(45);
-            mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);
-
-          //https://stackoverflow.com/questions/32816570/how-can-i-remove-black-background-of-after-rotate-bitmap-image-in-android-5-0
-            mBitmapHeadCurrent.setHasAlpha(true);*/
-
-            /*myCanvas.drawBitmap(mBitmapHeadRight,
-                    screenX / 2,
-                    screenY / 2, myPaint);
-
-            myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    screenX / 4,
-                    screenY / 4, myPaint);
-
-            matrix.preRotate(20,((screenX/4)+ blockSize*2), ((screenY/2)+blockSize*2));
-            mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);*/
-
-            /*myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    screenX / 4,
-                    screenY / 2, myPaint);*/
-
-            matrix.preRotate(45);
-            myCanvas.drawBitmap(mBitmapHeadUp,
-                    screenX / 2,
-                    screenY / 2, myPaint);
+                            0, 0, blockSize*3, blockSize*3, matrix, true);
             mBitmapHeadCurrent.setHasAlpha(true);
+            myCanvas.drawBitmap(mBitmapHeadCurrent,
+                    myShip.getRectLeft(),
+                    myShip.getRectTop(), myPaint);
+
+//            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectLeft()));
+//            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectTop()));
+//            mBitmapHeadCurrent.setHasAlpha(true);
 //            matrix.mapRect(myShip.getRect());
 
            /* matrix.postRotate(20);
             mBitmapHeadCurrent = Bitmap
                     .createBitmap(mBitmapHeadUp,
                             0, 0, blockSize*4, blockSize*4, matrix, true);
-
-
             myCanvas.drawBitmap(mBitmapHeadCurrent,
                     screenX / 2,
                     screenY / 4, myPaint);*/
@@ -241,6 +204,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 
+
     // Handle all the screen touches
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
@@ -259,7 +223,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 // If finger pressed on right side of screen
                 // then the ship will accelerate
                 if(motionEvent.getX() > screenX / 2){
-                // call method that will accelerate ship
+                    // call method that will accelerate ship
                 }
 
                 // If finger pressed on left side of screen...
@@ -366,4 +330,3 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 }
-
