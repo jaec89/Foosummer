@@ -1,5 +1,8 @@
 package com.gamecodeschool.asteroidsfs;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.RectF;
 
 public class SpaceObject {
@@ -21,8 +24,16 @@ public class SpaceObject {
 
 
     // Return a reference to mRect to AsteroidsGame
-    public RectF getRect(){
+    public RectF getRect() {
         return mRect;
+    }
+
+
+    // Draw object
+    public void draw(Canvas myCanvas) {
+        Paint myPaint = new Paint();
+        myPaint.setColor(Color.argb(255, 255, 255, 255));
+        myCanvas.drawRect(mRect, myPaint);
     }
 
 
