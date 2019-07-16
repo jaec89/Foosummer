@@ -50,6 +50,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private boolean nowPaused = true;
 
     // GAME OBJECTS
+    private int levels[] = {0, 1, 2};
 //    private Space mySpace;
     private Player myShip;
 //    private OpponentShip npcShip; // make a vector of npc ships
