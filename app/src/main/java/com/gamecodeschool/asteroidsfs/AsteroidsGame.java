@@ -57,7 +57,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //    private Space mySpace;
     private Player myShip;
 //    private OpponentShip npcShip; // make a vector of npc ships
-    private Asteroid asteroids[]; // make a vector of asteroids
+    private Vector<Asteroid> asteroids; // make a vector of asteroids
     private Vector<Laser> myLaser;
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
 //    private Power.Ups mineralPowerUps; // vector of mineral powerups
@@ -85,7 +85,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         myShip = new Player(screenX, screenY);
         myLaser = new Laser(screenX/2, screenY/2, screenY/100, screenY/100, -(screenY/5), (screenY/5));
         // Initialize asteroids
-        asteroids = new Asteroid[3];
+        asteroids = new Vector<Asteroid>(3, Asteroid());
         for(int i = 0 ; i < asteroids.length ; i++) {
             Random rand = new Random();
             int asteroidXPosition = rand.nextInt(screenX);
@@ -149,7 +149,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             if(!nowPaused){
                 update();
-//            detectCollisions();
+                detectCollisions();
             }
 
             // The movement has been handled and collisions
@@ -312,6 +312,20 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         } catch (InterruptedException e){
             Log.e("Error:", "joining thread");
         }
+    }
+
+    /* 
+        We go through run through all object pairs that can be collided.
+        meteor - player's laser.
+        meteor - player
+        enemy - player
+        enemy laser - player
+        enemy - player's laser
+
+        These should cover the basic cases of collision within the game.
+    */
+    private void detectCollisions() {
+
     }
 
 
