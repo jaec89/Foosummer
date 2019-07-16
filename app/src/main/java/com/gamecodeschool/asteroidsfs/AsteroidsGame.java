@@ -9,10 +9,13 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 
+import android.graphics.Bitmap;
 
 class AsteroidsGame extends SurfaceView implements Runnable{
+    private final int NUM_BLOCKS_WIDE = 40;
+    int blockSize;
+
 
     // Toggle for debugging
     private final boolean DEBUGGING = true;
@@ -56,6 +59,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //    private Power.Ups mineralPowerUps; // vector of mineral powerups
 
 
+    // temp Context
+    Context ourContext;
+
     //private Drawable mCustomImage;
 
 
@@ -64,6 +70,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     public AsteroidsGame(Context context, int x, int y){
         // calls parent class constructor of SurfaceView
         super(context);
+        ourContext = context;
+        blockSize = x / NUM_BLOCKS_WIDE;
 
         screenX = x;
         screenY = y;
@@ -102,7 +110,27 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // Draw the objects
             myCanvas.drawRect(myShip.getRect(), myPaint);
+            // Draw player ship on hit box
 
+
+            // A bitmap for each direction the head can face
+            Bitmap mBitmapHeadUp;
+
+            // Create and scale the bitmaps
+            mBitmapHeadUp = BitmapFactory
+                    .decodeResource(ourContext.getResources(),
+                            R.drawable.grayship);
+
+            // To do: Modify the bitmaps to face the ship
+            // in the correct direction
+            mBitmapHeadUp = Bitmap
+                    .createScaledBitmap(mBitmapHeadUp,
+                            blockSize*2, blockSize*2, false);
+
+
+            myCanvas.drawBitmap(mBitmapHeadUp,
+                    screenX / 2,
+                    screenY / 2, myPaint);
 
             // Choose the font size
             myPaint.setTextSize(fontSize);
