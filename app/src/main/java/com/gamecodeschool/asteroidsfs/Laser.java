@@ -1,5 +1,8 @@
 package com.gamecodeschool.asteroidsfs;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.RectF;
 
 public class Laser {
@@ -20,10 +23,20 @@ public class Laser {
     }
 
 
+
     // Return a reference to mRect to AsteroidsGame
     public RectF getRect(){
         return mRect;
     }
+
+
+
+    public void draw(Canvas myCanvas) {
+        Paint myPaint = new Paint();
+        myPaint.setColor(Color.argb(255, 75, 180, 250));
+        myCanvas.drawRect(mRect, myPaint);
+    }
+
 
 
     // Update the asteroid position (called each frame/loop)

@@ -200,7 +200,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // Draw the objects
             myCanvas.drawRect(myShip.getRect(), myPaint);
-            myCanvas.drawRect(myLaser.getRect(), myPaint);
+            myLaser.draw(myCanvas);
             for(int i = 0 ; i < asteroids.length ; i++) {
                 asteroids[i].draw(myCanvas);
             }
