@@ -11,6 +11,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Bitmap;
+
 
 import java.util.Random;
 
@@ -20,17 +22,17 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     // Toggle for debugging
     private final boolean DEBUGGING = true;
 
-    // Necessary objects for drawing
+    // Drawing objects
     private SurfaceHolder myHolder;
     private Canvas myCanvas;
     private Paint myPaint;
 
-    // How many frames per second did we get?
+    // Frames per second
     private long myFPS;
-    // The number of milliseconds in a second
+    // Number of milliseconds in a second
     private final int MILLIS_IN_SECOND = 1000;
 
-    // Retains screen resolution
+    // Screen resolution
     private int screenX;
     private int screenY;
 
@@ -50,7 +52,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private boolean nowPaused = true;
 
     // GAME OBJECTS
-    private int levels[] = {0, 1, 2};
 //    private Space mySpace;
     private Player myShip;
 //    private OpponentShip npcShip; // make a vector of npc ships
@@ -59,6 +60,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
 //    private Power.Ups mineralPowerUps; // vector of mineral powerups
 
+    Context ourContext;
 
     //private Drawable mCustomImage;
 
@@ -68,6 +70,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     public AsteroidsGame(Context context, int x, int y) {
         // calls parent class constructor of SurfaceView
         super(context);
+        ourContext = context;
 
         screenX = x;
         screenY = y;
@@ -80,17 +83,17 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize the objects
         myShip = new Player(screenX, screenY);
-        myLaser = new Laser(screenX/2, screenY/2, screenY/100, screenY/100, -(screenY/5), (screenY/5));
+        myLaser = new Laser(screenX/2, screenY/2, screenY/50, screenY/50, -(screenY/5), (screenY/5));
         // Initialize asteroids
         asteroids = new Asteroid[5];
         for(int i = 0 ; i < asteroids.length ; i++) {
             Random rand = new Random();
             int asteroidXPosition = rand.nextInt(screenX);
             int asteroidYPosition = rand.nextInt(screenY);
-            int asteroidWidth = screenY/ 50;
-            int asteroidHeight = screenY/ 50;
-            int asteroidXVelocity = -(screenY / 10);
-            int asteroidYVelocity = (screenY / 10);
+            int asteroidWidth = screenY/25;
+            int asteroidHeight = screenY/25;
+            int asteroidXVelocity = -(screenY/10);
+            int asteroidYVelocity = (screenY/10);
 
             // Pick a random direction
             // 0 -> left, down
@@ -190,6 +193,10 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // Lock the canvas (graphics memory) ready to draw
             myCanvas = myHolder.lockCanvas();
 
+            Bitmap mAsteroids;
+            mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(),
+                    R.drawable.asteroid);
+
             // Fills the screen with background "space" image
             myCanvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
                     R.drawable.outerspacebackground1), 0, 0, null);
@@ -203,6 +210,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             myLaser.draw(myCanvas);
             for(int i = 0 ; i < asteroids.length ; i++) {
                 asteroids[i].draw(myCanvas);
+                //asteroids[i].draw(myCanvas, mAsteroids);
             }
 
             // Choose the font size
