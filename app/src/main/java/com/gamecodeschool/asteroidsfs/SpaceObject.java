@@ -43,8 +43,8 @@ public class SpaceObject {
         // Move the top left corner
         mRect.left = mRect.left + (mXVelocity / fps);
         mRect.top = mRect.top + (mYVelocity / fps);
-        // Match up the bottom right corner
-        // based on the size of the asteroid
+
+        // Match up the bottom right corner based on the size of the asteroid
         mRect.right = mRect.left + mWidth;
         mRect.bottom = mRect.top + mHeight;
     }

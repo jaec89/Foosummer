@@ -1,6 +1,7 @@
 package com.gamecodeschool.asteroidsfs;
 
 import android.graphics.RectF;
+import java.util.Random;
 
 public class Asteroids {
     private RectF mRect; // Give access to precise position and size of asteroid
@@ -22,24 +23,23 @@ public class Asteroids {
     // in the AsteroidsGame class
 
     Asteroids(int screenX, int screenY) {
-
         this.screenX = screenX;
         this.screenY = screenY;
 
-
         // Make the asteroid square 1% of screen width
-        mWidth = screenX / 100;
-        mHeight = screenX / 100;
+        this.mWidth = screenX / 100;
+        this.mHeight = screenX / 100;
 
         // Initialize the RectF
         // We do it here because we only want to do it once.
         // We will initialize the detail at the start of each game
-        // Default constructor sets variables (left, top, right and bottom)
-        mRect = new RectF();
-        mRect.left = screenX / 2;
-        mRect.top = screenY / 2;
-        mRect.right = screenX / 2 + mWidth;
-        mRect.bottom = screenY / 2 + mHeight;
+        // Default constructor sets variables (left, top, right and bottom) to random
+        this.mRect = new RectF();
+        Random rand = new Random();
+        mRect.left = rand.nextInt(screenX);
+        mRect.top = rand.nextInt(screenX);
+        mRect.right = mRect.left + mWidth;
+        mRect.bottom = mRect.top + mHeight;
 
         // How fast will the ball travel
         // You could vary this to suit
@@ -70,6 +70,7 @@ public class Asteroids {
         mRect.left = mRect.left + (mXVelocity / fps) ;
         mRect.top = mRect.top + (mYVelocity / fps) ;
 
+        // If asteroid travels off the screen -> wrap around
         if(mRect.left < 0) {
             mRect.left = screenX;
         }
