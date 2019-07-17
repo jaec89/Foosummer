@@ -115,7 +115,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // Draw the objects
             myCanvas.drawRect(myShip.getRect(), myPaint);
 
-
             // A bitmap for each direction the ship can face
             Bitmap mBitmapHeadUp;
             Bitmap mBitmapHeadLeft;
