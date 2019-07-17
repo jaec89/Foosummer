@@ -22,6 +22,10 @@ public class Player extends SpaceObject {
 	private int lives = 3;
 	private int score = 0;
 	private float mPlayerSpeed;
+	private RectF mRect1;
+	private RectF mRect2;
+	private RectF mCircle;
+	private int radius = 50;
 
 	private boolean hit;
 
@@ -31,8 +35,8 @@ public class Player extends SpaceObject {
 
 		// Configure the size of the player's
 		// ship based on the screen resolution
-		mLength = screenX / 13;
-		mHeight = screenY / 6;
+		mLength = screenX / 15;
+		mHeight = screenY / 15;
 
 		// start player ship location at center
 		// of the screen
@@ -41,8 +45,23 @@ public class Player extends SpaceObject {
 
 		// Intialize mRect based on the size and position
 		mRect = new RectF(mXCoord, mYCoord,
-				mXCoord + mLength,
-				mYCoord + mHeight);
+				mXCoord + mLength - 15,
+				mYCoord + mLength - 15);
+		float rectCenterX = mRect.centerX();
+		float rectCenterY = mRect.centerY();
+
+//		mRect1 = new RectF(mXCoord, mYCoord,
+//				mXCoord + mLength,
+//				mYCoord + mHeight);
+//		mRect2 = new RectF(mXCoord, mYCoord,
+//				mXCoord + mLength,
+//				mYCoord + mHeight);
+		mCircle = new RectF(mXCoord, mYCoord,
+				mXCoord + mLength , mYCoord + mLength);
+//		RectF oval = new RectF(width/2 - radius, width/2 - radius,
+//				width/2 + radius, width/2 + radius);
+//		canvas.drawArc(oval, 0, 360, false, paint1);
+
 
 		// Configure the speed of the ship
 		// This code means the ship can cover the
@@ -51,6 +70,7 @@ public class Player extends SpaceObject {
 	}
 
 
+	RectF getCirc() {return mCircle;}
 
 	RectF getRect(){
 		return mRect;

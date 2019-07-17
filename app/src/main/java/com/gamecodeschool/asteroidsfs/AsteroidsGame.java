@@ -113,7 +113,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     (255, 26, 190, 26));
 
             // Draw the objects
+
             myCanvas.drawRect(myShip.getRect(), myPaint);
+//            myCanvas.drawArc(myShip.getCirc(), 0, 360, false, myPaint);
 
 
             // A bitmap for each direction the ship can face
@@ -122,7 +124,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             Bitmap mBitmapHeadDown;
             Bitmap mBitmapHeadRight;
             Bitmap mBitmapHeadCurrent;
-
 
 
 
@@ -148,7 +149,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // in the correct direction
             mBitmapHeadUp = Bitmap
                     .createScaledBitmap(mBitmapHeadUp,
-                            blockSize*3, blockSize*3, false);
+                            blockSize*2, blockSize*2, false);
 
             // A matrix for scaling
             Matrix matrix = new Matrix();
@@ -157,33 +158,46 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
             matrix.preRotate(degree);
-            degree++;
+            degree = degree + 5;
             if(degree > 360){
                 degree = 0;
             }
             Log.d("ADebugTag", "Degree: " + Float.toString(degree));
+            Log.d("ADebugTag", "BlockSize: " + Float.toString(blockSize));
+
             mBitmapHeadCurrent = Bitmap
                     .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*3, blockSize*3, matrix, true);
+                            0, 0, (blockSize*2), (blockSize*2), matrix, true);
             mBitmapHeadCurrent.setHasAlpha(true);
+//            myCanvas.drawBitmap(mBitmapHeadCurrent,
+//                    null,
+//                    myShip.getRect(), myPaint);
             myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    myShip.getRectLeft(),
-                    myShip.getRectTop(), myPaint);
+                    myShip.getRectLeft()+5,
+                    myShip.getRectTop()+5, myPaint);
+
+
+//            if( (degree > 290 && degree < 350)){
+//                myCanvas.drawBitmap(mBitmapHeadCurrent,
+//                        myShip.getRectLeft()-40,
+//                        myShip.getRectTop()-40, myPaint);
+//            }
+//            else if(degree > 180 && degree < 260){
+//                myCanvas.drawBitmap(mBitmapHeadCurrent,
+//                        myShip.getRectLeft()-15,
+//                        myShip.getRectTop()-15, myPaint);
+//            }
+//            else{
+//                myCanvas.drawBitmap(mBitmapHeadCurrent,
+//                        myShip.getRectLeft(),
+//                        myShip.getRectTop(), myPaint);
+//            }
 
 //            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectLeft()));
 //            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectTop()));
 //            mBitmapHeadCurrent.setHasAlpha(true);
 //            matrix.mapRect(myShip.getRect());
 
-           /* matrix.postRotate(20);
-            mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);
-
-
-            myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    screenX / 2,
-                    screenY / 4, myPaint);*/
 
             // Choose the font size
             myPaint.setTextSize(fontSize);
@@ -295,11 +309,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 myFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
         }
-
-        // change condition for this later...
-//        while(nowPlaying){
-//            draw();
-//        }
 
     }
 
