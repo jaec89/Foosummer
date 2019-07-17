@@ -229,18 +229,27 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             if(!nowPaused){
                 update();
-                Asteroid mAsteroid = asteroids.get(i);
-                boolean hit = detectCollision(myShip.getRect(), mAsteroid.getRect());
+
+                // check for collision between player and asteroids
+                Asteroid myAsteroid = asteroids.get(i);
+                boolean asteroidPlayerHit = detectCollision(myShip.getRect(), myAsteroid.getRect());
                 i++;
-                Log.d("ADebugTag", "value of i before for loop: " + i);
                 if(i > 4){
                     i = 0;
                 }
+
+                /*
                 Log.d("ADebugTag", "collision detected: " + hit);
                 Log.d("ADebugTag", "value of i: " + i);
-                Log.d("ADebugTag", "asteroids.get(i): " + mAsteroid.getRect());
-                Log.d("ADebugTag", "myShip.getRect(): " + myShip.getRect());
+                */
 
+                //sprint 2
+                // asteroid hit player's ship - decrement player's hitpoints
+                //if(asteroidPlayerHit){}
+
+                // check for collision between player and police laser
+                // check for collision between player's laser and powerup
+                // check for collision between player's laser and asteroids
 
             }
 
