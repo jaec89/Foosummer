@@ -262,7 +262,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     private void update() {
         // Update the asteroid
-        myShip.update(myFPS);
+        myShip.update(myFPS, ourContext, blockSize);
         for(int i = 0; i < myLasers.size(); i++) {
             myLasers.get(i).update(myFPS, screenX, screenY);
         }
@@ -296,6 +296,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //            myCanvas.drawArc(myShip.getCirc(), 0, 360, false, myPaint);
 
 
+
+// CTRL-Z TO HERE FOR ORIGINAL CODE DELETE IN THIS FUNC
             // A bitmap for each direction the ship can face
             Bitmap mBitmapHeadUp;
             Bitmap mBitmapHeadLeft;
@@ -332,14 +334,15 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // A matrix for scaling
             Matrix matrix = new Matrix();
 
+            // Rotate player's spaceship
+//            Matrix myMatrix = new Matrix();
+//            myMatrix.setRotate(90, (int)(myShip.getRect().left + myShip.getRect().right)/2, (int)(myShip.getRect().top + myShip.getRect().bottom)/2);
+//            myMatrix.mapRect(myShip.getRect());
+
             // set parameters depending on degree orientation vs location of box
-            matrix.preRotate(degree);
-            degree = degree + 5;
-            if(degree > 360){
-                degree = 0;
-            }
-            Log.d("ADebugTag", "Degree: " + Float.toString(degree));
-            Log.d("ADebugTag", "BlockSize: " + Float.toString(blockSize));
+            matrix.preRotate(myShip.getDegree());
+//            myShip.setDegree();
+
 
             mBitmapHeadCurrent = Bitmap
                     .createBitmap(mBitmapHeadUp,
@@ -348,39 +351,14 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //            myCanvas.drawBitmap(mBitmapHeadCurrent,
 //                    null,
 //                    myShip.getRect(), myPaint);
+
+
+            // myShip func that will return mBitmapHeadCurrent
             myCanvas.drawBitmap(mBitmapHeadCurrent,
                     myShip.getRectLeft()+5,
                     myShip.getRectTop()+5, myPaint);
-
-
-//            if( (degree > 290 && degree < 350)){
-//                myCanvas.drawBitmap(mBitmapHeadCurrent,
-//                        myShip.getRectLeft()-40,
-//                        myShip.getRectTop()-40, myPaint);
-//            }
-//            else if(degree > 180 && degree < 260){
-//                myCanvas.drawBitmap(mBitmapHeadCurrent,
-//                        myShip.getRectLeft()-15,
-//                        myShip.getRectTop()-15, myPaint);
-//            }
-//            else{
-//                myCanvas.drawBitmap(mBitmapHeadCurrent,
-//                        myShip.getRectLeft(),
-//                        myShip.getRectTop(), myPaint);
-//            }
-
-//            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectLeft()));
-//            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectTop()));
-//            mBitmapHeadCurrent.setHasAlpha(true);
 //            matrix.mapRect(myShip.getRect());
 
-           /* matrix.postRotate(20);
-            mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);
-            myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    screenX / 2,
-                    screenY / 4, myPaint);*/
 
 
             // Draw lasers
@@ -439,11 +417,16 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     // then the ship will rotate counter-clockwise
                     if(motionEvent.getY() < screenY / 2){
                         // rotate ship counter-clockwise
+                        myShip.setRotationState(1);
+                    }
+                    else{
+                        // rotate ship clockwise
+                        myShip.setRotationState(2);
                     }
 
-                    if(motionEvent.getY() > screenY / 2){
-                        // rotate ship clockwise
-                    }
+//                    if(motionEvent.getY() > screenY / 2){
+//                        // rotate ship clockwise
+//                    }
                 }
 
                 break;
@@ -461,6 +444,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
                 if(motionEvent.getX() < screenX / 2){
                     // stop rotation / fix orientation
+                    myShip.setRotationState(0);
                 }
 
                 break;
