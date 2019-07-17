@@ -52,6 +52,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     // track user score and lives
     private int myScore = 0;
     private int myLives = 3; // abstract this to UserShip class?
+    private int i = 0;
 
     private int degree;
 
@@ -228,10 +229,10 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             if(!nowPaused){
                 update();
-                int i = 0;
                 Asteroid mAsteroid = asteroids.get(i);
                 boolean hit = detectCollision(myShip.getRect(), mAsteroid.getRect());
                 i++;
+                Log.d("ADebugTag", "value of i before for loop: " + i);
                 if(i > 4){
                     i = 0;
                 }
