@@ -44,15 +44,15 @@ Storyboard
     <td> Sprint 1 </td>
     <td> I have a spaceship and I can rotate 360 degrees </td>
     <td> Black screen with score and other statistics displayed, and power ups (minerals) are available </td>
-    <td> Asteroids float through space with different sizes, directions, and speeds </td>
+    <td> Asteroids float through space with different directions and speeds </td>
     <td> Space police show up and approach </td>
   </tr>
 
   <tr>
     <td> Sprint 2 </td>
     <td> My spaceship has a laser and mobile functionality </td>
-    <td> There are multiple levels and space town/port varies with each level </td>
-    <td> Asteroids do not collide with each other or police ships or police lasers</td>
+    <td> Statistics update accordingly after each event </td>
+    <td> Asteroids of varying sizes do not collide with each other or police ships or police lasers</td>
     <td> Space police always shoots at the pirate on sight. </td>
   </tr>
 
@@ -60,7 +60,7 @@ Storyboard
     <td> Sprint 3 </td>
     <td> My spaceship is the Black Pearl </td>
     <td> Visual and sound features are implemented </td>
-    <td> Bigger asteroids break into smaller size until </td>
+    <td> Bigger asteroids break into smaller size units</td>
     <td> Space police shoots faster on higher difficulty </td>
   </tr>
 </table>
