@@ -1,80 +1,51 @@
 package com.gamecodeschool.asteroidsfs;
-/*
-	Spacecraft
-*/
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 
 public class SpaceObject {
-	
-	private double pos_x;	// position x coordinate
-	private double pos_y;	// position y coordinate
-	private double velocity_x;	// m/s?
-	private double velocity_y;	// int or double? spaceship is so small int will probably do for 360 degrees
-// 	private boolean hit;	// Do we want this in this class???
-	
-	
-	
-	public SpaceObject() {	// should we allow a spacecraft to be initialized without a position?
-		this(1,1,1,1);
-	}
-	public SpaceObject(double pos_x, double pos_y) {
-		this(pos_x,pos_y,1,1);	// Starting with velocity = 1 for now
-	}
-	public SpaceObject(double pos_x, double pos_y, double velocity_x, double velocity_y) {
-		this.pos_x = pos_x;
-		this.pos_y = pos_y;
-		this.velocity_x = velocity_x;
-		this.velocity_y = velocity_y;
-		//this.hit = hit;
-	}
-	
-	
-	
-	public void setPos_x(double pos_x) {
-		this.pos_x = pos_x;
-	}
-	public void setPos_y(double pos_y) {
-		this.pos_y = pos_y;
-	}
-	public void setVelocity_x() {
-		this.velocity_x = velocity_x;
-	}
-	public void setVelocity_y(int direction) {
-		//this.direction = direction;
-	}
-// 	public void setHit(boolean hit) {
-// 		this.hit = hit;
-// 	}
-	
-	
-	
-	public double getPos_x() {
-		return pos_x;
-	}
-	public double getPos_y() {
-		return pos_y;
-	}
-	public double getVelocity_x() {
-		//return speed;
-		return 0;
-	}
-	public int getVelocity_y() {
-		//return direction;
-		return 0;
-	}
-// 	public boolean getHit() {
-// 		return hit;
-// 	}
-	
-    
-    
-// 	public void draw() {
-// 		
-//     }
+
+    private RectF mRect; // Give access to precise position and size of asteroid
+    private float xVelocity;
+    private float yVelocity;
+    private float width;
+    private float height;
 
 
-// 	public void move() {
-// 		
-//     }
-	
-	
+    public SpaceObject(float xPosition, float yPosition, float width, float height, float xVelocity, float yVelocity) {
+        this.mRect = new RectF(xPosition, yPosition, xPosition+width,yPosition+height);
+        this.width = width;
+        this.height = height;
+        this.xVelocity = xVelocity;
+        this.yVelocity = yVelocity;
+    }
+
+
+    // Return a reference to mRect to AsteroidsGame
+    public RectF getRect() {
+        return mRect;
+    }
+
+
+    // Draw object
+    public void draw(Canvas myCanvas) {
+        Paint myPaint = new Paint();
+        myPaint.setColor(Color.argb(255, 255, 255, 255));
+        myCanvas.drawRect(mRect, myPaint);
+    }
+
+
+    // Update the object's position (called each frame/loop)
+    // Move the object based on the velocity and current frame rate (mFPS)
+    public void update(long fps){
+        // Move the top left corner
+        mRect.left = mRect.left + (xVelocity / fps);
+        mRect.top = mRect.top + (yVelocity / fps);
+        // Match up the bottom right corner based on the size of the asteroid
+        mRect.right = mRect.left + width;
+        mRect.bottom = mRect.top + height;
+    }
+
 }

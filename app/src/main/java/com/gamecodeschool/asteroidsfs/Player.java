@@ -6,7 +6,7 @@ import android.graphics.RectF;
 */
 
 
-public class Player extends SpaceObject {
+public class Player {
 
 	private int screenX;
 	private int screenY;
@@ -25,9 +25,7 @@ public class Player extends SpaceObject {
 
 	private boolean hit;
 
-	public Player(int x, int y){
-		screenX = x;
-		screenY = y;
+	Player(int screenX, int screenY) {
 
 		// Configure the size of the player's
 		// ship based on the screen resolution
@@ -52,7 +50,7 @@ public class Player extends SpaceObject {
 
 
 
-	RectF getRect(){
+	public RectF getRect(){
 		return mRect;
 	}
 
@@ -62,7 +60,7 @@ public class Player extends SpaceObject {
 
 
 	// Update the bat- Called each frame/loop
-	void update(long fps){
+	void update(long fps) {
 
 	}
 
@@ -87,6 +85,7 @@ public class Player extends SpaceObject {
 	public void shoot() {
 		Laser laser;
 		//laser = new Laser();
+		//Laser laser = new Laser(mRect.left, mRect.top, screenY/100, screenY/100, -(screenY/5), (screenY/5));
 	}
 
 }
