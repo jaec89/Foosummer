@@ -162,7 +162,11 @@ public class Player {
 
 	}
 
+	public int getCenterX(){return (int)((this.mRect.left + this.mRect.right)/2);}
+	public int getCenterY(){return (int)((this.mRect.top + this.mRect.bottom)/2);}
+
 	void setRotationState(int playerRotate) { rotateState = rotationStates[playerRotate];}
+
 	public int getDegree(){return this.degree;}
 
 	public Bitmap getBitMap() {return this.mBitmapHeadCurrent;}
