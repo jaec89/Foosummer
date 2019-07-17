@@ -333,7 +333,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // set parameters depending on degree orientation vs location of box
             matrix.preRotate(degree);
-            degree++;
+            degree = degree + 5;
             if(degree > 360){
                 degree = 0;
             }
