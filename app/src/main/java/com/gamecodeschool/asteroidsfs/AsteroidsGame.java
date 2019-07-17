@@ -46,7 +46,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private int screenY;
 
     // Text size
-    private int fontSize;
+    private int fontSize = blockSize*10;
     private int fontMargin;
 
     // track user score and lives
@@ -228,7 +228,19 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             if(!nowPaused){
                 update();
-                //detectCollisions();
+                int i = 0;
+                Asteroid mAsteroid = asteroids.get(i);
+                boolean hit = detectCollision(myShip.getRect(), mAsteroid.getRect());
+                i++;
+                if(i > 4){
+                    i = 0;
+                }
+                Log.d("ADebugTag", "collision detected: " + hit);
+                Log.d("ADebugTag", "value of i: " + i);
+                Log.d("ADebugTag", "asteroids.get(i): " + mAsteroid.getRect());
+                Log.d("ADebugTag", "myShip.getRect(): " + myShip.getRect());
+
+
             }
 
             // The movement has been handled and collisions
@@ -294,30 +306,15 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             myCanvas.drawRect(myShip.getRect(), myPaint);
 
 
-            // A bitmap for each direction the ship can face
+            // A bitmap for starting position
             Bitmap mBitmapHeadUp;
-            Bitmap mBitmapHeadLeft;
-            Bitmap mBitmapHeadDown;
-            Bitmap mBitmapHeadRight;
             Bitmap mBitmapHeadCurrent;
-
-
 
 
             // Create and scale the bitmaps
             mBitmapHeadUp = BitmapFactory
                     .decodeResource(ourContext.getResources(),
                             R.drawable.sqspaceship);
-            mBitmapHeadLeft = BitmapFactory
-                    .decodeResource(ourContext.getResources(),
-                            R.drawable.sqspaceship);
-            mBitmapHeadDown = BitmapFactory
-                    .decodeResource(ourContext.getResources(),
-                            R.drawable.sqspaceship);
-            mBitmapHeadRight = BitmapFactory
-                    .decodeResource(ourContext.getResources(),
-                            R.drawable.sqspaceship);
-
             mBitmapHeadCurrent = BitmapFactory
                     .decodeResource(ourContext.getResources(),
                             R.drawable.grayship);
@@ -491,8 +488,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         These should cover the basic cases of collision within the game.
     */
-    private void detectCollisions() {
 
+    public boolean detectCollision(RectF objectA, RectF objectB) {
+            return RectF.intersects(objectA, objectB);
     }
 
 }
