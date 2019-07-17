@@ -130,12 +130,13 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         }
 
         // Initialize powerups - eventually have them scale with levels?
-        // currently hardcoded to 2 for lolz
-        mineralPowerUps = new PowerUps[2];
+        // currently hardcoded to 1 for now
+        // ill change it to spawn upon a certain point threshold or timed later
+        mineralPowerUps = new PowerUps[1];
         Random rn = new Random();
         for(int i = 0; i < mineralPowerUps.length; i++){
             mineralPowerUps[i] = new PowerUps(rn.nextInt(screenX), rn.nextInt(screenY),
-                    screenY / 50, screenY / 50, hitsLeft, -(screenY/5), (screenY/5));
+                    screenY / 50, screenY / 50, hitsLeft, -(screenY/8), (screenY/8));
         }
 
 
