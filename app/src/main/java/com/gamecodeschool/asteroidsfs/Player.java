@@ -103,8 +103,6 @@ public class Player {
 
 	float getRectTop() {return mRect.top;}
 
-
-
 	// Update the Player- Called each frame/loop
 	// Update arguments within the AsteroidsGame class
 	void update(long fps, Context ourContext, int blockSize) {

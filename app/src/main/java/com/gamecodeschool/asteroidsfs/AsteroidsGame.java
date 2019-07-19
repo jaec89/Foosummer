@@ -67,7 +67,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     // GAME OBJECTS
     private GameProgress gameProgress;
 //    private Space mySpace;
-    private Player myShip;
+
     private Player myShipHitbox;
 //    private OpponentShip npcShip; 
     private ArrayList<Asteroid> asteroids;
@@ -102,7 +102,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         myPaint = new Paint();
 
         // Initialize the objects
-        myShip = new Player(screenX, screenY);
+
         myShipHitbox = new Player(screenX, screenY);
 
         // Asteroids = new Asteroids()
@@ -166,7 +166,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
       
         gameProgress = new GameProgress();
 
-        // enemyShip = new ...()
+
         // enemyShipHitbox = new ...()
         // myLaser = new ..()
         // enemyLaser = new ..()
@@ -300,7 +300,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
     private void update() {
-        //myShip.update(myFPS);
+
         myShipHitbox.update(myFPS, ourContext, blockSize);
         for(int i = 0; i < myLasers.size(); i++) {
             myLasers.get(i).update(myFPS, screenX, screenY);
@@ -336,52 +336,66 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     (255, 75, 180, 250));
 
 
-
             // Draw the objects
-            //myCanvas.drawRect(myShip.getRect(), myPaint);
             myCanvas.drawRect(myShipHitbox.getRect(), myPaint);
 //            myCanvas.drawArc(myShipHitbox.getCirc(), 0, 360, false, myPaint);
 
 
+// CTRL-Z TO HERE FOR ORIGINAL CODE DELETE IN THIS FUNC
+            // A bitmap for each direction the ship can face
+            Bitmap shipBitmap;
 
 // CTRL-Z TO HERE FOR ORIGINAL CODE DELETE IN THIS FUNC
             // A bitmap for each direction the ship can face
             Bitmap mBitmapHeadCurrent;
             // Create and scale the bitmaps
-            mBitmapHeadCurrent = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.sqspaceship);
+
+
+            shipBitmap = BitmapFactory
+                    .decodeResource(ourContext.getResources(),
+                            R.drawable.sqspaceship);
+
 
             // Modify the bitmaps to face the ship
             // in the correct direction
-            mBitmapHeadCurrent = Bitmap.createScaledBitmap(mBitmapHeadCurrent,
-                                        blockSize*2, blockSize*2, false);
+            shipBitmap = Bitmap
+                    .createScaledBitmap(shipBitmap,
+                            blockSize*2, blockSize*2, false);
 
 
             // set parameters depending on degree orientation vs location of box
             // shipMatrix.preRotate(myShipHitbox.getDegree());
             shipMatrix.setRotate(myShipHitbox.getDegree(), myShipHitbox.getCenterX(), myShipHitbox.getCenterY());
-            shipMatrix.postTranslate(myShipHitbox.getRectLeft()-(mBitmapHeadCurrent.getWidth()),
-                                    myShipHitbox.getRectTop()-(mBitmapHeadCurrent.getHeight()));
+            shipMatrix.postTranslate(myShipHitbox.getRectLeft()-(shipBitmap.getWidth()),
+                    myShipHitbox.getRectTop()-(shipBitmap.getHeight()));
 //            myShipHitbox.setDegree();
 
 
-            mBitmapHeadCurrent = Bitmap.createBitmap(mBitmapHeadCurrent,
-                                    0, 0, (blockSize*2), (blockSize*2), shipMatrix, true);
-            mBitmapHeadCurrent.setHasAlpha(true);
-//            myCanvas.drawBitmap(mBitmapHeadCurrent,
+            shipBitmap = Bitmap
+                    .createBitmap(shipBitmap,
+                            0, 0, (blockSize*2), (blockSize*2), shipMatrix, true);
+            shipBitmap.setHasAlpha(true);
+//            myCanvas.drawBitmap(shipBitmap,
+
 //                    null,
 //                    myShipHitbox.getRect(), myPaint);
 
 
-            // myShipHitbox func that will return mBitmapHeadCurrent
-            myCanvas.drawBitmap(mBitmapHeadCurrent, myShipHitbox.getRectLeft()+5,
-                                                            myShipHitbox.getRectTop()+5, myPaint);
-//            myCanvas.drawBitmap(mBitmapHeadCurrent,
+
+            // myShipHitbox func that will return shipBitmap
+            myCanvas.drawBitmap(shipBitmap,
+                    myShipHitbox.getRectLeft()+5,
+                    myShipHitbox.getRectTop()+5, myPaint);
+//            myCanvas.drawBitmap(shipBitmap,
+
 //                    shipMatrix, myPaint);
 //            shipMatrix.mapRect(myShipHitbox.getRect());
 
 
 
+
             // LASERS
+            // Draw lasers
             for(int i = 0; i < myLasers.size(); i++) {
                 myLasers.get(i).draw(myCanvas);
             }
