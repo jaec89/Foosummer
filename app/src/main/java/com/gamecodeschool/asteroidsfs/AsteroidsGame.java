@@ -388,18 +388,22 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
 
-            // Draw lasers
+            // LASERS
             for(int i = 0; i < myLasers.size(); i++) {
                 myLasers.get(i).draw(myCanvas);
             }
 
+            // ASTEROIDS
+            Bitmap mAsteroids;
+            mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
+            for(int i = 0 ; i < asteroids.size(); i++) {
+                myCanvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left,
+                                                            asteroids.get(i).getHitbox().top, myPaint);
+            }
+            
+            // POWER UPS
             for(int i = 0; i < mineralPowerUps.length; i++){
                 mineralPowerUps[i].draw(myCanvas);
-            }
-
-            // Draw asteroids
-            for(int i = 0 ; i < asteroids.size(); i++) {
-                asteroids.get(i).draw(myCanvas);
             }
 
 
