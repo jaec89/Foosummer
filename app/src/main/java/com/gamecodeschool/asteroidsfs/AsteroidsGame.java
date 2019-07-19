@@ -45,8 +45,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private int fontMargin;
 
     // track user score and lives
-    private int myScore = 0;
-    private int myLives = 3; // abstract this to UserShip class?
+    private int score = 0;
+    private int lives = 3; // abstract this to UserShip class?
     private int i = 0;
 
     private int degree;
@@ -303,9 +303,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // Lock the canvas (graphics memory) ready to draw
             myCanvas = myHolder.lockCanvas();
 
-            Bitmap mAsteroids;
-            mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(),
-                    R.drawable.asteroid);
 
             // Fills the screen with background "space" image
             myCanvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
@@ -327,32 +324,25 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 // CTRL-Z TO HERE FOR ORIGINAL CODE DELETE IN THIS FUNC
             // A bitmap for each direction the ship can face
             Bitmap mBitmapHeadCurrent;
-
-
-
             // Create and scale the bitmaps
-            mBitmapHeadCurrent = BitmapFactory
-                    .decodeResource(ourContext.getResources(),
-                            R.drawable.sqspaceship);
+            mBitmapHeadCurrent = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.sqspaceship);
 
             // Modify the bitmaps to face the ship
             // in the correct direction
-            mBitmapHeadCurrent = Bitmap
-                    .createScaledBitmap(mBitmapHeadCurrent,
-                            blockSize*2, blockSize*2, false);
+            mBitmapHeadCurrent = Bitmap.createScaledBitmap(mBitmapHeadCurrent,
+                                        blockSize*2, blockSize*2, false);
 
 
             // set parameters depending on degree orientation vs location of box
             // shipMatrix.preRotate(myShipHitbox.getDegree());
             shipMatrix.setRotate(myShipHitbox.getDegree(), myShipHitbox.getCenterX(), myShipHitbox.getCenterY());
             shipMatrix.postTranslate(myShipHitbox.getRectLeft()-(mBitmapHeadCurrent.getWidth()),
-                    myShipHitbox.getRectTop()-(mBitmapHeadCurrent.getHeight()));
+                                    myShipHitbox.getRectTop()-(mBitmapHeadCurrent.getHeight()));
 //            myShipHitbox.setDegree();
 
 
-            mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadCurrent,
-                            0, 0, (blockSize*2), (blockSize*2), shipMatrix, true);
+            mBitmapHeadCurrent = Bitmap.createBitmap(mBitmapHeadCurrent,
+                                    0, 0, (blockSize*2), (blockSize*2), shipMatrix, true);
             mBitmapHeadCurrent.setHasAlpha(true);
 //            myCanvas.drawBitmap(mBitmapHeadCurrent,
 //                    null,
@@ -360,33 +350,33 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
             // myShipHitbox func that will return mBitmapHeadCurrent
-            myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    myShipHitbox.getRectLeft()+5,
-                    myShipHitbox.getRectTop()+5, myPaint);
+            myCanvas.drawBitmap(mBitmapHeadCurrent, myShipHitbox.getRectLeft()+5,
+                                                            myShipHitbox.getRectTop()+5, myPaint);
 //            myCanvas.drawBitmap(mBitmapHeadCurrent,
 //                    shipMatrix, myPaint);
 //            shipMatrix.mapRect(myShipHitbox.getRect());
 
 
 
-            // Draw lasers
+            // LASERS
             for(int i = 0; i < myLasers.size(); i++) {
                 myLasers.get(i).draw(myCanvas);
             }
-            // Draw asteroids
-            for(int i = 0 ; i < asteroids.size(); i++) {
-                asteroids.get(i).draw(myCanvas);
-            }
 
+            // ASTEROIDS
+            Bitmap mAsteroids;
+            mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
+            for(int i = 0 ; i < asteroids.size(); i++) {
+                myCanvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left,
+                                                            asteroids.get(i).getHitbox().top, myPaint);
+            }
 
 
             // Choose the font size
             myPaint.setTextSize(fontSize);
 
-//            // Draw the HUD
-//            myCanvas.drawText("Score: " + mScore +
-//                            "   Lives: " + mLives,
-//                    fontMargin , fontSize, myPaint);
+            // Draw the HUD
+            //myCanvas.drawText("Score: " + score + "   Lives: " + lives, fontMargin , fontSize, myPaint);
 
 //            if(DEBUGGING){
 //                printDebuggingText();
