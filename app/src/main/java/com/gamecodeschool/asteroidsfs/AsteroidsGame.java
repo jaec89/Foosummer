@@ -44,12 +44,12 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private int fontSize = blockSize*10;
     private int fontMargin;
 
-    // track user score and lives
-    private int myScore = 0;
-    private int myLives = 3; // abstract this to UserShip class?
     private int i = 0;
 
     private int degree;
+
+    // Number of hits to destroy PowerUps
+    private int hitsLeft= 3;
 
     // Here is the Thread and two control variables
     private Thread myGameThread = null;
@@ -61,7 +61,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     Matrix shipMatrix = new Matrix();
 
     // GAME OBJECTS
-    private int level = 1; // we increment each time the player clears a level.
+    private GameProgress gameProgress;
 //    private Space mySpace;
     private Player myShip;
     private Player myShipHitbox;
@@ -69,8 +69,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private ArrayList<Asteroid> asteroids;
     private ArrayList<Laser> myLasers;
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
-//    private Power.Ups mineralPowerUps; // vector of mineral powerups
+    private PowerUps mineralPowerUps[]; // vector of mineral powerups
 //    private Drawable mCustomImage;
+
 
     // temp Context
     Context ourContext;
@@ -149,6 +150,17 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                                         asteroidYVelocity));
         }
 
+        // Initialize powerups - eventually have them scale with levels?
+        // currently hardcoded to 1 for now
+        // ill change it to spawn upon a certain point threshold or timed later
+        mineralPowerUps = new PowerUps[1];
+        Random rn = new Random();
+        for(int i = 0; i < mineralPowerUps.length; i++){
+            mineralPowerUps[i] = new PowerUps(rn.nextInt(screenX), rn.nextInt(screenY),
+                    screenY / 50, screenY / 50, hitsLeft, -(screenY/8), (screenY/8));
+        }
+      
+        gameProgress = new GameProgress();
 
         // enemyShip = new ...()
         // enemyShipHitbox = new ...()
@@ -213,6 +225,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //                    asteroidXVelocity,
 //                    asteroidYVelocity));
 //        }
+
+//        gameProgress.reset();
     }
 
 
@@ -289,6 +303,11 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         }
         for(int i = 0 ; i < asteroids.size() ; i++) {
             asteroids.get(i).update(myFPS, screenX, screenY);
+        }
+
+        // PowerUp position - currently stationary
+        for(int i = 0; i < mineralPowerUps.length; i++) {
+            mineralPowerUps[i].update(myFPS, screenX, screenY);
         }
     }
 
@@ -373,13 +392,18 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             for(int i = 0; i < myLasers.size(); i++) {
                 myLasers.get(i).draw(myCanvas);
             }
+
+            for(int i = 0; i < mineralPowerUps.length; i++){
+                mineralPowerUps[i].draw(myCanvas);
+            }
+
             // Draw asteroids
             for(int i = 0 ; i < asteroids.size(); i++) {
                 asteroids.get(i).draw(myCanvas);
             }
 
 
-
+          
             // Choose the font size
             myPaint.setTextSize(fontSize);
 
