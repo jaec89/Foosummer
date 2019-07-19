@@ -62,6 +62,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
     // GAME OBJECTS
+    private GameProgress gameProgress;
 //    private Space mySpace;
     private Player myShip;
 //    private OpponentShip npcShip; 
@@ -146,6 +147,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                                         asteroidYVelocity));
         }
 
+        gameProgress = new GameProgress();
+
 
 
         // enemyShip = new ...()
@@ -210,6 +213,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //                    asteroidXVelocity,
 //                    asteroidYVelocity));
 //        }
+
+//        gameProgress.reset();
     }
 
 
