@@ -7,7 +7,7 @@ import android.graphics.RectF;
 
 public class SpaceObject {
 
-    private RectF mRect; // Give access to precise position and size of asteroid
+    private RectF mRect;        // Give access to precise position and size of object
     private float xVelocity;
     private float yVelocity;
     private float width;

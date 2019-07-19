@@ -12,6 +12,7 @@ import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import java.util.Random;
 
 public class Asteroid extends SpaceObject {
     private boolean hit;
@@ -39,7 +40,8 @@ public class Asteroid extends SpaceObject {
     }
 
 
-    void increaseVelocity() {
+
+    public void increaseVelocity() {
         // increase the speed by 10%
         super.setXVelocity(super.getXVelocity() * 1.1f);
         super.setYVelocity(super.getYVelocity() * 1.1f);
@@ -48,10 +50,9 @@ public class Asteroid extends SpaceObject {
 
     // Detect collision with a laser object
     // Has the laser hit the asteroid?
-//    private void detectCollisions(RectF laserPosition) {
-//        hit = RectF.intersects(laserPosition, super.getRect());
-//    }
-
+    private void detectCollisions(RectF laserPosition){
+        hit = RectF.intersects(laserPosition, super.getRect());
+    }
 
     // Large asteroid breaks into medium pieces
     // medium piece breaks into small pieces

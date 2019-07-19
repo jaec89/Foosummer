@@ -12,6 +12,7 @@ public class Laser extends SpaceObject {
     }
 
 
+    @Override
     public void draw(Canvas myCanvas) {
         Paint myPaint = new Paint();
         myPaint.setColor(Color.argb(255, 75, 180, 250));
@@ -19,10 +20,7 @@ public class Laser extends SpaceObject {
     }
 
 
-    // Update the asteroid position (called each frame/loop)
-    // Move the asteroid based on the velocity and current frame rate (mFPS)
-    //OVERRIDE update() in SpaceObject
-    public void update(long fps, int x, int y) {
+    public void update(long fps) {
         // Move the top left corner
         super.getRect().left = super.getRect().left + (super.getXVelocity() / fps) ;
         super.getRect().top = super.getRect().top + (super.getYVelocity() / fps) ;
@@ -32,7 +30,7 @@ public class Laser extends SpaceObject {
     }
 
 
-    void increaseVelocity() {
+    public void increaseVelocity() {
         // increase the speed by 10%
         super.setXVelocity(super.getXVelocity() * 1.1f);
         super.setYVelocity(super.getYVelocity() * 1.1f);
