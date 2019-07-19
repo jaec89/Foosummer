@@ -29,8 +29,8 @@ public class Player {
 
 		// Configure the size of the player's
 		// ship based on the screen resolution
-		mLength = screenX / 25;
-		mHeight = screenY / 30;
+		mLength = screenX / 13;
+		mHeight = screenY / 6;
 
 		// start player ship location at center
 		// of the screen
@@ -54,9 +54,13 @@ public class Player {
 		return mRect;
 	}
 
+	float getRectLeft() {return mRect.left;}
+
+	float getRectTop() {return mRect.top;}
+
 
 	// Update the bat- Called each frame/loop
-	void update(long fps){
+	void update(long fps) {
 
 	}
 
@@ -77,11 +81,11 @@ public class Player {
 //		super(pos_x, pos_y, velocity_x, velocity_y);
 //		this.hit = hit;
 //	}
-	
+
 	public void shoot() {
 		Laser laser;
 		//laser = new Laser();
 		//Laser laser = new Laser(mRect.left, mRect.top, screenY/100, screenY/100, -(screenY/5), (screenY/5));
 	}
-	
+
 }
