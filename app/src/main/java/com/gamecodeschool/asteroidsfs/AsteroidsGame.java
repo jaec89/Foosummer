@@ -49,9 +49,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private int fontSize = blockSize*10;
     private int fontMargin;
 
-    // track user score and lives
-    private int myScore = 0;
-    private int myLives = 3; // abstract this to UserShip class?
     private int i = 0;
 
     private int degree;
@@ -65,7 +62,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
     // GAME OBJECTS
-    private int level = 1; // we increment each time the player clears a level.
 //    private Space mySpace;
     private Player myShip;
 //    private OpponentShip npcShip; 
