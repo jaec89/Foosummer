@@ -1,14 +1,10 @@
-FooSummer Story Board - "I'm a Space Pirate"
-=================================================================
+# FooSummer Story Board - "I'm a Space Pirate"
 
-BHAG
------------------------------------------------------------------
+## BHAG
 You are a space pirate that is hiding from the Galaxy Federation Space Police Force (GFSPF) in an asteroid belt. Your goal is to escape the GFSPF while gathering rare materials present in the asteroids.
 
 
-User Stories
------------------------------------------------------------------
-
+## User Stories
 As a space pirate I want to use a spacecraft and laser to navigate outer space while escaping the space police force and destroying asteroids.
 
 As a space pirate I have a spaceship and I can rotate 360 degrees.
@@ -24,13 +20,11 @@ As a space pirate I want to use power ups (minerals) available to help me shoot 
 As an asteroid belt I want my asteroids to have different sizes and move in different directions, and at different speeds.
 
 
-Tables
-=================================================================
+## Tables
 As a space pirate, I want to pilot my spaceship to avoid the GFSPF and collect rare materials by destroying the asteroids.
 
 
-<hr></hr>
-Storyboard
+### Storyboard
 <table width="75%" border="1">
   <tr>
     <td> User Story</td>
@@ -66,9 +60,44 @@ Storyboard
 </table>
 
 
+### Updated Storyboard
+We removed the plan to change background setting at each new level and divided the statistics display into two sprints.  We also moved varying asteroids size into sprint 2 and refined the asteroids sprint.
+<table width="75%" border="1">
+  <tr>
+    <td> User Story</td>
+    <td> As a space pirate, I want to navigate my spacecraft </td>
+    <td> through outer space  </td>
+    <td> while gathering rare materials from asteroids </td>
+    <td> and being chased by space police. </td>
+  </tr>
 
-<hr></hr>
-Acceptance Tests
+  <tr>
+    <td> Sprint 1 </td>
+    <td> I have a spaceship and I can rotate 360 degrees </td>
+    <td> Black screen with score and other statistics displayed, and power ups (minerals) are available </td>
+    <td> Asteroids float through space with different directions and speeds </td>
+    <td> Space police show up and approach </td>
+  </tr>
+
+  <tr>
+    <td> Sprint 2 </td>
+    <td> My spaceship has a laser and mobile functionality </td>
+    <td> Statistics update accordingly after each event </td>
+    <td> Asteroids of varying sizes only collide with player's ship or its laser</td>
+    <td> Space police always shoots at the pirate on sight. </td>
+  </tr>
+
+  <tr> 
+    <td> Sprint 3 </td>
+    <td> My spaceship is the Black Pearl </td>
+    <td> Visual and sound features are implemented </td>
+    <td> Bigger asteroids break into smaller size units</td>
+    <td> Space police shoots faster on higher difficulty </td>
+  </tr>
+</table>
+
+
+### Acceptance Tests
 <table width="75%" border="1">
   <tr>
     <td> User Story</td>
