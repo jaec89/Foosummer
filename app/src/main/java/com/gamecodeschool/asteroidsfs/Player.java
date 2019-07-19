@@ -79,8 +79,6 @@ public class Player {
 //		mRect2 = new RectF(mXCoord, mYCoord,
 //				mXCoord + mLength,
 //				mYCoord + mHeight);
-		mCircle = new RectF(mXCoord, mYCoord,
-				mXCoord + mLength , mYCoord + mLength);
 //		RectF oval = new RectF(width/2 - radius, width/2 - radius,
 //				width/2 + radius, width/2 + radius);
 //		canvas.drawArc(oval, 0, 360, false, paint1);
