@@ -20,6 +20,8 @@ public class Laser extends SpaceObject {
     }
 
 
+    // Update the laser position (called each frame/loop)
+    // Allow laser to travel off the screen
     public void update(long fps) {
         // Move the top left corner
         super.getRect().left = super.getRect().left + (super.getXVelocity() / fps) ;

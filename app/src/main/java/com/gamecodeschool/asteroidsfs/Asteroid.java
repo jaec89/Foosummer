@@ -40,7 +40,6 @@ public class Asteroid extends SpaceObject {
     }
 
 
-
     public void increaseVelocity() {
         // increase the speed by 10%
         super.setXVelocity(super.getXVelocity() * 1.1f);

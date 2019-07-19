@@ -507,8 +507,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         These should cover the basic cases of collision within the game.
     */
-
-
     public boolean detectCollision(RectF objectA, RectF objectB) {
             return RectF.intersects(objectA, objectB);
     }
