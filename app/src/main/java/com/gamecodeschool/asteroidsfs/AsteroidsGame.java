@@ -231,7 +231,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
                 // check for collision between player and asteroids
                 Asteroid myAsteroid = asteroids.get(i);
-                boolean asteroidPlayerHit = detectCollision(myShip.getRect(), myAsteroid.getRect());
+                boolean asteroidPlayerHit = detectCollision(myShip.getRect(), myAsteroid.getHitbox());
                 i++;
                 if(i > 4){
                     i = 0;

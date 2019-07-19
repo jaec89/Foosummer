@@ -15,7 +15,9 @@ public class SpaceObject {
 
 
     public SpaceObject(float positionX, float positionY, float width, float height, float velocityX, float velocityY) {
-        this.hitbox = new RectF(positionX, positionY, positionX+width,positionY+height);
+        float halfWidth = width/2;
+        float halfHeight = height/2;
+        this.hitbox = new RectF(positionX-halfWidth, positionY-halfHeight, positionX+halfWidth,positionY+halfHeight);
         this.width = width;
         this.height = height;
         this.velocityX = velocityX;
