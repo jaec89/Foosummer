@@ -1,12 +1,10 @@
 package com.gamecodeschool.asteroidsfs;
 
-// the power ups kinda function the same as asteroids so we might want to inherit from that
-// and extra functionality?
-
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import java.util.Random;
 
 public class PowerUps {
     private RectF mRect;
@@ -15,18 +13,18 @@ public class PowerUps {
 
     public PowerUps(float xPosition, float yPosition, float width, float height, int hitsLeft,
                     float xVelocity, float yVelocity) {
-        this.mRect = new RectF(xPosition, yPosition, xPosition+width,yPosition+height);
+        this.mRect = new RectF(xPosition, yPosition, xPosition + width, yPosition + height);
         this.width = width;
         this.height = height;
         this.hitsLeft = hitsLeft;
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
-    }
+
 
 //    public void move(int screenWidth, int screenHeight){
 //        something with radius and x.y
-//    }
-
+//
+    }
     public RectF getRect() {
         return mRect;
     }
@@ -62,8 +60,10 @@ public class PowerUps {
     }
 
 
+
+
     public int getHitsLeft(){
-        //checks hitpoints to determine whether it is destroyed or split up
+        //checks hitpoints to determine whether it is destroyed
         return hitsLeft;
     }
 
