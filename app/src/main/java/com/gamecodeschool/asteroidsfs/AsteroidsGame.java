@@ -63,11 +63,13 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private volatile boolean nowPlaying;
     private boolean nowPaused = true;
 
+    Matrix shipMatrix = new Matrix();
+
 
     // GAME OBJECTS
     private GameProgress gameProgress;
 //    private Space mySpace;
-    private Player myShip;
+    private Player myShipHitbox;
 //    private OpponentShip npcShip; 
     private ArrayList<Asteroid> asteroids;
     private ArrayList<Laser> myLasers;
@@ -100,7 +102,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         myPaint = new Paint();
 
         // Initialize the objects
-        myShip = new Player(screenX, screenY);
+        myShipHitbox = new Player(screenX, screenY);
 
         // Asteroids = new Asteroids()
 
@@ -163,7 +165,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
       
         gameProgress = new GameProgress();
 
-        // enemyShip = new ...()
+        // enemyShipHitbox = new ...()
         // myLaser = new ..()
         // enemyLaser = new ..()
 
@@ -279,7 +281,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             if(timeThisFrame > 0) {
                 // Store the current frame rate in myFPS
                 // ready to pass to the update methods of
-                // myShip..... next frame/loop
+                // myShipHitbox..... next frame/loop
                 myFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
         }
@@ -297,7 +299,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     private void update() {
         // Update the asteroid
-        //myShip.update(myFPS);
+        myShipHitbox.update(myFPS, ourContext, blockSize);
         for(int i = 0; i < myLasers.size(); i++) {
             myLasers.get(i).update(myFPS, screenX, screenY);
         }
@@ -330,59 +332,57 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             myPaint.setColor(Color.argb
                     (255, 75, 180, 250));
 
-            // Draw player
-            myCanvas.drawRect(myShip.getRect(), myPaint);
+
+            // Draw the objects
+            myCanvas.drawRect(myShipHitbox.getRect(), myPaint);
+//            myCanvas.drawArc(myShipHitbox.getCirc(), 0, 360, false, myPaint);
 
 
-            // A bitmap for starting position
-            Bitmap mBitmapHeadUp;
-            Bitmap mBitmapHeadCurrent;
 
+// CTRL-Z TO HERE FOR ORIGINAL CODE DELETE IN THIS FUNC
+            // A bitmap for each direction the ship can face
+            Bitmap shipBitmap;
 
             // Create and scale the bitmaps
-            mBitmapHeadUp = BitmapFactory
+
+            shipBitmap = BitmapFactory
                     .decodeResource(ourContext.getResources(),
                             R.drawable.sqspaceship);
-            mBitmapHeadCurrent = BitmapFactory
-                    .decodeResource(ourContext.getResources(),
-                            R.drawable.grayship);
+
 
             // Modify the bitmaps to face the ship
             // in the correct direction
-            mBitmapHeadUp = Bitmap
-                    .createScaledBitmap(mBitmapHeadUp,
-                            blockSize*3, blockSize*3, false);
+            shipBitmap = Bitmap
+                    .createScaledBitmap(shipBitmap,
+                            blockSize*2, blockSize*2, false);
 
-            // A matrix for scaling
-            Matrix matrix = new Matrix();
 
             // set parameters depending on degree orientation vs location of box
-            matrix.preRotate(degree);
-            degree = degree + 5;
-            if(degree > 360){
-                degree = 0;
-            }
-            Log.d("ADebugTag", "Degree: " + Float.toString(degree));
-            mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*3, blockSize*3, matrix, true);
-            mBitmapHeadCurrent.setHasAlpha(true);
-            myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    myShip.getRectLeft(),
-                    myShip.getRectTop(), myPaint);
+            // shipMatrix.preRotate(myShipHitbox.getDegree());
+            shipMatrix.setRotate(myShipHitbox.getDegree(), myShipHitbox.getCenterX(), myShipHitbox.getCenterY());
+            shipMatrix.postTranslate(myShipHitbox.getRectLeft()-(shipBitmap.getWidth()),
+                    myShipHitbox.getRectTop()-(shipBitmap.getHeight()));
+//            myShipHitbox.setDegree();
 
-//            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectLeft()));
-//            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectTop()));
-//            mBitmapHeadCurrent.setHasAlpha(true);
-//            matrix.mapRect(myShip.getRect());
 
-           /* matrix.postRotate(20);
-            mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);
-            myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    screenX / 2,
-                    screenY / 4, myPaint);*/
+            shipBitmap = Bitmap
+                    .createBitmap(shipBitmap,
+                            0, 0, (blockSize*2), (blockSize*2), shipMatrix, true);
+            shipBitmap.setHasAlpha(true);
+//            myCanvas.drawBitmap(shipBitmap,
+//                    null,
+//                    myShipHitbox.getRect(), myPaint);
+
+
+            // myShipHitbox func that will return shipBitmap
+            myCanvas.drawBitmap(shipBitmap,
+                    myShipHitbox.getRectLeft()+5,
+                    myShipHitbox.getRectTop()+5, myPaint);
+//            myCanvas.drawBitmap(shipBitmap,
+//                    shipMatrix, myPaint);
+//            shipMatrix.mapRect(myShipHitbox.getRect());
+
+
 
             // Draw lasers
             for(int i = 0; i < myLasers.size(); i++) {
@@ -444,11 +444,16 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     // then the ship will rotate counter-clockwise
                     if(motionEvent.getY() < screenY / 2){
                         // rotate ship counter-clockwise
+                        myShipHitbox.setRotationState(1);
+                    }
+                    else{
+                        // rotate ship clockwise
+                        myShipHitbox.setRotationState(2);
                     }
 
-                    if(motionEvent.getY() > screenY / 2){
-                        // rotate ship clockwise
-                    }
+//                    if(motionEvent.getY() > screenY / 2){
+//                        // rotate ship clockwise
+//                    }
                 }
 
                 break;
@@ -466,14 +471,13 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
                 if(motionEvent.getX() < screenX / 2){
                     // stop rotation / fix orientation
+                    myShipHitbox.setRotationState(0);
                 }
 
                 break;
         }
         return true;
     }
-
-
 
 
 
