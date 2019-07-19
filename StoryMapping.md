@@ -1,14 +1,10 @@
 # FooSummer Story Board - "I'm a Space Pirate"
-=================================================================
 
 ## BHAG
------------------------------------------------------------------
 You are a space pirate that is hiding from the Galaxy Federation Space Police Force (GFSPF) in an asteroid belt. Your goal is to escape the GFSPF while gathering rare materials present in the asteroids.
 
 
 ## User Stories
------------------------------------------------------------------
-
 As a space pirate I want to use a spacecraft and laser to navigate outer space while escaping the space police force and destroying asteroids.
 
 As a space pirate I have a spaceship and I can rotate 360 degrees.
@@ -25,11 +21,9 @@ As an asteroid belt I want my asteroids to have different sizes and move in diff
 
 
 ## Tables
-=================================================================
 As a space pirate, I want to pilot my spaceship to avoid the GFSPF and collect rare materials by destroying the asteroids.
 
 
-<hr></hr>
 # Storyboard
 <table width="75%" border="1">
   <tr>
@@ -65,7 +59,7 @@ As a space pirate, I want to pilot my spaceship to avoid the GFSPF and collect r
   </tr>
 </table>
 
-<hr></hr>
+
 # Updated Storyboard
 We removed the plan to change background setting at each new level and divided the statistics display into two sprints.  We also moved varying asteroids size into sprint 2 and refined the asteroids sprint.
 <table width="75%" border="1">
@@ -103,8 +97,6 @@ We removed the plan to change background setting at each new level and divided t
 </table>
 
 
-
-<hr></hr>
 # Acceptance Tests
 <table width="75%" border="1">
   <tr>
