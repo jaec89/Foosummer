@@ -16,9 +16,6 @@ import android.graphics.Bitmap;
 // these imports deal with ArrayList class in java
 import java.util.*;
 import java.util.Random;
-
-
-
 import android.graphics.Bitmap;
 
 class AsteroidsGame extends SurfaceView implements Runnable{
@@ -61,11 +58,13 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private volatile boolean nowPlaying;
     private boolean nowPaused = true;
 
+    Matrix shipMatrix = new Matrix();
 
     // GAME OBJECTS
     private int level = 1; // we increment each time the player clears a level.
 //    private Space mySpace;
     private Player myShip;
+    private Player myShipHitbox;
 //    private OpponentShip npcShip; 
     private ArrayList<Asteroid> asteroids;
     private ArrayList<Laser> myLasers;
@@ -99,6 +98,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize the objects
         myShip = new Player(screenX, screenY);
+        myShipHitbox = new Player(screenX, screenY);
 
         // Asteroids = new Asteroids()
 
@@ -150,8 +150,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         }
 
 
-
         // enemyShip = new ...()
+        // enemyShipHitbox = new ...()
         // myLaser = new ..()
         // enemyLaser = new ..()
 
@@ -249,7 +249,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 // check for collision between player and police laser
                 // check for collision between player's laser and powerup
                 // check for collision between player's laser and asteroids
-
+                //detectCollisions();
             }
 
             // The movement has been handled and collisions
@@ -265,7 +265,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             if(timeThisFrame > 0) {
                 // Store the current frame rate in myFPS
                 // ready to pass to the update methods of
-                // myShip..... next frame/loop
+                // myShipHitbox..... next frame/loop
                 myFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
         }
@@ -282,8 +282,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
     private void update() {
-        // Update the asteroid
         //myShip.update(myFPS);
+        myShipHitbox.update(myFPS, ourContext, blockSize);
         for(int i = 0; i < myLasers.size(); i++) {
             myLasers.get(i).update(myFPS, screenX, screenY);
         }
@@ -315,60 +315,59 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             myPaint.setColor(Color.argb
                     (255, 75, 180, 250));
 
-            // Draw player
-            myCanvas.drawRect(myShip.getRect(), myPaint);
+
+
+            // Draw the objects
+            //myCanvas.drawRect(myShip.getRect(), myPaint);
+            myCanvas.drawRect(myShipHitbox.getRect(), myPaint);
+//            myCanvas.drawArc(myShipHitbox.getCirc(), 0, 360, false, myPaint);
 
 
 
-            // A bitmap for starting position
-            Bitmap mBitmapHeadUp;
+// CTRL-Z TO HERE FOR ORIGINAL CODE DELETE IN THIS FUNC
+            // A bitmap for each direction the ship can face
             Bitmap mBitmapHeadCurrent;
 
 
+
             // Create and scale the bitmaps
-            mBitmapHeadUp = BitmapFactory
-                    .decodeResource(ourContext.getResources(),
-                            R.drawable.sqspaceship);
             mBitmapHeadCurrent = BitmapFactory
                     .decodeResource(ourContext.getResources(),
-                            R.drawable.grayship);
+                            R.drawable.sqspaceship);
 
             // Modify the bitmaps to face the ship
             // in the correct direction
-            mBitmapHeadUp = Bitmap
-                    .createScaledBitmap(mBitmapHeadUp,
-                            blockSize*3, blockSize*3, false);
+            mBitmapHeadCurrent = Bitmap
+                    .createScaledBitmap(mBitmapHeadCurrent,
+                            blockSize*2, blockSize*2, false);
 
-            // A matrix for scaling
-            Matrix matrix = new Matrix();
 
             // set parameters depending on degree orientation vs location of box
-            matrix.preRotate(degree);
-            degree = degree + 5;
-            if(degree > 360){
-                degree = 0;
-            }
-            Log.d("ADebugTag", "Degree: " + Float.toString(degree));
+            // shipMatrix.preRotate(myShipHitbox.getDegree());
+            shipMatrix.setRotate(myShipHitbox.getDegree(), myShipHitbox.getCenterX(), myShipHitbox.getCenterY());
+            shipMatrix.postTranslate(myShipHitbox.getRectLeft()-(mBitmapHeadCurrent.getWidth()),
+                    myShipHitbox.getRectTop()-(mBitmapHeadCurrent.getHeight()));
+//            myShipHitbox.setDegree();
+
+
             mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*3, blockSize*3, matrix, true);
+                    .createBitmap(mBitmapHeadCurrent,
+                            0, 0, (blockSize*2), (blockSize*2), shipMatrix, true);
             mBitmapHeadCurrent.setHasAlpha(true);
-            myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    myShip.getRectLeft(),
-                    myShip.getRectTop(), myPaint);
+//            myCanvas.drawBitmap(mBitmapHeadCurrent,
+//                    null,
+//                    myShipHitbox.getRect(), myPaint);
 
-//            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectLeft()));
-//            Log.d("ADebugTag", "RectLeft: " + Float.toString(myShip.getRectTop()));
-//            mBitmapHeadCurrent.setHasAlpha(true);
-//            matrix.mapRect(myShip.getRect());
 
-           /* matrix.postRotate(20);
-            mBitmapHeadCurrent = Bitmap
-                    .createBitmap(mBitmapHeadUp,
-                            0, 0, blockSize*4, blockSize*4, matrix, true);
+            // myShipHitbox func that will return mBitmapHeadCurrent
             myCanvas.drawBitmap(mBitmapHeadCurrent,
-                    screenX / 2,
-                    screenY / 4, myPaint);*/
+                    myShipHitbox.getRectLeft()+5,
+                    myShipHitbox.getRectTop()+5, myPaint);
+//            myCanvas.drawBitmap(mBitmapHeadCurrent,
+//                    shipMatrix, myPaint);
+//            shipMatrix.mapRect(myShipHitbox.getRect());
+
+
 
             // Draw lasers
             for(int i = 0; i < myLasers.size(); i++) {
@@ -378,6 +377,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             for(int i = 0 ; i < asteroids.size(); i++) {
                 asteroids.get(i).draw(myCanvas);
             }
+
 
 
             // Choose the font size
@@ -426,11 +426,16 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     // then the ship will rotate counter-clockwise
                     if(motionEvent.getY() < screenY / 2){
                         // rotate ship counter-clockwise
+                        myShipHitbox.setRotationState(1);
+                    }
+                    else{
+                        // rotate ship clockwise
+                        myShipHitbox.setRotationState(2);
                     }
 
-                    if(motionEvent.getY() > screenY / 2){
-                        // rotate ship clockwise
-                    }
+//                    if(motionEvent.getY() > screenY / 2){
+//                        // rotate ship clockwise
+//                    }
                 }
 
                 break;
@@ -448,13 +453,13 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
                 if(motionEvent.getX() < screenX / 2){
                     // stop rotation / fix orientation
+                    myShipHitbox.setRotationState(0);
                 }
 
                 break;
         }
         return true;
     }
-
 
 
 
@@ -502,6 +507,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         These should cover the basic cases of collision within the game.
     */
+
 
     public boolean detectCollision(RectF objectA, RectF objectB) {
             return RectF.intersects(objectA, objectB);
