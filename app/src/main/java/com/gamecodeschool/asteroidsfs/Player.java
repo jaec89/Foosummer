@@ -56,8 +56,10 @@ public class Player {
 
 		// Configure the size of the player's
 		// ship based on the screen resolution
+
 		mLength = screenX / 15;
 		mHeight = screenY / 15;
+
 
 		// start player ship location at center
 		// of the screen
@@ -101,10 +103,7 @@ public class Player {
 
 	float getRectTop() {return mRect.top;}
 
-
-
 	// Update the Player- Called each frame/loop
-
 	// Update arguments within the AsteroidsGame class
 	void update(long fps, Context ourContext, int blockSize) {
 		if(rotateState == 1){
@@ -159,7 +158,6 @@ public class Player {
 
 		// setRotate() function?
 		// Accelerate()
-
 	}
 
 	public int getCenterX(){return (int)((this.mRect.left + this.mRect.right)/2);}
