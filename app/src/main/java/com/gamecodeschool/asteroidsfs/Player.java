@@ -15,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 /*
 	Player is a spacecraft that is able to shoot.
 */
@@ -22,8 +23,6 @@ import android.graphics.Bitmap;
 
 public class Player {
 
-	private int screenX;
-	private int screenY;
 	private RectF mRect;
 	private float mLength;
 	private float mHeight;
@@ -36,14 +35,10 @@ public class Player {
 	private int lives = 3;
 	private int score = 0;
 	private float mPlayerSpeed;
-	private RectF mRect1;
-	private RectF mRect2;
-	private RectF mCircle;
-	private int radius = 50;
 	private int degree;
+	private Point centerCoords;
 
 	private boolean hit;
-//	private boolean clockWise;
 	// 0 = stopped, 1 = clockwise, 2 = counter-clockwise
 	private int rotationStates[] = {0,1,2};
 	private int rotateState;
@@ -72,13 +67,9 @@ public class Player {
 				mYCoord + mLength - 15);
 		float rectCenterX = mRect.centerX();
 		float rectCenterY = mRect.centerY();
+		centerCoords = new Point((int)mRect.centerX(), (int)mRect.centerY());
 
-//		mRect1 = new RectF(mXCoord, mYCoord,
-//				mXCoord + mLength,
-//				mYCoord + mHeight);
-//		mRect2 = new RectF(mXCoord, mYCoord,
-//				mXCoord + mLength,
-//				mYCoord + mHeight);
+
 //		RectF oval = new RectF(width/2 - radius, width/2 - radius,
 //				width/2 + radius, width/2 + radius);
 //		canvas.drawArc(oval, 0, 360, false, paint1);
@@ -91,15 +82,10 @@ public class Player {
 	}
 
 
-	RectF getCirc() {return mCircle;}
 
-	public RectF getRect(){
+	public RectF getHitbox(){
 		return mRect;
 	}
-
-	float getRectLeft() {return mRect.left;}
-
-	float getRectTop() {return mRect.top;}
 
 	// Update the Player- Called each frame/loop
 	// Update arguments within the AsteroidsGame class
@@ -162,6 +148,8 @@ public class Player {
 	public int getCenterY(){return (int)((this.mRect.top + this.mRect.bottom)/2);}
 
 	void setRotationState(int playerRotate) { rotateState = rotationStates[playerRotate];}
+
+	public Point getCenterCoords() {return this.centerCoords;}
 
 	public int getDegree(){return this.degree;}
 

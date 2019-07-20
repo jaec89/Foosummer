@@ -252,7 +252,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
                 // check for collision between player and asteroids
                 Asteroid myAsteroid = asteroids.get(i);
-                boolean asteroidPlayerHit = detectCollision(myShip.getRect(), myAsteroid.getHitbox());
+                boolean asteroidPlayerHit = detectCollision(myShip.getHitbox(), myAsteroid.getHitbox());
                 i++;
                 if(i > 4){
                     i = 0;
@@ -275,10 +275,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // The movement has been handled and collisions
             // detected now we can draw the scene.
-            gameView.draw(myShip.getRect(), blockSize, myShip.getDegree(),
-                    myShip.getCenterX(), myShip.getCenterY(),
-                    myShip.getRectLeft(), myShip.getRectTop(),
-                    asteroids, myLasers, mineralPowerUps);
+            gameView.draw(myShip.getHitbox(), blockSize, myShip.getDegree(),
+                    myShip.getCenterCoords(), asteroids, myLasers, mineralPowerUps);
 
             // How long did this frame/loop take?
             // Store the answer in timeThisFrame
@@ -293,14 +291,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 myFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
         }
-
-        // change condition for this later...
-//        while(nowPlaying){
-//            draw();
-//        }
     }
-
-
 
 
 
@@ -321,13 +312,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         }
     }
 
-
-
-
-
-
-    // Draw the game objects and the HUD
-    //void draw() {
 
 
 
@@ -364,20 +348,12 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                         // rotate ship clockwise
                         myShip.setRotationState(2);
                     }
-
-//                    if(motionEvent.getY() > screenY / 2){
-//                        // rotate ship clockwise
-//                    }
                 }
 
                 break;
 
             // The player lifted their finger
             // from anywhere on screen.
-            // It is possible to create bugs by using
-            // multiple fingers. We will use more
-            // complicated and robust touch handling
-            // in later projects
             case MotionEvent.ACTION_UP:
                 if(motionEvent.getX() > screenX / 2){
                     // stop position

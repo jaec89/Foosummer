@@ -10,6 +10,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.content.Context;
 import android.graphics.RectF;
+import android.graphics.Point;
 
 import java.util.ArrayList;
 
@@ -32,10 +33,9 @@ public class GameView{
 
 
     // Draw the game objects and the HUD
-    void draw(RectF myShipHitbox, int blockSize, int myShipDegree,
-              int myShipCenterX, int myShipCenterY, float myShipHitboxLeft,
-              float myShipHitboxTop, ArrayList<Asteroid> asteroids,
+    void draw(RectF myShipHitbox, int blockSize, int myShipDegree, Point shipCenter, ArrayList<Asteroid> asteroids,
               ArrayList<Laser> myLasers, PowerUps[] mineralPowerUps) {
+
         if (myHolder.getSurface().isValid()) {
             // Lock the canvas (graphics memory) ready to draw
             myCanvas = myHolder.lockCanvas();
@@ -73,9 +73,9 @@ public class GameView{
 
             // set parameters depending on degree orientation vs location of box
             // shipMatrix.preRotate(myShipDegree);
-            shipMatrix.setRotate(myShipDegree, myShipCenterX, myShipCenterY);
-            shipMatrix.postTranslate(myShipHitboxLeft-(shipBitmap.getWidth()),
-                    myShipHitboxTop-(shipBitmap.getHeight()));
+            shipMatrix.setRotate(myShipDegree, shipCenter.x, shipCenter.y);
+            shipMatrix.postTranslate(myShipHitbox.left-(shipBitmap.getWidth()),
+                    myShipHitbox.top-(shipBitmap.getHeight()));
 //            myShipHitbox.setDegree();
 
 
@@ -92,8 +92,8 @@ public class GameView{
 
             // myShipHitbox func that will return shipBitmap
             myCanvas.drawBitmap(shipBitmap,
-                    myShipHitboxLeft+5,
-                    myShipHitboxTop+5, myPaint);
+                    myShipHitbox.left + 5,
+                    myShipHitbox.top + 5, myPaint);
 //            myCanvas.drawBitmap(shipBitmap,
 
 //                    shipMatrix, myPaint);
