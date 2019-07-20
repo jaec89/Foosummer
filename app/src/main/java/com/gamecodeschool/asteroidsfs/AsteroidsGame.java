@@ -39,6 +39,11 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     // Screen resolution
     private int screenX;
     private int screenY;
+    /* 
+        JSC: Let's eventually replace screen resolution 
+        with this object variable (that contains the screen x y size)
+    */
+    private Display display; 
 
     // Text size
     private int fontSize = blockSize*10;
