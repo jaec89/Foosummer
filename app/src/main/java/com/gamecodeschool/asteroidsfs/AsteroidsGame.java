@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -149,8 +150,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     break;
             }
 
-            asteroids.add(new Asteroid(asteroidXPosition,
-                                        asteroidYPosition,
+            asteroids.add(new Asteroid(new PointF(asteroidXPosition,
+                                        asteroidYPosition),
                                         asteroidWidth,
                                         asteroidHeight,
                                         asteroidXVelocity,
