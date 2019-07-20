@@ -1,6 +1,6 @@
 package com.gamecodeschool.asteroidsfs;
 
-import android.graphics.Canvas;
+import android.graphics.*;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -8,16 +8,17 @@ import android.graphics.RectF;
 public class SpaceObject {
 
     private RectF hitbox;        // Give access to precise position and size of object
+    private PointF center;
     private float velocityX;
     private float velocityY;
     private float width;
     private float height;
 
 
-    public SpaceObject(float positionX, float positionY, float width, float height, float velocityX, float velocityY) {
+    public SpaceObject(PointF position, float width, float height, float velocityX, float velocityY) {
         float halfWidth = width/2;
         float halfHeight = height/2;
-        this.hitbox = new RectF(positionX-halfWidth, positionY-halfHeight, positionX+halfWidth,positionY+halfHeight);
+        this.hitbox = new RectF(position.x-halfWidth, position.y-halfHeight, position.x+halfWidth,position.y+halfHeight);
         this.width = width;
         this.height = height;
         this.velocityX = velocityX;
@@ -27,6 +28,9 @@ public class SpaceObject {
 
     public RectF getHitbox() {
         return hitbox;
+    }
+    public PointF getPosition() {
+        return center;
     }
     public float getWidth() {
         return width;
