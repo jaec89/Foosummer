@@ -1,37 +1,24 @@
 package com.gamecodeschool.asteroidsfs;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import java.util.Random;
 
 public class Asteroid extends SpaceObject {
     private int size;       //Define different size asteroids
     private boolean hit;
 
 
-    public Asteroid(float positionX, float positionY, float width, float height, float velocityX, float velocityY) {
-        super(positionX, positionY, width, height, velocityX, velocityY);
+    public Asteroid(PointF position, float width, float height, float velocityX, float velocityY) {
+        super(position, width, height, velocityX, velocityY);
         this.hit = false;
     }
 
 
-    // Draw asteroid
-    @Override
-    public void draw(Canvas myCanvas) {
-        Paint myPaint = new Paint();
-        myPaint.setColor(Color.argb(255, 205, 160, 245));
-        myCanvas.drawRect(super.getHitbox(), myPaint);
-    }
+    // Draw asteroid w/ picture
     public void draw(Canvas canvas, Bitmap asteroidsBitmap) {
         Paint myPaint = new Paint();
         canvas.drawBitmap(asteroidsBitmap, 100, 100, myPaint);
