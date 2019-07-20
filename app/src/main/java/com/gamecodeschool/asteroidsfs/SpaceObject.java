@@ -7,8 +7,8 @@ import android.graphics.RectF;
 
 public class SpaceObject {
 
+    private PointF position;
     private RectF hitbox;        // Give access to precise position and size of object
-    private PointF center;
     private float velocityX;
     private float velocityY;
     private float width;
@@ -16,6 +16,7 @@ public class SpaceObject {
 
 
     public SpaceObject(PointF position, float width, float height, float velocityX, float velocityY) {
+        this.position = position;
         float halfWidth = width/2;
         float halfHeight = height/2;
         this.hitbox = new RectF(position.x-halfWidth, position.y-halfHeight, position.x+halfWidth,position.y+halfHeight);
@@ -30,19 +31,13 @@ public class SpaceObject {
         return hitbox;
     }
     public PointF getPosition() {
-        return center;
+        return position;
     }
     public float getWidth() {
         return width;
     }
-    public void setWidth(float width) {
-        this.width = width;
-    }
     public float getHeight() {
         return height;
-    }
-    public void setHeight(float height) {
-        this.height = height;
     }
     public float getVelocityX() {
         return velocityX;
