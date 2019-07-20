@@ -68,7 +68,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private GameProgress gameProgress;
 //    private Space mySpace;
 
-    public Player myShipHitbox;
+    public Player myShip;
 //    private OpponentShip npcShip; 
     private ArrayList<Asteroid> asteroids;
     private ArrayList<Laser> myLasers;
@@ -106,7 +106,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize the objects
 
-        myShipHitbox = new Player(screenX, screenY);
+        myShip = new Player(screenX, screenY);
 
         // Asteroids = new Asteroids()
 
@@ -170,7 +170,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         gameProgress = new GameProgress();
 
 
-        // enemyShipHitbox = new ...()
+        // enemyShip = new ...()
         // myLaser = new ..()
         // enemyLaser = new ..()
 
@@ -252,7 +252,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
                 // check for collision between player and asteroids
                 Asteroid myAsteroid = asteroids.get(i);
-                boolean asteroidPlayerHit = detectCollision(myShipHitbox.getRect(), myAsteroid.getHitbox());
+                boolean asteroidPlayerHit = detectCollision(myShip.getRect(), myAsteroid.getHitbox());
                 i++;
                 if(i > 4){
                     i = 0;
@@ -275,9 +275,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // The movement has been handled and collisions
             // detected now we can draw the scene.
-            gameView.draw(myShipHitbox.getRect(), blockSize, myShipHitbox.getDegree(),
-                    myShipHitbox.getCenterX(), myShipHitbox.getCenterY(),
-                    myShipHitbox.getRectLeft(), myShipHitbox.getRectTop(),
+            gameView.draw(myShip.getRect(), blockSize, myShip.getDegree(),
+                    myShip.getCenterX(), myShip.getCenterY(),
+                    myShip.getRectLeft(), myShip.getRectTop(),
                     asteroids, myLasers, mineralPowerUps);
 
             // How long did this frame/loop take?
@@ -289,7 +289,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             if(timeThisFrame > 0) {
                 // Store the current frame rate in myFPS
                 // ready to pass to the update methods of
-                // myShipHitbox..... next frame/loop
+                // myShip..... next frame/loop
                 myFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
         }
@@ -307,7 +307,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     private void update() {
 
-        myShipHitbox.update(myFPS, getContext(), blockSize);
+        myShip.update(myFPS, getContext(), blockSize);
         for(int i = 0; i < myLasers.size(); i++) {
             myLasers.get(i).update(myFPS, screenX, screenY);
         }
@@ -358,11 +358,11 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     // then the ship will rotate counter-clockwise
                     if(motionEvent.getY() < screenY / 2){
                         // rotate ship counter-clockwise
-                        myShipHitbox.setRotationState(1);
+                        myShip.setRotationState(1);
                     }
                     else{
                         // rotate ship clockwise
-                        myShipHitbox.setRotationState(2);
+                        myShip.setRotationState(2);
                     }
 
 //                    if(motionEvent.getY() > screenY / 2){
@@ -385,7 +385,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
                 if(motionEvent.getX() < screenX / 2){
                     // stop rotation / fix orientation
-                    myShipHitbox.setRotationState(0);
+                    myShip.setRotationState(0);
                 }
 
                 break;
