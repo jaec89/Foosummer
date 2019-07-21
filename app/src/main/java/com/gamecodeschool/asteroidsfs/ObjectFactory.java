@@ -9,22 +9,23 @@ public class ObjectFactory {
         final private Zone zone1; // Area in between 25% to 100% of screen
         final private Zone zone2; // Area in between 50% to 100% of screen
 
+        // When this object is first made for the game engine. The screen 
         ObjectFactory(Display display) {
-            zone1 = new Zone(display.width * .25,
-                            display.height * .25,
-                            display.width,
-                            display.height);
+                zone1 = new Zone((float)(display.width * .25), (float)(display.height * .25),
+                                (float)display.width, (float)display.height);
+                zone2 = new Zone((float)(display.width * .50), (float)(display.height * .50),
+                                (float)display.width, (float)display.height);
         }
 }
 
 class Zone {
         // defines minimal rectangle areas where an object may spawn.
-        int minX;
-        int minY;
-        int maxX;
-        int maxY;
+        float minX;
+        float minY;
+        float maxX;
+        float maxY;
 
-        Zone(int minWidth, int minHeight, int maxWidth, int maxHeight) {
+        Zone(float minWidth, float minHeight, float maxWidth, float maxHeight) {
             minX = minWidth;
             minY = minHeight;
             maxX = maxWidth;

@@ -83,4 +83,7 @@ public class SpaceObject {
         hitbox.right = hitbox.left + width;
         hitbox.bottom = hitbox.top + height;
     }
+
+    // Hitbox check done by radius
+    
 }
