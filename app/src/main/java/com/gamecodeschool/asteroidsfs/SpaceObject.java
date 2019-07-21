@@ -13,7 +13,7 @@ public class SpaceObject {
     private float width;
     private float height;
 
-    // new variables to control hitboxes. Only really need position and object radius.
+    // new variables to control circular hit box. Only really need position and object radius.
     private float posX;
     private float poxY;
     private float hitBoxRadius;

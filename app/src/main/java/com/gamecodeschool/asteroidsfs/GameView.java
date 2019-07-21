@@ -19,15 +19,18 @@ public class GameView{
     private SurfaceHolder myHolder;
     private Canvas myCanvas;
     private Paint myPaint;
-    private Context ourContext;
+    static Context ourContext;
     Matrix shipMatrix = new Matrix();
     Bitmap shipBitmap;
-    Bitmap mAsteroids;
+    static Bitmap mAsteroids;
+
+
     
     GameView(Context context, SurfaceHolder surfHolder){
         ourContext = context;
         myHolder = surfHolder;
         myPaint = new Paint();
+
     }
 
 
@@ -112,12 +115,11 @@ public class GameView{
 
             // ASTEROIDS
 
-            mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
+;
             for(int i = 0 ; i < asteroids.size(); i++) {
-                mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
-                mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (blockSize*2), (blockSize*2), false);
-                myCanvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left,
-                        asteroids.get(i).getHitbox().top, myPaint);
+//
+//                myCanvas.drawBitmap(asteroids.get(i).getBitmap(), asteroids.get(i).getHitbox().left,
+//                                    asteroids.get(i).getHitbox().top, myPaint);
             }
 
             // POWER UPS
@@ -141,6 +143,12 @@ public class GameView{
             myHolder.unlockCanvasAndPost(myCanvas);
         }
 
+    }
+
+    static public Bitmap createAsteroidBitmap(int blockSize) {
+        Bitmap newAsteroid = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
+        newAsteroid = Bitmap.createScaledBitmap(mAsteroids, (blockSize*2), (blockSize*2), false);
+        return newAsteroid;
     }
 
 }

@@ -17,6 +17,7 @@ import java.util.Random;
 public class Asteroid extends SpaceObject {
     private int size;       //Define different size asteroids
     private boolean hit;
+    private Bitmap bitmap;
 
 
     public Asteroid(float positionX, float positionY, float width, float height, float velocityX, float velocityY) {
@@ -28,6 +29,7 @@ public class Asteroid extends SpaceObject {
     public Asteroid(int angle, int xPos, int yPos, float velocityMagnitude, float asteroidSize) {
         super((float)xPos, (float)yPos, angle, velocityMagnitude, asteroidSize);
         this.hit = false;
+//        bitmap = GameView.createAsteroidBitmap((int)asteroidSize*2);
     }
 
 
@@ -59,7 +61,20 @@ public class Asteroid extends SpaceObject {
 
     // Large asteroid breaks into medium pieces
     // medium piece breaks into small pieces
-    void disintegrate(){
+    void disintegrate() {
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+
+    public float getHorizontalPos() {
+        return super.getHitbox().left;
+    }
+
+    public float getVerticalPos() {
+        return super.getHitbox().top;
     }
 }
 
