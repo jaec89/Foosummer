@@ -39,6 +39,7 @@ public class Player {
 	private float mPlayerSpeed;
 	private int degree;
 	private Point centerCoords;
+	private float movementMagnitude;
 
 	private boolean hit;
 	// 0 = stopped, 1 = clockwise, 2 = counter-clockwise
@@ -88,6 +89,7 @@ public class Player {
 
 		mXVelocity = 0;
 		mYVelocity = 0;
+		movementMagnitude = 0;
 	}
 
 
@@ -100,31 +102,36 @@ public class Player {
 	// Update arguments within the AsteroidsGame class
 	void update(long fps, Context ourContext, int blockSize) {
 		if(rotateState == 1){
+			if(degree < 0){
+				degree = 360;
+			}
 			degree -= 5;
 		}
 		else if(rotateState == 2){
+			if(degree > 360){
+				degree = 0;
+			}
 			degree += 5;
 		}
 		else{
 			degree = degree;
 		}
-		// speed = 0.005f
-//		x = speed * (float) Math.cos(degree);
-//		y = speed * (float) Math.sin(degree);
-//		float dx = vel.x * timeInMillisecond;
-//		float dy = vel.y * timeInMillisecond;
-//		hitbox.offset(dx, dy);
+
 
 		if(moveState == true) {
+//			movementMagnitude += 1.1f;
 			this.mXVelocity = 1.1f * (float)Math.cos(degree);
 			this.mYVelocity = 1.1f * (float)Math.sin(degree);
 			// + mXVelocity/fps;
 			// + mYVelocity/fps;
 			this.dx += mXVelocity/fps;
 			this.dy += mYVelocity/fps;
-			mRect.offset(this.dx, this.dy);
+//			mRect.offset(this.dx, this.dy);
+			mRect.offset(this.mXVelocity, this.mYVelocity);
 			centerCoords = new Point((int)(mRect.left+0.5*(mRect.right-mRect.left)),
 					(int)(mRect.top+0.5*(mRect.bottom-mRect.top)));
+
+			Log.d("player: ", "degree: " + degree);
 			Log.d("player: ", "value of mXVelocity: " + mXVelocity);
 			Log.d("player: ", "value of mYVelocity: " + mYVelocity);
 			Log.d("player: ", "value of dx: " + dx);
@@ -141,45 +148,6 @@ public class Player {
 			this.dy = 0;
 
 		}
-//		// A bitmap for each direction the ship can face
-//		Bitmap mBitmapHeadUp;
-//		Bitmap mBitmapHeadCurrent;
-
-//		// Create and scale the bitmaps
-//		mBitmapHeadUp = BitmapFactory
-//				.decodeResource(ourContext.getResources(),
-//						R.drawable.sqspaceship);
-//
-//		mBitmapHeadCurrent = BitmapFactory
-//				.decodeResource(ourContext.getResources(),
-//						R.drawable.grayship);
-//
-//		// Modify the bitmaps to face the ship
-//		// in the correct direction
-//		mBitmapHeadUp = Bitmap
-//				.createScaledBitmap(mBitmapHeadUp,
-//						blockSize*2, blockSize*2, false);
-//
-//		Matrix matrix = new Matrix();
-//
-//		// set parameters depending on degree orientation vs location of box
-//		matrix.preRotate(degree);
-//		degree = degree + 5;
-//		if(degree > 360){
-//			degree = 0;
-//		}
-//
-//		mBitmapHeadCurrent = Bitmap
-//				.createBitmap(mBitmapHeadUp,
-//						0, 0, (blockSize*2), (blockSize*2), matrix, true);
-//		mBitmapHeadCurrent.setHasAlpha(true);
-//
-//
-//
-
-
-
-
 
 		// setRotate() function?
 		// Accelerate()
