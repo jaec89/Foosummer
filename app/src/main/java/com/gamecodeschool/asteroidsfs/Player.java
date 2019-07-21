@@ -15,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 /*
 	Player is a spacecraft that is able to shoot.
 */
@@ -22,8 +23,6 @@ import android.graphics.Bitmap;
 
 public class Player {
 
-	private int screenX;
-	private int screenY;
 	private RectF mRect;
 	private float mLength;
 	private float mHeight;
@@ -31,22 +30,24 @@ public class Player {
 	private float mYCoord;
 	private float mXVelocity;
 	private float mYVelocity;
+	float dx;
+	float dy;
 	private float mShipWidth;
 	private float mShipHeight;
 	private int lives = 3;
 	private int score = 0;
 	private float mPlayerSpeed;
-	private RectF mRect1;
-	private RectF mRect2;
-	private RectF mCircle;
-	private int radius = 50;
 	private int degree;
+	private Point centerCoords;
+	private float movementMagnitude;
 
 	private boolean hit;
-//	private boolean clockWise;
 	// 0 = stopped, 1 = clockwise, 2 = counter-clockwise
 	private int rotationStates[] = {0,1,2};
 	private int rotateState;
+
+	// true if player is moving, false if player is stationary
+	private boolean moveState;
 
 	// A bitmap for each direction the ship can face
 	private Bitmap mBitmapHeadUp;
@@ -57,8 +58,8 @@ public class Player {
 		// Configure the size of the player's
 		// ship based on the screen resolution
 
-		mLength = screenX / 15;
-		mHeight = screenY / 15;
+		mLength = screenX / 25;
+		mHeight = screenY / 25;
 
 
 		// start player ship location at center
@@ -70,15 +71,12 @@ public class Player {
 		mRect = new RectF(mXCoord, mYCoord,
 				mXCoord + mLength - 15,
 				mYCoord + mLength - 15);
-		float rectCenterX = mRect.centerX();
-		float rectCenterY = mRect.centerY();
+//		float rectCenterX = mRect.centerX();
+//		float rectCenterY = mRect.centerY();
+		centerCoords = new Point((int)(mRect.left+0.5*(mRect.right-mRect.left)),
+				(int)(mRect.top+0.5*(mRect.bottom-mRect.top)));
 
-//		mRect1 = new RectF(mXCoord, mYCoord,
-//				mXCoord + mLength,
-//				mYCoord + mHeight);
-//		mRect2 = new RectF(mXCoord, mYCoord,
-//				mXCoord + mLength,
-//				mYCoord + mHeight);
+
 //		RectF oval = new RectF(width/2 - radius, width/2 - radius,
 //				width/2 + radius, width/2 + radius);
 //		canvas.drawArc(oval, 0, 360, false, paint1);
@@ -88,80 +86,82 @@ public class Player {
 		// This code means the ship can cover the
 		// width of the screen in 2 seconds
 		mPlayerSpeed = screenX / 2;
+
+		mXVelocity = 0;
+		mYVelocity = 0;
+		movementMagnitude = 0;
 	}
 
 
-	RectF getCirc() {return mCircle;}
 
-	public RectF getRect(){
+	public RectF getHitbox(){
 		return mRect;
 	}
-
-	float getRectLeft() {return mRect.left;}
-
-	float getRectTop() {return mRect.top;}
 
 	// Update the Player- Called each frame/loop
 	// Update arguments within the AsteroidsGame class
 	void update(long fps, Context ourContext, int blockSize) {
 		if(rotateState == 1){
+			if(degree < 0){
+				degree = 360;
+			}
 			degree -= 5;
 		}
 		else if(rotateState == 2){
+			if(degree > 360){
+				degree = 0;
+			}
 			degree += 5;
 		}
 		else{
 			degree = degree;
 		}
 
-//		// A bitmap for each direction the ship can face
-//		Bitmap mBitmapHeadUp;
-//		Bitmap mBitmapHeadCurrent;
 
-//		// Create and scale the bitmaps
-//		mBitmapHeadUp = BitmapFactory
-//				.decodeResource(ourContext.getResources(),
-//						R.drawable.sqspaceship);
-//
-//		mBitmapHeadCurrent = BitmapFactory
-//				.decodeResource(ourContext.getResources(),
-//						R.drawable.grayship);
-//
-//		// Modify the bitmaps to face the ship
-//		// in the correct direction
-//		mBitmapHeadUp = Bitmap
-//				.createScaledBitmap(mBitmapHeadUp,
-//						blockSize*2, blockSize*2, false);
-//
-//		Matrix matrix = new Matrix();
-//
-//		// set parameters depending on degree orientation vs location of box
-//		matrix.preRotate(degree);
-//		degree = degree + 5;
-//		if(degree > 360){
-//			degree = 0;
-//		}
-//
-//		mBitmapHeadCurrent = Bitmap
-//				.createBitmap(mBitmapHeadUp,
-//						0, 0, (blockSize*2), (blockSize*2), matrix, true);
-//		mBitmapHeadCurrent.setHasAlpha(true);
-//
-//
-//
+		if(moveState == true) {
+			movementMagnitude += 1.1f;
+			this.mXVelocity = movementMagnitude * (float)Math.cos(degree*0.0174533);
+			this.mYVelocity = movementMagnitude * (float)Math.sin(degree*0.0174533);
+			// + mXVelocity/fps;
+			// + mYVelocity/fps;
+			this.dx += mXVelocity/fps;
+			this.dy += mYVelocity/fps;
+//			mRect.offset(this.dx, this.dy);
+			mRect.offset(this.dx, this.dy);
+			centerCoords = new Point((int)(mRect.left+0.5*(mRect.right-mRect.left)),
+					(int)(mRect.top+0.5*(mRect.bottom-mRect.top)));
 
+			Log.d("player: ", "degree: " + degree);
+			Log.d("player: ", "value of mXVelocity: " + mXVelocity);
+			Log.d("player: ", "value of mYVelocity: " + mYVelocity);
+			Log.d("player: ", "value of dx: " + dx);
+			Log.d("player: ", "value of dy: " + dy);
+			Log.d("player: ", "value of mRect.left: " + mRect.left);
 
+			Log.d("player: ", "value of mRect.top: " + mRect.top);
+			Log.d("player: ", "value of shipCenter.x: " + centerCoords.x);
+			Log.d("player: ", "value of shipCenter.y: " + centerCoords.y);
+		}
+		else{
+			this.mXVelocity = 0;
+			this.mYVelocity = 0;
+			this.dx = 0;
+			this.dy = 0;
+			movementMagnitude = 0;
 
-
+		}
 
 		// setRotate() function?
 		// Accelerate()
 	}
 
-	public int getCenterX(){return (int)((this.mRect.left + this.mRect.right)/2);}
-	public int getCenterY(){return (int)((this.mRect.top + this.mRect.bottom)/2);}
+
+
+	void setMoveState(boolean playerMove) {moveState = playerMove;}
 
 	void setRotationState(int playerRotate) { rotateState = rotationStates[playerRotate];}
+
+	public Point getCenterCoords() {return this.centerCoords;}
 
 	public int getDegree(){return this.degree;}
 
@@ -174,6 +174,8 @@ public class Player {
 	public float getPlayerHeight(){
 		return this.mHeight;
 	}
+
+
 //	public Player() {
 //		this(1,1,1,1,false);
 //	}

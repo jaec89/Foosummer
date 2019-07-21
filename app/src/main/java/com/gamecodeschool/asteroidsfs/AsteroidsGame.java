@@ -54,13 +54,12 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     private volatile boolean nowPlaying;
     private boolean nowPaused = true;
 
-//    Matrix shipMatrix = new Matrix();
 
     // GAME OBJECTS
     private GameProgress gameProgress;
 //    private Space mySpace;
 
-    public Player myShipHitbox;
+    public Player myShip;
 //    private OpponentShip npcShip; 
     private ArrayList<Asteroid> asteroids;
     private ArrayList<Laser> myLasers;
@@ -98,7 +97,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize the objects
 
-        myShipHitbox = new Player(screenX, screenY);
+        myShip = new Player(screenX, screenY);
 
         // Asteroids = new Asteroids()
 
@@ -162,7 +161,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         gameProgress = new GameProgress();
 
 
-        // enemyShipHitbox = new ...()
+        // enemyShip = new ...()
         // myLaser = new ..()
         // enemyLaser = new ..()
 
@@ -244,7 +243,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
                 // check for collision between player and asteroids
                 Asteroid myAsteroid = asteroids.get(i);
-                boolean asteroidPlayerHit = detectCollision(myShipHitbox.getRect(), myAsteroid.getHitbox());
+                boolean asteroidPlayerHit = detectCollision(myShip.getHitbox(), myAsteroid.getHitbox());
                 i++;
                 if(i > 4){
                     i = 0;
@@ -267,10 +266,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // The movement has been handled and collisions
             // detected now we can draw the scene.
-            gameView.draw(myShipHitbox.getRect(), blockSize, myShipHitbox.getDegree(),
-                    myShipHitbox.getCenterX(), myShipHitbox.getCenterY(),
-                    myShipHitbox.getRectLeft(), myShipHitbox.getRectTop(),
-                    asteroids, myLasers, mineralPowerUps);
+            gameView.draw(myShip.getHitbox(), blockSize, myShip.getDegree(),
+                    myShip.getCenterCoords(), asteroids, myLasers, mineralPowerUps);
 
             // How long did this frame/loop take?
             // Store the answer in timeThisFrame
@@ -281,25 +278,18 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             if(timeThisFrame > 0) {
                 // Store the current frame rate in myFPS
                 // ready to pass to the update methods of
-                // myShipHitbox..... next frame/loop
+                // myShip..... next frame/loop
                 myFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
         }
-
-        // change condition for this later...
-//        while(nowPlaying){
-//            draw();
-//        }
     }
-
-
 
 
 
 
     private void update() {
 
-        myShipHitbox.update(myFPS, getContext(), blockSize);
+        myShip.update(myFPS, getContext(), blockSize);
         for(int i = 0; i < myLasers.size(); i++) {
             myLasers.get(i).update(myFPS, screenX, screenY);
         }
@@ -313,13 +303,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         }
     }
 
-
-
-
-
-
-    // Draw the game objects and the HUD
-    //void draw() {
 
 
 
@@ -342,6 +325,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 // then the ship will accelerate
                 if(motionEvent.getX() > screenX / 2){
                     // call method that will accelerate ship
+                    myShip.setMoveState(true);
                 }
 
                 // If finger pressed on left side of screen...
@@ -350,34 +334,27 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     // then the ship will rotate counter-clockwise
                     if(motionEvent.getY() < screenY / 2){
                         // rotate ship counter-clockwise
-                        myShipHitbox.setRotationState(1);
+                        myShip.setRotationState(1);
                     }
                     else{
                         // rotate ship clockwise
-                        myShipHitbox.setRotationState(2);
+                        myShip.setRotationState(2);
                     }
-
-//                    if(motionEvent.getY() > screenY / 2){
-//                        // rotate ship clockwise
-//                    }
                 }
 
                 break;
 
             // The player lifted their finger
             // from anywhere on screen.
-            // It is possible to create bugs by using
-            // multiple fingers. We will use more
-            // complicated and robust touch handling
-            // in later projects
             case MotionEvent.ACTION_UP:
                 if(motionEvent.getX() > screenX / 2){
                     // stop position
+                    myShip.setMoveState(false);
                 }
 
                 if(motionEvent.getX() < screenX / 2){
                     // stop rotation / fix orientation
-                    myShipHitbox.setRotationState(0);
+                    myShip.setRotationState(0);
                 }
 
                 break;
