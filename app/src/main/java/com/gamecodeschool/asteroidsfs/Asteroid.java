@@ -24,6 +24,12 @@ public class Asteroid extends SpaceObject {
         this.hit = false;
     }
 
+    // Using this constructor does not generate a RectF in the SpaceObject.
+    public Asteroid(int angle, int xPos, int yPos, float velocityMagnitude, float asteroidSize) {
+        super((float)xPos, (float)yPos, angle, velocityMagnitude, asteroidSize);
+        this.hit = false;
+    }
+
 
     // Draw asteroid
     @Override

@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
 // these imports deal with ArrayList class in java
+import java.util.ArrayList;
 import java.util.*;
 import java.util.Random;
 import android.graphics.Bitmap;
@@ -33,6 +34,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     // Frames per second
     private long myFPS;
+    private long timeElapsed;
     // Number of milliseconds in a second
     private final int MILLIS_IN_SECOND = 1000;
 
@@ -71,6 +73,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     // GAME OBJECTS
     private GameProgress gameProgress;
+    private ObjectFactory factory;
+    SpaceObjectType objType;
 //    private Space mySpace;
 
     public Player myShipHitbox;
@@ -117,48 +121,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize asteroids
         asteroids = new ArrayList<Asteroid>();
-        for(int i = 0 ; i < 5 ; i++) {
-
-            Random rand = new Random();
-            int asteroidXPosition = rand.nextInt(screenX);
-            int asteroidYPosition = rand.nextInt(screenY);
-            int asteroidWidth = screenY / 25;
-            int asteroidHeight = screenY / 25;
-            int asteroidXVelocity = -(screenY / 10);
-            int asteroidYVelocity = (screenY / 10);
-
-            // Pick a random direction
-            // 0 -> left, down
-            // 1 -> left, up
-            // 2 -> right, down
-            // 3 -> right, up
-            int direction = rand.nextInt(4);
-            switch (direction) {
-                case 0:
-                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
-                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
-                    break;
-                case 1:
-                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
-                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
-                    break;
-                case 2:
-                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
-                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
-                    break;
-                case 3:
-                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
-                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
-                    break;
-            }
-
-            asteroids.add(new Asteroid(asteroidXPosition,
-                                        asteroidYPosition,
-                                        asteroidWidth,
-                                        asteroidHeight,
-                                        asteroidXVelocity,
-                                        asteroidYVelocity));
-        }
 
         // Initialize powerups - eventually have them scale with levels?
         // currently hardcoded to 1 for now
@@ -170,8 +132,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     screenY / 50, screenY / 50, hitsLeft, -(screenY/8), (screenY/8));
         }
       
+        display = new Display(x, y);
         gameProgress = new GameProgress();
-
+        factory = new ObjectFactory(display);
 
         // enemyShipHitbox = new ...()
         // myLaser = new ..()
@@ -193,50 +156,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     */
     private void startNewGame() {
 //        // FIXME: Change 3 to asteroid count variable that can be changed.
-//        for(int i = 0 ; i < 3 ; i++) {
-//            Random rand = new Random();
-//            int asteroidXPosition = rand.nextInt(screenX);
-//            int asteroidYPosition = rand.nextInt(screenY);
-//            int asteroidWidth = screenY/ 25;
-//            int asteroidHeight = screenY/ 25;
-//            int asteroidXVelocity = -(screenY / 5);
-//            int asteroidYVelocity = (screenY / 5);
-//
-//            // Pick a random direction
-//            // 0 -> left, down
-//            // 1 -> left, up
-//            // 2 -> right, down
-//            // 3 -> right, up
-//            int direction = rand.nextInt(4);
-//            switch (direction) {
-//                case 0:
-//                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
-//                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
-//                    break;
-//                case 1:
-//                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
-//                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
-//                    break;
-//                case 2:
-//                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
-//                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
-//                    break;
-//                case 3:
-//                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
-//                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
-//                    break;
-//            }
-//
-//
-//            asteroids.add(new Asteroid(asteroidXPosition,
-//                    asteroidYPosition,
-//                    asteroidWidth,
-//                    asteroidHeight,
-//                    asteroidXVelocity,
-//                    asteroidYVelocity));
-//        }
-
-//        gameProgress.reset();
+        for(int i = 0; i < 3; i++) {
+            asteroids.add((Asteroid)factory.getSpaceObject(objType.ASTEROID));
+        }
     }
 
 
@@ -251,15 +173,22 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             long frameStartTime = System.currentTimeMillis();
 
             if(!nowPaused){
-                update();
+                if(timeElapsed > 0) {
+                    update();
+                    gameView.draw(myShipHitbox.getRect(), blockSize, myShipHitbox.getDegree(),
+                    myShipHitbox.getCenterX(), myShipHitbox.getCenterY(),
+                    myShipHitbox.getRectLeft(), myShipHitbox.getRectTop(),
+                    asteroids, myLasers, mineralPowerUps);
+                }
+                    
 
                 // check for collision between player and asteroids
-                Asteroid myAsteroid = asteroids.get(i);
-                boolean asteroidPlayerHit = detectCollision(myShipHitbox.getRect(), myAsteroid.getHitbox());
-                i++;
-                if(i > 4){
-                    i = 0;
-                }
+                // Asteroid myAsteroid = asteroids.get(i);
+                // boolean asteroidPlayerHit = detectCollision(myShipHitbox.getRect(), myAsteroid.getHitbox());
+                // i++;
+                // if(i > 4){
+                //     i = 0;
+                // }
 
                 /*
                 Log.d("ADebugTag", "collision detected: " + hit);
@@ -278,10 +207,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // The movement has been handled and collisions
             // detected now we can draw the scene.
-            gameView.draw(myShipHitbox.getRect(), blockSize, myShipHitbox.getDegree(),
-                    myShipHitbox.getCenterX(), myShipHitbox.getCenterY(),
-                    myShipHitbox.getRectLeft(), myShipHitbox.getRectTop(),
-                    asteroids, myLasers, mineralPowerUps);
 
             // How long did this frame/loop take?
             // Store the answer in timeThisFrame
@@ -289,12 +214,13 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             // Make sure timeThisFrame is at least 1 millisecond
             // because accidentally dividing by zero crashes the game
-            if(timeThisFrame > 0) {
-                // Store the current frame rate in myFPS
-                // ready to pass to the update methods of
-                // myShipHitbox..... next frame/loop
-                myFPS = MILLIS_IN_SECOND / timeThisFrame;
-            }
+            timeElapsed = timeThisFrame;
+            // if(timeThisFrame > 0) {
+            //     // Store the current frame rate in myFPS
+            //     // ready to pass to the update methods of
+            //     // myShipHitbox..... next frame/loop
+            //     myFPS = MILLIS_IN_SECOND / timeThisFrame;
+            // }
         }
 
         // change condition for this later...
@@ -310,18 +236,29 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     private void update() {
 
-        myShipHitbox.update(myFPS, getContext(), blockSize);
+        // myShipHitbox.update(myFPS, getContext(), blockSize);
+        // for(int i = 0; i < myLasers.size(); i++) {
+        //     myLasers.get(i).update(myFPS, screenX, screenY);
+        // }
+        // for(int i = 0 ; i < asteroids.size() ; i++) {
+        //     asteroids.get(i).update(myFPS, screenX, screenY);
+        // }
+
+        // // PowerUp position - currently stationary
+        // for(int i = 0; i < mineralPowerUps.length; i++) {
+        //     mineralPowerUps[i].update(myFPS, screenX, screenY);
+        // }
+
+        myShipHitbox.update(timeElapsed, getContext(), blockSize);
+
         for(int i = 0; i < myLasers.size(); i++) {
-            myLasers.get(i).update(myFPS, screenX, screenY);
-        }
-        for(int i = 0 ; i < asteroids.size() ; i++) {
-            asteroids.get(i).update(myFPS, screenX, screenY);
+            myLasers.get(i).update(timeElapsed, display);
         }
 
-        // PowerUp position - currently stationary
-        for(int i = 0; i < mineralPowerUps.length; i++) {
-            mineralPowerUps[i].update(myFPS, screenX, screenY);
+        for(int i = 0 ; i < asteroids.size() ; i++) {
+            asteroids.get(i).update(timeElapsed, display);
         }
+
     }
 
 

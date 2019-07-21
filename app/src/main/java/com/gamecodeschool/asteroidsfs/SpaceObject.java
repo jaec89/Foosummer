@@ -29,6 +29,15 @@ public class SpaceObject {
         this.velocityY = velocityY;
     }
 
+    public SpaceObject(float positionX, float positionY, int angle, float velocityMagnitude, float hitCircleSize) {
+        float sideLength = hitCircleSize / 2;
+        hitbox = new RectF(positionX-sideLength, positionY-sideLength, positionX+sideLength,positionY+sideLength);
+        width = hitCircleSize;
+        height = width;
+        velocityX = velocityMagnitude * (float) Math.cos(angle);
+        velocityY = velocityMagnitude * (float) Math.sin(angle);
+    }
+
 
     public RectF getHitbox() {
         return hitbox;
@@ -89,6 +98,24 @@ public class SpaceObject {
         hitbox.bottom = hitbox.top + height;
     }
 
-    // Hitbox check done by radius
+    // Uploaded 
+    public void update(long time, final Display screen) {
+        hitbox.left = hitbox.left + (velocityX * time) ;
+        hitbox.top = hitbox.top + (velocityY * time) ;
+
+        // If object travels off the screen -> wrap around
+        if (hitbox.left < 0)
+            hitbox.left = screen.width;
+        if (hitbox.left > screen.width)
+            hitbox.left = 0;
+        if (hitbox.top < 0)
+            hitbox.top = screen.height;
+        if (hitbox.top > screen.height)
+            hitbox.top = 0;
+
+        // Match up the bottom right corner based on the size of the ball
+        hitbox.right = hitbox.left + width;
+        hitbox.bottom = hitbox.top + height;
+    }
 
 }

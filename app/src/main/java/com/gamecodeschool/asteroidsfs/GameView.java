@@ -21,7 +21,9 @@ public class GameView{
     private Paint myPaint;
     private Context ourContext;
     Matrix shipMatrix = new Matrix();
-
+    Bitmap shipBitmap;
+    Bitmap mAsteroids;
+    
     GameView(Context context, SurfaceHolder surfHolder){
         ourContext = context;
         myHolder = surfHolder;
@@ -56,7 +58,7 @@ public class GameView{
 
 
             // A bitmap for each direction the ship can face
-            Bitmap shipBitmap;
+
 
 
             shipBitmap = BitmapFactory
@@ -109,7 +111,7 @@ public class GameView{
             }
 
             // ASTEROIDS
-            Bitmap mAsteroids;
+
             mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
             for(int i = 0 ; i < asteroids.size(); i++) {
                 mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
