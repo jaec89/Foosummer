@@ -9,11 +9,16 @@ import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.content.Context;
 import android.graphics.RectF;
+import android.graphics.drawable.AnimationDrawable;
+import android.widget.ImageView;
+import android.view.View;
+import android.app.Activity;
+
 
 import java.util.ArrayList;
 
 // make this an interface
-public class GameView {
+public class GameView extends Activity {
 
     private SurfaceHolder surfaceHolder;
     private Canvas canvas;
@@ -31,10 +36,11 @@ public class GameView {
 
 
     // Draw the game objects and the HUD
-    void draw(RectF myShipHitbox, int blockSize, int myShipDegree,
-              int myShipCenterX, int myShipCenterY, float myShipHitboxLeft,
-              float myShipHitboxTop, ArrayList<Asteroid> asteroids,
-              ArrayList<Laser> myLasers, PowerUps[] mineralPowerUps) {
+    void draw(RectF myShipHitbox, int blockSize, int myShipDegree, int myShipCenterX, int myShipCenterY, float myShipHitboxLeft,
+              float myShipHitboxTop, ArrayList<Asteroid> asteroids, ArrayList<Laser> myLasers, PowerUps[] mineralPowerUps) {
+
+
+
         if (surfaceHolder.getSurface().isValid()) {
             // Lock the canvas (graphics memory) ready to draw
             canvas = surfaceHolder.lockCanvas();
@@ -43,6 +49,7 @@ public class GameView {
             // Fills the screen with background "space" image
             canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(),
                     R.drawable.outerspacebackground1), 0, 0, null);
+
 
             // Choose a color to paint with
             paint.setColor(Color.argb
@@ -56,17 +63,12 @@ public class GameView {
 
             // A bitmap for each direction the ship can face
             Bitmap shipBitmap;
-
-
-            shipBitmap = BitmapFactory
-                    .decodeResource(context.getResources(),
-                            R.drawable.sqspaceship);
+            shipBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.sqspaceship);
 
 
             // Modify the bitmaps to face the ship
             // in the correct direction
-            shipBitmap = Bitmap
-                    .createScaledBitmap(shipBitmap,
+            shipBitmap = Bitmap.createScaledBitmap(shipBitmap,
                             blockSize*2, blockSize*2, false);
 
 
@@ -91,13 +93,12 @@ public class GameView {
 
 
             // myShipHitbox func that will return shipBitmap
-            canvas.drawBitmap(shipBitmap,
-                    myShipHitboxLeft+5,
-                    myShipHitboxTop+5, paint);
+            canvas.drawBitmap(shipBitmap, myShipHitboxLeft+5, myShipHitboxTop+5, paint);
 //            myCanvas.drawBitmap(shipBitmap,
 
 //                    shipMatrix, paint);
 //            shipMatrix.mapRect(myShipHitbox.getRect());
+
 
 
 
@@ -111,11 +112,10 @@ public class GameView {
             // ASTEROIDS
             Bitmap mAsteroids;
             mAsteroids = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid);
+            mAsteroids = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid);
+            mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (blockSize*2), (blockSize*2), false);
             for(int i = 0 ; i < asteroids.size(); i++) {
-                mAsteroids = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid);
-                mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (blockSize*2), (blockSize*2), false);
-                canvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left,
-                        asteroids.get(i).getHitbox().top, paint);
+                canvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left, asteroids.get(i).getHitbox().top, paint);
             }
 
             // POWER UPS
