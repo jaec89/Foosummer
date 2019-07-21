@@ -87,15 +87,15 @@ public class GameView{
             );
             shipBitmap.setHasAlpha(true);
 
-            Log.e("draw: ", "value of shiphitbox.left: " + myShipHitbox.left);
-            Log.e("draw: ", "value of shiphitbox.right: " + myShipHitbox.right);
-            Log.e("draw: ", "value of shiphitbox.top: " + myShipHitbox.top);
-            Log.e("draw: ", "value of shiphitbox.bottom: " + myShipHitbox.bottom);
-            Log.d("draw:", "value of shipcenter.x: " + shipCenter.x);
-            Log.d("draw:", "value of shipcenter.y: " + shipCenter.y);
-            Log.d("draw:", "value of blockSize: " + blockSize);
-            Log.d("draw:", "value of shipbitmap.height: " + shipBitmap.getHeight());
-            Log.d("draw:", "value of shipbitmap.width: " + shipBitmap.getWidth());
+//            Log.e("draw: ", "value of shiphitbox.left: " + myShipHitbox.left);
+//            Log.e("draw: ", "value of shiphitbox.right: " + myShipHitbox.right);
+//            Log.e("draw: ", "value of shiphitbox.top: " + myShipHitbox.top);
+//            Log.e("draw: ", "value of shiphitbox.bottom: " + myShipHitbox.bottom);
+//            Log.d("draw:", "value of shipcenter.x: " + shipCenter.x);
+//            Log.d("draw:", "value of shipcenter.y: " + shipCenter.y);
+//            Log.d("draw:", "value of blockSize: " + blockSize);
+//            Log.d("draw:", "value of shipbitmap.height: " + shipBitmap.getHeight());
+//            Log.d("draw:", "value of shipbitmap.width: " + shipBitmap.getWidth());
 
 
             // myShipHitbox func that will return shipBitmap
