@@ -52,8 +52,8 @@ public class Player {
 		// Configure the size of the player's
 		// ship based on the screen resolution
 
-		mLength = screenX / 15;
-		mHeight = screenY / 15;
+		mLength = screenX / 25;
+		mHeight = screenY / 25;
 
 
 		// start player ship location at center
@@ -65,9 +65,10 @@ public class Player {
 		mRect = new RectF(mXCoord, mYCoord,
 				mXCoord + mLength - 15,
 				mYCoord + mLength - 15);
-		float rectCenterX = mRect.centerX();
-		float rectCenterY = mRect.centerY();
-		centerCoords = new Point((int)mRect.centerX(), (int)mRect.centerY());
+//		float rectCenterX = mRect.centerX();
+//		float rectCenterY = mRect.centerY();
+		centerCoords = new Point((int)(mRect.left+0.5*(mRect.right-mRect.left)),
+				(int)(mRect.top+0.5*(mRect.bottom-mRect.top)));
 
 
 //		RectF oval = new RectF(width/2 - radius, width/2 - radius,
@@ -144,8 +145,8 @@ public class Player {
 		// Accelerate()
 	}
 
-	public int getCenterX(){return (int)((this.mRect.left + this.mRect.right)/2);}
-	public int getCenterY(){return (int)((this.mRect.top + this.mRect.bottom)/2);}
+//	public int getCenterX(){return (int)((this.mRect.left + this.mRect.right)/2);}
+//	public int getCenterY(){return (int)((this.mRect.top + this.mRect.bottom)/2);}
 
 	void setRotationState(int playerRotate) { rotateState = rotationStates[playerRotate];}
 
@@ -162,6 +163,8 @@ public class Player {
 	public float getPlayerHeight(){
 		return this.mHeight;
 	}
+
+
 //	public Player() {
 //		this(1,1,1,1,false);
 //	}
