@@ -334,6 +334,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 // then the ship will accelerate
                 if(motionEvent.getX() > screenX / 2){
                     // call method that will accelerate ship
+                    myShip.setMoveState(true);
                 }
 
                 // If finger pressed on left side of screen...
@@ -357,6 +358,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             case MotionEvent.ACTION_UP:
                 if(motionEvent.getX() > screenX / 2){
                     // stop position
+                    myShip.setMoveState(false);
                 }
 
                 if(motionEvent.getX() < screenX / 2){
