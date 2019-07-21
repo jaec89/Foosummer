@@ -188,7 +188,7 @@ public class Player {
 //	}
 
 	public void shoot() {
-		Laser laser;
+		//Laser laser;
 		//laser = new Laser();
 		//Laser laser = new Laser(mRect.left, mRect.top, screenY/100, screenY/100, -(screenY/5), (screenY/5));
 	}
