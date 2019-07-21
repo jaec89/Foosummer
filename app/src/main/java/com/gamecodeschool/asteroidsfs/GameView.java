@@ -112,9 +112,8 @@ public class GameView extends Activity {
             // ASTEROIDS
             Bitmap mAsteroids;
             mAsteroids = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid);
-            mAsteroids = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid);
-            mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (blockSize*2), (blockSize*2), false);
             for(int i = 0 ; i < asteroids.size(); i++) {
+                mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (int)asteroids.get(i).getWidth(), (int) asteroids.get(i).getHeight(), false);
                 canvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left, asteroids.get(i).getHitbox().top, paint);
             }
 
