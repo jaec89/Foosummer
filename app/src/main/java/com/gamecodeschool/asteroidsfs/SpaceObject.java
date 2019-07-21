@@ -13,6 +13,11 @@ public class SpaceObject {
     private float width;
     private float height;
 
+    // new variables to control hitboxes. Only really need position and object radius.
+    private float posX;
+    private float poxY;
+    private float hitBoxRadius;
+
 
     public SpaceObject(float positionX, float positionY, float width, float height, float velocityX, float velocityY) {
         float halfWidth = width/2;
@@ -85,5 +90,5 @@ public class SpaceObject {
     }
 
     // Hitbox check done by radius
-    
+
 }

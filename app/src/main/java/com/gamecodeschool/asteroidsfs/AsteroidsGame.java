@@ -82,8 +82,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //    private Drawable mCustomImage;
 
     private GameView gameView;
-
-
     // temp Context
 
 
