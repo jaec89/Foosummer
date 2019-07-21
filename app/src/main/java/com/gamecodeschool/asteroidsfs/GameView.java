@@ -31,8 +31,6 @@ public class GameView{
     }
 
 
-
-
     // Draw the game objects and the HUD
     void draw(RectF myShipHitbox, int blockSize, int myShipDegree, Point shipCenter, ArrayList<Asteroid> asteroids,
               ArrayList<Laser> myLasers, PowerUps[] mineralPowerUps) {

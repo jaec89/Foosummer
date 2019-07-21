@@ -119,15 +119,15 @@ public class Player {
 
 
 		if(moveState == true) {
-//			movementMagnitude += 1.1f;
-			this.mXVelocity = 1.1f * (float)Math.cos(degree);
-			this.mYVelocity = 1.1f * (float)Math.sin(degree);
+			movementMagnitude += 1.1f;
+			this.mXVelocity = movementMagnitude * (float)Math.cos(degree*0.0174533);
+			this.mYVelocity = movementMagnitude * (float)Math.sin(degree*0.0174533);
 			// + mXVelocity/fps;
 			// + mYVelocity/fps;
 			this.dx += mXVelocity/fps;
 			this.dy += mYVelocity/fps;
 //			mRect.offset(this.dx, this.dy);
-			mRect.offset(this.mXVelocity, this.mYVelocity);
+			mRect.offset(this.dx, this.dy);
 			centerCoords = new Point((int)(mRect.left+0.5*(mRect.right-mRect.left)),
 					(int)(mRect.top+0.5*(mRect.bottom-mRect.top)));
 
@@ -137,6 +137,7 @@ public class Player {
 			Log.d("player: ", "value of dx: " + dx);
 			Log.d("player: ", "value of dy: " + dy);
 			Log.d("player: ", "value of mRect.left: " + mRect.left);
+
 			Log.d("player: ", "value of mRect.top: " + mRect.top);
 			Log.d("player: ", "value of shipCenter.x: " + centerCoords.x);
 			Log.d("player: ", "value of shipCenter.y: " + centerCoords.y);
@@ -146,6 +147,7 @@ public class Player {
 			this.mYVelocity = 0;
 			this.dx = 0;
 			this.dy = 0;
+			movementMagnitude = 0;
 
 		}
 
