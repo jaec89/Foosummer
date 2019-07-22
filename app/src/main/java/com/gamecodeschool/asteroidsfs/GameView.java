@@ -8,60 +8,59 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.content.Context;
 import android.graphics.RectF;
 import android.graphics.Point;
+import android.graphics.drawable.AnimationDrawable;
+import android.widget.ImageView;
+import android.view.View;
+import android.app.Activity;
 
 import java.util.ArrayList;
 
 // make this an interface
-public class GameView{
+public class GameView extends Activity {
 
-    private SurfaceHolder myHolder;
-    private Canvas myCanvas;
-    private Paint myPaint;
-    private Context ourContext;
-    Matrix shipMatrix = new Matrix();
+    private SurfaceHolder surfaceHolder;
+    private Canvas canvas;
+    private Paint paint;
+    private Context context;
 
-    GameView(Context context, SurfaceHolder surfHolder){
-        ourContext = context;
-        myHolder = surfHolder;
-        myPaint = new Paint();
+
+    GameView(Context context, SurfaceHolder surfHolder) {
+        this.context = context;
+        surfaceHolder = surfHolder;
+        paint = new Paint();
     }
 
 
     // Draw the game objects and the HUD
-    void draw(RectF myShipHitbox, int blockSize, int myShipDegree, Point shipCenter, ArrayList<Asteroid> asteroids,
-              ArrayList<Laser> myLasers, PowerUps[] mineralPowerUps) {
+    void draw(RectF myShipHitbox, int blockSize, int myShipDegree, Point shipCenter, ArrayList<Asteroid> asteroids, PowerUps[] mineralPowerUps) {
         //include position of ship (updating move location to be drawn)
 
-        if (myHolder.getSurface().isValid()) {
+        if (surfaceHolder.getSurface().isValid()) {
             // Lock the canvas (graphics memory) ready to draw
-            myCanvas = myHolder.lockCanvas();
+            canvas = surfaceHolder.lockCanvas();
 
 
             // Fills the screen with background "space" image
-            myCanvas.drawBitmap(BitmapFactory.decodeResource(ourContext.getResources(),
+            canvas.drawBitmap(BitmapFactory.decodeResource(context.getResources(),
                     R.drawable.outerspacebackground1), 0, 0, null);
 
+
             // Choose a color to paint with
-            myPaint.setColor(Color.argb
+            paint.setColor(Color.argb
                     (255, 75, 180, 250));
 
 
             // Draw the objects
-//            myCanvas.drawRect(myShipHitbox, myPaint);
-//            myCanvas.drawArc(myShipHitbox.getCirc(), 0, 360, false, myPaint);
+//            canvas.drawRect(myShipHitbox, paint);
+//            myCanvas.drawArc(myShipHitbox.getCirc(), 0, 360, false, paint);
 
 
             // A bitmap for each direction the ship can face
             Bitmap shipBitmap;
-
-
-            shipBitmap = BitmapFactory
-                    .decodeResource(ourContext.getResources(),
-                            R.drawable.sqspaceship);
+            shipBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.sqspaceship);
 
 
 //            // Modify the bitmaps to face the ship
@@ -76,6 +75,8 @@ public class GameView{
 //            shipBitmap = Bitmap
 //                    .createBitmap(shipBitmap,
 //                            0, 0, (blockSize*2), (blockSize*2), shipMatrix, true);
+
+            Matrix shipMatrix = new Matrix();
             shipMatrix.setRotate(myShipDegree, shipBitmap.getWidth()/2, shipBitmap.getHeight()/2);
 //            shipMatrix.setTranslate();
 //            shipMatrix.postTranslate((myShipHitbox.left - shipBitmap.getWidth()+blockSize),
@@ -98,51 +99,46 @@ public class GameView{
 
 
             // myShipHitbox func that will return shipBitmap
-            myCanvas.drawRect(myShipHitbox, myPaint);
-            myCanvas.drawBitmap(shipBitmap, shipMatrix, myPaint);
+            canvas.drawRect(myShipHitbox, paint);
+            canvas.drawBitmap(shipBitmap, shipMatrix, paint);
 //            myCanvas.drawBitmap(shipBitmap,
 
-//                    shipMatrix, myPaint);
+//                    shipMatrix, paint);
 //            shipMatrix.mapRect(myShipHitbox.getRect());
 
 
 
 
-//            // LASERS
-//            // Draw lasers
-//            for(int i = 0; i < myLasers.size(); i++) {
-//                myLasers.get(i).draw(myCanvas);
-//            }
-//
-//            // ASTEROIDS
-//            Bitmap mAsteroids;
-//            mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
-//            for(int i = 0 ; i < asteroids.size(); i++) {
-//                mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
-//                mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (blockSize*2), (blockSize*2), false);
-//                myCanvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left,
-//                        asteroids.get(i).getHitbox().top, myPaint);
-//            }
-//
-//            // POWER UPS
-//            for(int i = 0; i < mineralPowerUps.length; i++){
-//                mineralPowerUps[i].draw(myCanvas);
-//            }
+
+
+
+            // ASTEROIDS
+            Bitmap mAsteroids;
+            mAsteroids = BitmapFactory.decodeResource(context.getResources(), R.drawable.asteroid);
+            for(int i = 0 ; i < asteroids.size(); i++) {
+                mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (int)asteroids.get(i).getWidth(), (int) asteroids.get(i).getHeight(), false);
+                canvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left, asteroids.get(i).getHitbox().top, paint);
+            }
+
+            // POWER UPS
+            for(int i = 0; i < mineralPowerUps.length; i++){
+                mineralPowerUps[i].draw(canvas);
+            }
 
 
 
             // Choose the font size
-            //myPaint.setTextSize(fontSize);
+            //paint.setTextSize(fontSize);
 
             // Draw the HUD
-            //myCanvas.drawText("Score: " + score + "   Lives: " + lives, fontMargin , fontSize, myPaint);
+            //myCanvas.drawText("Score: " + score + "   Lives: " + lives, fontMargin , fontSize, paint);
 
 //            if(DEBUGGING){
 //                printDebuggingText();
 //            }
             // Display the drawing on screen
             // unlockCanvasAndPost is a method of SurfaceView
-            myHolder.unlockCanvasAndPost(myCanvas);
+            surfaceHolder.unlockCanvasAndPost(canvas);
         }
 
     }
