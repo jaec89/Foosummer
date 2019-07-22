@@ -108,26 +108,26 @@ public class GameView{
 
 
 
-//            // LASERS
-//            // Draw lasers
-//            for(int i = 0; i < myLasers.size(); i++) {
-//                myLasers.get(i).draw(myCanvas);
-//            }
-//
-//            // ASTEROIDS
-//            Bitmap mAsteroids;
-//            mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
-//            for(int i = 0 ; i < asteroids.size(); i++) {
-//                mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
-//                mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (blockSize*2), (blockSize*2), false);
-//                myCanvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left,
-//                        asteroids.get(i).getHitbox().top, myPaint);
-//            }
-//
-//            // POWER UPS
-//            for(int i = 0; i < mineralPowerUps.length; i++){
-//                mineralPowerUps[i].draw(myCanvas);
-//            }
+            // LASERS
+            // Draw lasers
+            for(int i = 0; i < myLasers.size(); i++) {
+                myLasers.get(i).draw(myCanvas);
+            }
+
+            // ASTEROIDS
+            Bitmap mAsteroids;
+            mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
+            for(int i = 0 ; i < asteroids.size(); i++) {
+                mAsteroids = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.asteroid);
+                mAsteroids = Bitmap.createScaledBitmap(mAsteroids, (blockSize*2), (blockSize*2), false);
+                myCanvas.drawBitmap(mAsteroids, asteroids.get(i).getHitbox().left,
+                        asteroids.get(i).getHitbox().top, myPaint);
+            }
+
+            // POWER UPS
+            for(int i = 0; i < mineralPowerUps.length; i++){
+                mineralPowerUps[i].draw(myCanvas);
+            }
 
 
 
