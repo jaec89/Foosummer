@@ -22,7 +22,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
     // Toggle for debugging
-    private final boolean DEBUGGING = true;
+    static final boolean DEBUGGING = true;
 
     // Drawing objects
     private SurfaceHolder myHolder;
@@ -83,7 +83,9 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 //    private Drawable mCustomImage;
 
     private GameView gameView;
+    private Render mRender = new Render();
     // temp Context
+
 
     public AsteroidsGame(Context context, int x, int y) {
         // calls parent class constructor of SurfaceView
@@ -167,7 +169,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         display = new Display(x, y);
         gameProgress = new GameProgress();
         factory = new ObjectFactory(display);
-
+        
+        bundleRender();
 
         // enemyShip = new ...()
         // myLaser = new ..()
@@ -189,6 +192,8 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     */
     private void startNewGame() {
 //        // FIXME: Change 3 to asteroid count variable that can be changed.
+        gameProgress.reset();
+        factory.resetSpeed();
         for(int i = 0; i < 3; i++) {
             asteroids.add((Asteroid)factory.getSpaceObject(objType.ASTEROID));
         }
@@ -209,8 +214,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             if(!nowPaused){
                 if(timeElapsed > 0) {
                     update();
-                    gameView.draw(myShip.getHitbox(), blockSize, myShip.getDegree(),
-                            myShip.getCenterCoords(), asteroids, myLasers, mineralPowerUps);
+                    gameView.draw(mRender);
                 }
                     
 
@@ -377,6 +381,15 @@ class AsteroidsGame extends SurfaceView implements Runnable{
     */
     public boolean detectCollision(RectF objectA, RectF objectB) {
             return RectF.intersects(objectA, objectB);
+    }
+
+
+    private void bundleRender(){
+        mRender.mPlayer = myShip;
+        mRender.mPlayerLaser = myLasers;
+        mRender.mAsteroids = asteroids;
+        mRender.mMineralPowerUps = mineralPowerUps;
+        mRender.mBlockSize = blockSize;
     }
 
 }
