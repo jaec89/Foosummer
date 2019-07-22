@@ -42,7 +42,7 @@ public class GameView {
                 shipBitmap = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.sqspaceship);
                 // // Modify the bitmaps to face the ship
                 // // in the correct direction
-                shipBitmap = Bitmap.createScaledBitmap(shipBitmap, 250, 250, true);
+                shipBitmap = Bitmap.createScaledBitmap(shipBitmap, 128, 128, true);
                 mBackGround = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.outerspacebackground1);
 
 
