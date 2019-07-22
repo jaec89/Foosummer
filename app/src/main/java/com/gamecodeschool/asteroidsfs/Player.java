@@ -1,8 +1,6 @@
 package com.gamecodeschool.asteroidsfs;
 
-//import android.graphics.Bitmap;
-//import android.graphics.BitmapFactory;
-//import android.graphics.RectF;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,9 +17,6 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 
 import java.util.ArrayList;
-/*
-	Player is a spacecraft that is able to shoot.
-*/
 
 
 public class Player {
@@ -106,6 +101,10 @@ public class Player {
 	public RectF getHitbox(){
 		return mRect;
 	}
+	public ArrayList<Laser> getLasers(){
+		return lasers;
+	}
+
 	public void setMoveState(boolean playerMove) {moveState = playerMove;}
 	public void setRotationState(int playerRotate) { rotateState = rotationStates[playerRotate];}
 	public Point getCenterCoords() {return this.centerCoords;}
