@@ -1,27 +1,18 @@
 package com.gamecodeschool.asteroidsfs;
 
-import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import java.util.Random;
 
 public class Asteroid extends SpaceObject {
     private int size;       //Define different size asteroids
     private boolean hit;
     private Bitmap bitmap;
 
-
-    public Asteroid(float positionX, float positionY, float width, float height, float velocityX, float velocityY) {
-        super(positionX, positionY, width, height, velocityX, velocityY);
+    public Asteroid(PointF position, float width, float height, float velocityX, float velocityY) {
+        super(position, width, height, velocityX, velocityY);
         this.hit = false;
     }
 
@@ -33,13 +24,17 @@ public class Asteroid extends SpaceObject {
     }
 
 
-    // Draw asteroid
-    @Override
-    public void draw(Canvas myCanvas) {
-        Paint myPaint = new Paint();
-        myPaint.setColor(Color.argb(255, 205, 160, 245));
-        myCanvas.drawRect(super.getHitbox(), myPaint);
+    public Bitmap getBitmap() {
+        return bitmap;
     }
+    public float getHorizontalPos() {
+        return super.getHitbox().left;
+    }
+    public float getVerticalPos() {
+        return super.getHitbox().top;
+    }
+
+    // Draw asteroid w/ picture
     public void draw(Canvas canvas, Bitmap asteroidsBitmap) {
         Paint myPaint = new Paint();
         canvas.drawBitmap(asteroidsBitmap, 100, 100, myPaint);
@@ -47,9 +42,9 @@ public class Asteroid extends SpaceObject {
 
 
     public void increaseVelocity() {
-        // increase the speed by 10%
-        super.setVelocityX(super.getVelocityX() * 1.1f);
-        super.setVelocityY(super.getVelocityY() * 1.1f);
+        // increase the speed by 20%
+        super.setVelocityX(super.getVelocityX() * 1.2f);
+        super.setVelocityY(super.getVelocityY() * 1.2f);
     }
 
 
@@ -61,20 +56,12 @@ public class Asteroid extends SpaceObject {
 
     // Large asteroid breaks into medium pieces
     // medium piece breaks into small pieces
-    void disintegrate() {
+    void disintegrate () {
+        if(size == 2) {
+
+        } else if (size == 1) {
+
+        }
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
-
-    public float getHorizontalPos() {
-        return super.getHitbox().left;
-    }
-
-    public float getVerticalPos() {
-        return super.getHitbox().top;
-    }
 }
-

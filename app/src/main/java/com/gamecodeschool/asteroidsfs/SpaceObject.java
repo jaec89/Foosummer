@@ -4,25 +4,21 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.PointF;
 
 public class SpaceObject {
 
+    private PointF position;
     private RectF hitbox;        // Give access to precise position and size of object
     private float velocityX;
     private float velocityY;
     private float width;
     private float height;
 
-    // new variables to control circular hit box. Only really need position and object radius.
-    private float posX;
-    private float poxY;
-    private float hitBoxRadius;
 
-
-    public SpaceObject(float positionX, float positionY, float width, float height, float velocityX, float velocityY) {
-        float halfWidth = width/2;
-        float halfHeight = height/2;
-        this.hitbox = new RectF(positionX-halfWidth, positionY-halfHeight, positionX+halfWidth,positionY+halfHeight);
+    public SpaceObject(PointF position, float width, float height, float velocityX, float velocityY) {
+        this.position = position;
+        this.hitbox = new RectF(position.x-width/2, position.y-height/2, position.x+width/2,position.y+height/2);
         this.width = width;
         this.height = height;
         this.velocityX = velocityX;
@@ -42,17 +38,14 @@ public class SpaceObject {
     public RectF getHitbox() {
         return hitbox;
     }
+    public PointF getPosition() {
+        return position;
+    }
     public float getWidth() {
         return width;
     }
-    public void setWidth(float width) {
-        this.width = width;
-    }
     public float getHeight() {
         return height;
-    }
-    public void setHeight(float height) {
-        this.height = height;
     }
     public float getVelocityX() {
         return velocityX;
@@ -98,7 +91,7 @@ public class SpaceObject {
         hitbox.bottom = hitbox.top + height;
     }
 
-    // Uploaded 
+    // Uploaded
     public void update(long time, final Display screen) {
         hitbox.left = hitbox.left + (velocityX * time) ;
         hitbox.top = hitbox.top + (velocityY * time) ;
@@ -117,5 +110,4 @@ public class SpaceObject {
         hitbox.right = hitbox.left + width;
         hitbox.bottom = hitbox.top + height;
     }
-
 }

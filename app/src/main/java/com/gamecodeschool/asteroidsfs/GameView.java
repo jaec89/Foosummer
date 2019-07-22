@@ -8,10 +8,13 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.content.Context;
 import android.graphics.RectF;
 import android.graphics.Point;
+import android.graphics.drawable.AnimationDrawable;
+import android.widget.ImageView;
+import android.view.View;
+import android.app.Activity;
 
 import java.util.ArrayList;
 
@@ -41,6 +44,7 @@ public class GameView {
                 // // in the correct direction
                 shipBitmap = Bitmap.createScaledBitmap(shipBitmap, 250, 250, true);
                 mBackGround = BitmapFactory.decodeResource(ourContext.getResources(), R.drawable.outerspacebackground1);
+
 
         }
 

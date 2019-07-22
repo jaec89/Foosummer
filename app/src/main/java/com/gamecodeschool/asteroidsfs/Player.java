@@ -1,13 +1,12 @@
 package com.gamecodeschool.asteroidsfs;
 
-//import android.graphics.Bitmap;
-//import android.graphics.BitmapFactory;
-//import android.graphics.RectF;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -16,9 +15,8 @@ import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-/*
-	Player is a spacecraft that is able to shoot.
-*/
+
+import java.util.ArrayList;
 
 public class Player {
 
@@ -52,6 +50,9 @@ public class Player {
 	private Bitmap mBitmapHeadUp;
 	private Bitmap mBitmapHeadCurrent;
 
+	//Laser Gun
+	ArrayList<Laser> lasers;
+
 	Player(int screenX, int screenY) {
 
 		// Configure the size of the player's
@@ -84,17 +85,38 @@ public class Player {
 		mXVelocity = 0;
 		mYVelocity = 0;
 		movementMagnitude = 0;
+
+
+		lasers = new ArrayList<Laser>();
 	}
 
 	public RectF getHitbox() {
 		return mRect;
 	}
+	public ArrayList<Laser> getLasers(){
+		return lasers;
+	}
+
+	public void setMoveState(boolean playerMove) {moveState = playerMove;}
+	public void setRotationState(int playerRotate) { rotateState = rotationStates[playerRotate];}
+	public Point getCenterCoords() {return this.centerCoords;}
+	public int getDegree(){return this.degree;}
+	public Bitmap getBitMap() {return this.mBitmapHeadCurrent;}
+	public float getPlayerLength(){
+		return this.mLength;
+	}
+	public float getPlayerHeight(){
+		return this.mHeight;
+	}
+
+
 
 	// Update the Player- Called each frame/loop
 	// Update arguments within the AsteroidsGame class
-	void update(long fps, Context ourContext, int blockSize) {
-		if (rotateState == 1) {
-			if (degree < 0) {
+
+	void update(long fps, Context ourContext, int blockSize, int x, int y) {
+		if(rotateState == 1){
+			if(degree < 0){
 				degree = 360;
 			}
 			degree -= 5;
@@ -171,10 +193,11 @@ public class Player {
 		return this.mHeight;
 	}
 
-	public void shoot() {
-		Laser laser;
-		// laser = new Laser();
-		// Laser laser = new Laser(mRect.left, mRect.top, screenY/100, screenY/100,
-		// -(screenY/5), (screenY/5));
+	public void shoot(int x, int y) {
+		lasers.add(new Laser(new PointF(x/2,y/2),y/100, y/100, -(y/5), (y/5)));
+
+		for(int i = 0; i < lasers.size(); i++) {
+			lasers.get(i).update(fps, x, y);
+		}
 	}
 }
