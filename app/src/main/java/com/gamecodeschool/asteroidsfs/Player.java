@@ -25,6 +25,8 @@ public class Player {
 	private float mHeight;
 	private float mXCoord;
 	private float mYCoord;
+	private float maxXCoord;
+	private float maxYCoord;
 	private float mXVelocity;
 	private float mYVelocity;
 	float dx;
@@ -55,6 +57,9 @@ public class Player {
 
 	Player(int screenX, int screenY) {
 
+		maxXCoord = screenX;
+		maxYCoord = screenY;
+
 		// Configure the size of the player's
 		// ship based on the screen resolution
 
@@ -67,11 +72,13 @@ public class Player {
 		mYCoord = (screenY / 2);
 
 		// Intialize mRect based on the size and position
+
 		mRect = new RectF(mXCoord, mYCoord, mXCoord + mLength - 15, mYCoord + mLength - 15);
 		// float rectCenterX = mRect.centerX();
 		// float rectCenterY = mRect.centerY();
 		centerCoords = new Point((int) (mRect.left + 0.5 * (mRect.right - mRect.left)),
 				(int) (mRect.top + 0.5 * (mRect.bottom - mRect.top)));
+
 
 		// RectF oval = new RectF(width/2 - radius, width/2 - radius,
 		// width/2 + radius, width/2 + radius);
@@ -124,8 +131,22 @@ public class Player {
 			this.dy += mYVelocity / fps;
 			// mRect.offset(this.dx, this.dy);
 			mRect.offset(this.dx, this.dy);
-			centerCoords = new Point((int) (mRect.left + 0.5 * (mRect.right - mRect.left)),
-					(int) (mRect.top + 0.5 * (mRect.bottom - mRect.top)));
+
+			centerCoords = new Point((int)(mRect.left+0.5*(mRect.right-mRect.left)),
+					(int)(mRect.top+0.5*(mRect.bottom-mRect.top)));
+			if(centerCoords.x > maxXCoord){
+				centerCoords.x = (int)maxXCoord;
+			}
+			else if(centerCoords.x < 0){
+				centerCoords.x = 0;
+			}
+			else if(centerCoords.y > maxYCoord){
+				centerCoords.y = (int)maxYCoord;
+			}
+			else if(centerCoords.y < 0){
+				centerCoords.y = 0;
+			}
+
 
 			Log.d("player: ", "degree: " + degree);
 			Log.d("player: ", "value of mXVelocity: " + mXVelocity);
@@ -136,8 +157,9 @@ public class Player {
 
 			Log.d("player: ", "value of mRect.top: " + mRect.top);
 			Log.d("player: ", "value of shipCenter.x: " + centerCoords.x);
-			Log.d("player: ", "value of shipCenter.y: " + centerCoords.y);
-		} else {
+			Log.d("player: ", "value of shipCenter.y: " + centerCoords.y)
+    }
+		else{
 			this.mXVelocity = 0;
 			this.mYVelocity = 0;
 			this.dx = 0;

@@ -19,6 +19,7 @@ import android.app.Activity;
 import java.util.ArrayList;
 
 // make this an interface
+
 public class GameView {
 
         private SurfaceHolder myHolder;
