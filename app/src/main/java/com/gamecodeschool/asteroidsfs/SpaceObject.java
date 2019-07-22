@@ -4,9 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.PointF;
 
 public class SpaceObject {
 
+    private PointF position;
     private RectF hitbox;        // Give access to precise position and size of object
     private float velocityX;
     private float velocityY;
@@ -14,31 +16,36 @@ public class SpaceObject {
     private float height;
 
 
-    public SpaceObject(float positionX, float positionY, float width, float height, float velocityX, float velocityY) {
-        float halfWidth = width/2;
-        float halfHeight = height/2;
-        this.hitbox = new RectF(positionX-halfWidth, positionY-halfHeight, positionX+halfWidth,positionY+halfHeight);
+    public SpaceObject(PointF position, float width, float height, float velocityX, float velocityY) {
+        this.position = position;
+        this.hitbox = new RectF(position.x-width/2, position.y-height/2, position.x+width/2,position.y+height/2);
         this.width = width;
         this.height = height;
         this.velocityX = velocityX;
         this.velocityY = velocityY;
     }
 
+    public SpaceObject(float positionX, float positionY, int angle, float velocityMagnitude, float hitCircleSize) {
+        float sideLength = hitCircleSize / 2;
+        hitbox = new RectF(positionX-sideLength, positionY-sideLength, positionX+sideLength,positionY+sideLength);
+        width = hitCircleSize;
+        height = width;
+        velocityX = velocityMagnitude * (float) Math.cos(angle);
+        velocityY = velocityMagnitude * (float) Math.sin(angle);
+    }
+
 
     public RectF getHitbox() {
         return hitbox;
     }
+    public PointF getPosition() {
+        return position;
+    }
     public float getWidth() {
         return width;
     }
-    public void setWidth(float width) {
-        this.width = width;
-    }
     public float getHeight() {
         return height;
-    }
-    public void setHeight(float height) {
-        this.height = height;
     }
     public float getVelocityX() {
         return velocityX;
@@ -77,6 +84,26 @@ public class SpaceObject {
         if (hitbox.top < 0)
             hitbox.top = y;
         if (hitbox.top > y)
+            hitbox.top = 0;
+
+        // Match up the bottom right corner based on the size of the ball
+        hitbox.right = hitbox.left + width;
+        hitbox.bottom = hitbox.top + height;
+    }
+
+    // Uploaded
+    public void update(long time, final Display screen) {
+        hitbox.left = hitbox.left + (velocityX * time) ;
+        hitbox.top = hitbox.top + (velocityY * time) ;
+
+        // If object travels off the screen -> wrap around
+        if (hitbox.left < 0)
+            hitbox.left = screen.width;
+        if (hitbox.left > screen.width)
+            hitbox.left = 0;
+        if (hitbox.top < 0)
+            hitbox.top = screen.height;
+        if (hitbox.top > screen.height)
             hitbox.top = 0;
 
         // Match up the bottom right corner based on the size of the ball

@@ -3,12 +3,12 @@ package com.gamecodeschool.asteroidsfs;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
+import android.graphics.PointF;
 
 public class Laser extends SpaceObject {
 
-    public Laser(float xPosition, float yPosition, float width, float height, float xVelocity, float yVelocity) {
-        super(xPosition, yPosition, width, height, xVelocity, yVelocity);
+    public Laser(PointF position, float width, float height, float xVelocity, float yVelocity) {
+        super(position, width, height, xVelocity, yVelocity);
     }
 
 

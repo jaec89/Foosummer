@@ -1,13 +1,12 @@
 package com.gamecodeschool.asteroidsfs;
 
-//import android.graphics.Bitmap;
-//import android.graphics.BitmapFactory;
-//import android.graphics.RectF;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -16,10 +15,8 @@ import android.view.SurfaceView;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-/*
-	Player is a spacecraft that is able to shoot.
-*/
 
+import java.util.ArrayList;
 
 public class Player {
 
@@ -45,7 +42,7 @@ public class Player {
 
 	private boolean hit;
 	// 0 = stopped, 1 = clockwise, 2 = counter-clockwise
-	private int rotationStates[] = {0,1,2};
+	private int rotationStates[] = { 0, 1, 2 };
 	private int rotateState;
 
 	// true if player is moving, false if player is stationary
@@ -54,6 +51,9 @@ public class Player {
 	// A bitmap for each direction the ship can face
 	private Bitmap mBitmapHeadUp;
 	private Bitmap mBitmapHeadCurrent;
+
+	//Laser Gun
+	ArrayList<Laser> lasers;
 
 	Player(int screenX, int screenY) {
 
@@ -66,27 +66,23 @@ public class Player {
 		mLength = screenX / 25;
 		mHeight = screenY / 25;
 
-
 		// start player ship location at center
 		// of the screen
 		mXCoord = screenX / 2;
 		mYCoord = (screenY / 2);
 
 		// Intialize mRect based on the size and position
-		mRect = new RectF(mXCoord, mYCoord,
-				mXCoord + mLength - 15,
-				mYCoord + mLength - 15);
-//		float rectCenterX = mRect.centerX();
-//		float rectCenterY = mRect.centerY();
-		centerCoords = new Point((int)(mRect.left+0.5*(mRect.right-mRect.left)),
-				(int)(mRect.top+0.5*(mRect.bottom-mRect.top)));
+
+		mRect = new RectF(mXCoord, mYCoord, mXCoord + mLength - 15, mYCoord + mLength - 15);
+		// float rectCenterX = mRect.centerX();
+		// float rectCenterY = mRect.centerY();
+		centerCoords = new Point((int) (mRect.left + 0.5 * (mRect.right - mRect.left)),
+				(int) (mRect.top + 0.5 * (mRect.bottom - mRect.top)));
 
 
-
-//		RectF oval = new RectF(width/2 - radius, width/2 - radius,
-//				width/2 + radius, width/2 + radius);
-//		canvas.drawArc(oval, 0, 360, false, paint1);
-
+		// RectF oval = new RectF(width/2 - radius, width/2 - radius,
+		// width/2 + radius, width/2 + radius);
+		// canvas.drawArc(oval, 0, 360, false, paint1);
 
 		// Configure the speed of the ship
 		// This code means the ship can cover the
@@ -96,44 +92,46 @@ public class Player {
 		mXVelocity = 0;
 		mYVelocity = 0;
 		movementMagnitude = 0;
+
+
+		lasers = new ArrayList<Laser>();
 	}
 
-
-
-	public RectF getHitbox(){
+	public RectF getHitbox() {
 		return mRect;
 	}
-
+	public ArrayList<Laser> getLasers(){
+		return lasers;
+	}
 	// Update the Player- Called each frame/loop
 	// Update arguments within the AsteroidsGame class
-	void update(long fps, Context ourContext, int blockSize) {
+
+	void update(long fps, Context ourContext, int blockSize, int x, int y) {
 		if(rotateState == 1){
 			if(degree < 0){
 				degree = 360;
 			}
 			degree -= 5;
-		}
-		else if(rotateState == 2){
-			if(degree > 360){
+		} else if (rotateState == 2) {
+			if (degree > 360) {
 				degree = 0;
 			}
 			degree += 5;
-		}
-		else{
+		} else {
 			degree = degree;
 		}
 
-
-		if(moveState == true) {
+		if (moveState == true) {
 			movementMagnitude += 1.1f;
-			this.mXVelocity = movementMagnitude * (float)Math.cos(degree*0.0174533);
-			this.mYVelocity = movementMagnitude * (float)Math.sin(degree*0.0174533);
+			this.mXVelocity = movementMagnitude * (float) Math.cos(degree * 0.0174533);
+			this.mYVelocity = movementMagnitude * (float) Math.sin(degree * 0.0174533);
 			// + mXVelocity/fps;
 			// + mYVelocity/fps;
-			this.dx += mXVelocity/fps;
-			this.dy += mYVelocity/fps;
-//			mRect.offset(this.dx, this.dy);
+			this.dx += mXVelocity / fps;
+			this.dy += mYVelocity / fps;
+			// mRect.offset(this.dx, this.dy);
 			mRect.offset(this.dx, this.dy);
+
 			centerCoords = new Point((int)(mRect.left+0.5*(mRect.right-mRect.left)),
 					(int)(mRect.top+0.5*(mRect.bottom-mRect.top)));
 			if(centerCoords.x > maxXCoord){
@@ -150,7 +148,6 @@ public class Player {
 			}
 
 
-
 			Log.d("player: ", "degree: " + degree);
 			Log.d("player: ", "value of mXVelocity: " + mXVelocity);
 			Log.d("player: ", "value of mYVelocity: " + mYVelocity);
@@ -160,10 +157,8 @@ public class Player {
 
 			Log.d("player: ", "value of mRect.top: " + mRect.top);
 			Log.d("player: ", "value of shipCenter.x: " + centerCoords.x);
-			Log.d("player: ", "value of shipCenter.y: " + centerCoords.y);
-
-
-		}
+			Log.d("player: ", "value of shipCenter.y: " + centerCoords.y)
+    }
 		else{
 			this.mXVelocity = 0;
 			this.mYVelocity = 0;
@@ -177,42 +172,39 @@ public class Player {
 		// Accelerate()
 	}
 
+	void setMoveState(boolean playerMove) {
+		moveState = playerMove;
+	}
 
+	void setRotationState(int playerRotate) {
+		rotateState = rotationStates[playerRotate];
+	}
 
-	void setMoveState(boolean playerMove) {moveState = playerMove;}
+	public Point getCenterCoords() {
+		return this.centerCoords;
+	}
 
-	void setRotationState(int playerRotate) { rotateState = rotationStates[playerRotate];}
+	public int getDegree() {
+		return this.degree;
+	}
 
-	public Point getCenterCoords() {return this.centerCoords;}
+	public Bitmap getBitMap() {
+		return this.mBitmapHeadCurrent;
+	}
 
-	public int getDegree(){return this.degree;}
-
-	public Bitmap getBitMap() {return this.mBitmapHeadCurrent;}
-
-	public float getPlayerLength(){
+	public float getPlayerLength() {
 		return this.mLength;
 	}
 
-	public float getPlayerHeight(){
+	public float getPlayerHeight() {
 		return this.mHeight;
 	}
 
+	public void shoot(int x, int y) {
+		lasers.add(new Laser(new PointF(x/2,y/2),y/100, y/100, -(y/5), (y/5)));
 
-//	public Player() {
-//		this(1,1,1,1,false);
-//	}
-//	public Player(double pos_x, double pos_y) {
-//		this(pos_x,pos_y,1,1,false);
-//	}
-//	public Player(double pos_x, double pos_y, double velocity_x, double velocity_y, boolean hit) {
-//		super(pos_x, pos_y, velocity_x, velocity_y);
-//		this.hit = hit;
-//	}
-
-	public void shoot() {
-		Laser laser;
-		//laser = new Laser();
-		//Laser laser = new Laser(mRect.left, mRect.top, screenY/100, screenY/100, -(screenY/5), (screenY/5));
+//		for(int i = 0; i < lasers.size(); i++) {
+//			lasers.get(i).update(fps, x, y);
+//		}
 	}
-
 }
