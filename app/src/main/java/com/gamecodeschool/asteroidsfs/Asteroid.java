@@ -1,7 +1,6 @@
 package com.gamecodeschool.asteroidsfs;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -43,9 +42,9 @@ public class Asteroid extends SpaceObject {
 
 
     public void increaseVelocity() {
-        // increase the speed by 10%
-        super.setVelocityX(super.getVelocityX() * 1.1f);
-        super.setVelocityY(super.getVelocityY() * 1.1f);
+        // increase the speed by 20%
+        super.setVelocityX(super.getVelocityX() * 1.2f);
+        super.setVelocityY(super.getVelocityY() * 1.2f);
     }
 
 
