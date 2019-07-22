@@ -57,12 +57,10 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     // GAME OBJECTS
     private GameProgress gameProgress;
-//    private Space mySpace;
 
     public Player myShip;
 //    private OpponentShip npcShip; 
     private ArrayList<Asteroid> asteroids;
-    private ArrayList<Laser> myLasers;
 //    private Laser npcLaser; // vector of lasers associated per npc ship?
     private PowerUps mineralPowerUps[]; // vector of mineral powerups
 //    private Drawable mCustomImage;
@@ -96,12 +94,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         gameView = new GameView(context, myHolder);
 
         // Initialize the objects
-
         myShip = new Player(screenX, screenY);
-
-        // Asteroids = new Asteroids()
-
-        myLasers = new ArrayList<Laser>();
 
         // Initialize asteroids
         asteroids = new ArrayList<Asteroid>();
@@ -267,7 +260,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
             // The movement has been handled and collisions
             // detected now we can draw the scene.
             gameView.draw(myShip.getHitbox(), blockSize, myShip.getDegree(),
-                    myShip.getCenterCoords(), asteroids, myLasers, mineralPowerUps);
+                    myShip.getCenterCoords(), asteroids, mineralPowerUps);
 
             // How long did this frame/loop take?
             // Store the answer in timeThisFrame
@@ -288,15 +281,15 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
 
     private void update() {
-
+        // PLAYER
         myShip.update(myFPS, getContext(), blockSize);
-        for(int i = 0; i < myLasers.size(); i++) {
-            myLasers.get(i).update(myFPS, screenX, screenY);
-        }
+
+        // ASTEROIDS
         for(int i = 0 ; i < asteroids.size() ; i++) {
             asteroids.get(i).update(myFPS, screenX, screenY);
         }
 
+        //POWER UPS
         // PowerUp position - currently stationary
         for(int i = 0; i < mineralPowerUps.length; i++) {
             mineralPowerUps[i].update(myFPS, screenX, screenY);
