@@ -96,21 +96,6 @@ public class Player {
 	public ArrayList<Laser> getLasers(){
 		return lasers;
 	}
-
-	public void setMoveState(boolean playerMove) {moveState = playerMove;}
-	public void setRotationState(int playerRotate) { rotateState = rotationStates[playerRotate];}
-	public Point getCenterCoords() {return this.centerCoords;}
-	public int getDegree(){return this.degree;}
-	public Bitmap getBitMap() {return this.mBitmapHeadCurrent;}
-	public float getPlayerLength(){
-		return this.mLength;
-	}
-	public float getPlayerHeight(){
-		return this.mHeight;
-	}
-
-
-
 	// Update the Player- Called each frame/loop
 	// Update arguments within the AsteroidsGame class
 
@@ -196,8 +181,8 @@ public class Player {
 	public void shoot(int x, int y) {
 		lasers.add(new Laser(new PointF(x/2,y/2),y/100, y/100, -(y/5), (y/5)));
 
-		for(int i = 0; i < lasers.size(); i++) {
-			lasers.get(i).update(fps, x, y);
-		}
+//		for(int i = 0; i < lasers.size(); i++) {
+//			lasers.get(i).update(fps, x, y);
+//		}
 	}
 }

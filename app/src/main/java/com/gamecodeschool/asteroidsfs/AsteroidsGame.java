@@ -112,48 +112,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
         // Initialize asteroids
         asteroids = new ArrayList<Asteroid>();
-        for(int i = 0 ; i < 5 ; i++) {
-
-            Random rand = new Random();
-            int asteroidXPosition = rand.nextInt(screenX);
-            int asteroidYPosition = rand.nextInt(screenY);
-            int asteroidWidth = screenY / 25;
-            int asteroidHeight = screenY / 25;
-            int asteroidXVelocity = -(screenY / 10);
-            int asteroidYVelocity = (screenY / 10);
-
-            // Pick a random direction
-            // 0 -> left, down
-            // 1 -> left, up
-            // 2 -> right, down
-            // 3 -> right, up
-            int direction = rand.nextInt(4);
-            switch (direction) {
-                case 0:
-                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
-                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
-                    break;
-                case 1:
-                    asteroidXVelocity = -Math.abs(asteroidXVelocity);   // left
-                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
-                    break;
-                case 2:
-                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
-                    asteroidYVelocity = Math.abs(asteroidYVelocity);    // down
-                    break;
-                case 3:
-                    asteroidXVelocity = Math.abs(asteroidXVelocity);    // right
-                    asteroidYVelocity = -Math.abs(asteroidYVelocity);   // up
-                    break;
-            }
-
-            asteroids.add(new Asteroid(new PointF(asteroidXPosition,
-                                        asteroidYPosition),
-                                        asteroidWidth,
-                                        asteroidHeight,
-                                        asteroidXVelocity,
-                                        asteroidYVelocity));
-        }
 
         // Initialize powerups - eventually have them scale with levels?
         // currently hardcoded to 1 for now
@@ -242,12 +200,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 //detectCollisions();
             }
 
-
-            // The movement has been handled and collisions
-            // detected now we can draw the scene.
-            gameView.draw(myShip.getHitbox(), blockSize, myShip.getDegree(),
-                    myShip.getCenterCoords(), asteroids, mineralPowerUps);
-
             // How long did this frame/loop take?
             // Store the answer in timeThisFrame
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
@@ -263,7 +215,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     private void update() {
         // PLAYER
-        myShip.update(myFPS, getContext(), blockSize, screenX, screenY);
+        myShip.update(timeElapsed, getContext(), blockSize, screenX, screenY);
 
         // ASTEROIDS
         for(int i = 0 ; i < asteroids.size() ; i++) {
@@ -273,7 +225,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         //POWER UPS
         // PowerUp position - currently stationary
         for(int i = 0; i < mineralPowerUps.length; i++) {
-            mineralPowerUps[i].update(myFPS, screenX, screenY);
+            mineralPowerUps[i].update(timeElapsed, screenX, screenY);
         }
     }
 
@@ -386,7 +338,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     private void bundleRender(){
         mRender.mPlayer = myShip;
-        mRender.mPlayerLaser = myLasers;
+//        mRender.mPlayerLaser = myLasers;
         mRender.mAsteroids = asteroids;
         mRender.mMineralPowerUps = mineralPowerUps;
         mRender.mBlockSize = blockSize;
