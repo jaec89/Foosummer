@@ -73,8 +73,10 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     // GAME OBJECTS
     private GameProgress gameProgress;
+
     private ObjectFactory factory;
     SpaceObjectType objType;
+
 //    private Space mySpace;
 
     public Player myShip;
@@ -87,9 +89,6 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
     private GameView gameView;
     // temp Context
-
-
-
 
     public AsteroidsGame(Context context, int x, int y) {
         // calls parent class constructor of SurfaceView
@@ -132,9 +131,11 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                     screenY / 50, screenY / 50, hitsLeft, -(screenY/8), (screenY/8));
         }
       
+
         display = new Display(x, y);
         gameProgress = new GameProgress();
         factory = new ObjectFactory(display);
+
 
         // enemyShip = new ...()
         // myLaser = new ..()
@@ -159,6 +160,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         for(int i = 0; i < 3; i++) {
             asteroids.add((Asteroid)factory.getSpaceObject(objType.ASTEROID));
         }
+
     }
 
 
@@ -188,6 +190,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
                 //     i = 0;
                 // }
 
+
                 /*
                 Log.d("ADebugTag", "collision detected: " + hit);
                 Log.d("ADebugTag", "value of i: " + i);
@@ -205,6 +208,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
 
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
             timeElapsed = timeThisFrame;
+
         }
     }
 
@@ -225,6 +229,7 @@ class AsteroidsGame extends SurfaceView implements Runnable{
         }
 
     }
+
 
     // Handle all the screen touches
     @Override
