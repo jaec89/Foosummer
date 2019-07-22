@@ -35,8 +35,7 @@ public class GameView extends Activity {
 
 
     // Draw the game objects and the HUD
-    void draw(RectF myShipHitbox, int blockSize, int myShipDegree, Point shipCenter, ArrayList<Asteroid> asteroids,
-              ArrayList<Laser> myLasers, PowerUps[] mineralPowerUps) {
+    void draw(RectF myShipHitbox, int blockSize, int myShipDegree, Point shipCenter, ArrayList<Asteroid> asteroids, PowerUps[] mineralPowerUps) {
         //include position of ship (updating move location to be drawn)
 
         if (surfaceHolder.getSurface().isValid()) {
@@ -111,11 +110,7 @@ public class GameView extends Activity {
 
 
 
-            // LASERS
-            // Draw lasers
-            for(int i = 0; i < myLasers.size(); i++) {
-                myLasers.get(i).draw(canvas);
-            }
+
 
             // ASTEROIDS
             Bitmap mAsteroids;

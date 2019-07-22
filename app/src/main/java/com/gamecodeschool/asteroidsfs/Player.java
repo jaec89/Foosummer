@@ -121,7 +121,7 @@ public class Player {
 
 	// Update the Player- Called each frame/loop
 	// Update arguments within the AsteroidsGame class
-	void update(long fps, Context ourContext, int blockSize) {
+	void update(long fps, Context ourContext, int blockSize, int x, int y) {
 		if(rotateState == 1){
 			if(degree < 0){
 				degree = 360;
@@ -174,6 +174,11 @@ public class Player {
 
 		// setRotate() function?
 		// Accelerate()
+
+
+		for(int i = 0; i < lasers.size(); i++) {
+			lasers.get(i).update(fps, x, y);
+		}
 	}
 
 
