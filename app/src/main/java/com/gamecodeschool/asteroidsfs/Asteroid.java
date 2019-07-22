@@ -56,7 +56,12 @@ public class Asteroid extends SpaceObject {
 
     // Large asteroid breaks into medium pieces
     // medium piece breaks into small pieces
-    void disintegrate(){
+    void disintegrate () {
+        if(size == 2) {
+
+        } else if (size == 1) {
+
+        }
     }
 
 }
