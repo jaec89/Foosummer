@@ -187,5 +187,4 @@ public class Player {
 	public void shoot(int x, int y) {
 		lasers.add(new Laser(new PointF(x/2,y/2),y/100, y/100, -(y/5), (y/5)));
 	}
-
 }
