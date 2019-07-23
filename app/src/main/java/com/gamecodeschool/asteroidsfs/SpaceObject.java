@@ -1,78 +1,113 @@
 package com.gamecodeschool.asteroidsfs;
-/*
-	Spacecraft
-*/
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.PointF;
 
 public class SpaceObject {
-	
-	private double pos_x;	// position x coordinate
-	private double pos_y;	// position y coordinate
-	private double velocity_x;	// m/s?
-	private double velocity_y;	// int or double? spaceship is so small int will probably do for 360 degrees
-// 	private boolean hit;	// Do we want this in this class???
-	
-	
-	
-	public SpaceObject() {	// should we allow a spacecraft to be initialized without a position?
-		this(1,1,1,1);
-	}
-	public SpaceObject(double pos_x, double pos_y) {
-		this(pos_x,pos_y,1,1);	// Starting with velocity = 1 for now
-	}
-	public SpaceObject(double pos_x, double pos_y, double velocity_x, double velocity_y) {
-		this.pos_x = pos_x;
-		this.pos_y = pos_y;
-		this.velocity_x = velocity_x;
-		this.velocity_y = velocity_y;
-		//this.hit = hit;
-	}
-	
-	
-	
-	public void setPos_x(double pos_x) {
-		this.pos_x = pos_x;
-	}
-	public void setPos_y(double pos_y) {
-		this.pos_y = pos_y;
-	}
-	public void setVelocity_x() {
-		this.velocity_x = velocity_x;
-	}
-	public void setVelocity_y(int direction) {
-		this.direction = direction;
-	}
-// 	public void setHit(boolean hit) {
-// 		this.hit = hit;
-// 	}
-	
-	
-	
-	public double getPos_x() {
-		return pos_x;
-	}
-	public double getPos_y() {
-		return pos_y;
-	}
-	public double getVelocity_x() {
-		return speed;
-	}
-	public int getVelocity_y() {
-		return direction;
-	}
-// 	public boolean getHit() {
-// 		return hit;
-// 	}
-	
-    
-    
-// 	public void draw() {
-// 		
-//     }
+
+    private PointF position;
+    private RectF hitbox;        // Give access to precise position and size of object
+    private float velocityX;
+    private float velocityY;
+    private float width;
+    private float height;
 
 
-// 	public void move() {
-// 		
-//     }
-	
-	
+    public SpaceObject(PointF position, float width, float height, float velocityX, float velocityY) {
+        this.position = position;
+        this.hitbox = new RectF(position.x-width/2, position.y-height/2, position.x+width/2,position.y+height/2);
+        this.width = width;
+        this.height = height;
+        this.velocityX = velocityX;
+        this.velocityY = velocityY;
+    }
+
+    public SpaceObject(float positionX, float positionY, int angle, float velocityMagnitude, float hitCircleSize) {
+        float sideLength = hitCircleSize / 2;
+        hitbox = new RectF(positionX-sideLength, positionY-sideLength, positionX+sideLength,positionY+sideLength);
+        width = hitCircleSize;
+        height = width;
+        velocityX = velocityMagnitude * (float) Math.cos(angle);
+        velocityY = velocityMagnitude * (float) Math.sin(angle);
+    }
+
+
+    public RectF getHitbox() {
+        return hitbox;
+    }
+    public PointF getPosition() {
+        return position;
+    }
+    public float getWidth() {
+        return width;
+    }
+    public float getHeight() {
+        return height;
+    }
+    public float getVelocityX() {
+        return velocityX;
+    }
+    public void setVelocityX(float velocityX) {
+        this.velocityX = velocityX;
+    }
+    public float getVelocityY() {
+        return velocityY;
+    }
+    public void setVelocityY(float velocityY) {
+        this.velocityY = velocityY;
+    }
+
+
+    // Draw object
+    public void draw(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setColor(Color.argb(255, 255, 255, 255));
+        canvas.drawRect(hitbox, paint);
+    }
+
+
+    // Update the object's position (called each frame/loop)
+    // Move the object based on the velocity and current frame rate (mFPS)
+    public void update(long fps, int x, int y){
+        // Move the top left corner
+        hitbox.left = hitbox.left + (velocityX / fps) ;
+        hitbox.top = hitbox.top + (velocityY / fps) ;
+
+        // If object travels off the screen -> wrap around
+        if (hitbox.left < 0)
+            hitbox.left = x;
+        if (hitbox.left > x)
+            hitbox.left = 0;
+        if (hitbox.top < 0)
+            hitbox.top = y;
+        if (hitbox.top > y)
+            hitbox.top = 0;
+
+        // Match up the bottom right corner based on the size of the ball
+        hitbox.right = hitbox.left + width;
+        hitbox.bottom = hitbox.top + height;
+    }
+
+    // Uploaded
+    public void update(long time, final Display screen) {
+        hitbox.left = hitbox.left + (velocityX * time) ;
+        hitbox.top = hitbox.top + (velocityY * time) ;
+
+        // If object travels off the screen -> wrap around
+        if (hitbox.left < 0)
+            hitbox.left = screen.width;
+        if (hitbox.left > screen.width)
+            hitbox.left = 0;
+        if (hitbox.top < 0)
+            hitbox.top = screen.height;
+        if (hitbox.top > screen.height)
+            hitbox.top = 0;
+
+        // Match up the bottom right corner based on the size of the ball
+        hitbox.right = hitbox.left + width;
+        hitbox.bottom = hitbox.top + height;
+    }
 }

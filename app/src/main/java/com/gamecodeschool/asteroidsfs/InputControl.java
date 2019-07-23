@@ -1,4 +1,4 @@
 package com.gamecodeschool.asteroidsfs;
 
-public class Asteroids {
+public class InputControl {
 }
